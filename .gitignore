@@ -56,4 +56,10 @@ buck-out/
 *.jsbundle
 
 # vim
-# .swp
+*.swp
+
+# apps
+*.apk
+*.ipa
+*.app
+
