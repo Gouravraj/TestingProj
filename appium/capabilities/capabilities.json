@@ -1,0 +1,21 @@
+{
+  "android": {
+    "platformName": "Android",
+    "deviceName": "Android Emulator",
+    "app": "./app/app-release.apk"
+  },
+  "iOS": {
+    "platformName": "iOS",
+    "app": {
+      "simulator": "./app/app-release.ios"
+    },
+    "deviceName": "iPhone Xs",
+    "wdaLaunchTimeout": 80000,
+    "wdaConnectionTimeout": 80000
+    "preventWDAAttachments": true,
+    "clearSystemFiles": true,
+    "shouldUseSingletonTestManager": false,
+    "automationName": "XCUITest",
+    "maxTypingFrequency": 10
+  }
+}
