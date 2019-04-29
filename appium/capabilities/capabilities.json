@@ -11,7 +11,7 @@
     },
     "deviceName": "iPhone Xs",
     "wdaLaunchTimeout": 80000,
-    "wdaConnectionTimeout": 80000
+    "wdaConnectionTimeout": 80000,
     "preventWDAAttachments": true,
     "clearSystemFiles": true,
     "shouldUseSingletonTestManager": false,
