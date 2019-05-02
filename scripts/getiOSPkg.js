@@ -24,7 +24,7 @@ errorHandler(xcrun.stderr);
 
 if (xcrun.stdout) {
   const pkgDir = xcrun.stdout.split('\n').join('');
-  const cp = spawnSync('cp', ['-r', pkgDir, `${to}/.`], {
+  const cp = spawnSync('cp', ['-r', pkgDir, to], {
     encoding: 'utf8'
   });
 
