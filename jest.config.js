@@ -5,5 +5,5 @@ module.exports = {
   bail: 1,
   notify: true,
   notifyMode: 'failure',
-  testRegex: '/appium/tests/'
-}
+  testMatch: ['**/tests/?(*.)+(spec|test).js']
+};

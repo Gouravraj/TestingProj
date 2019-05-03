@@ -1,22 +1,13 @@
-const colors = require('colors');
-const { spawnSync } = require('child_process');
+#!/usr/bin/env node
 
-function cmd(message, cmd, args, options = {}) {
-  options = Object.assign({}, {
-    encoding: 'utf8'
-  }, options);
+// extract package(.app, .apk) file(s) from simulalor and emulator
 
-  console.log('>>> '.green, message);
-  const { stdout, stderr } = spawnSync(cmd, args, options);
+const argv = require('yargs').argv;
 
-  if (stderr) {
-    console.log('Error(s):'.red);
-    console.log(stderr);
-
-    process.exit(1);
-  }
-
-  return Promise.resolve({ stdout, stderr });
+if (argv.ios) {
+  require('./ios');
 }
 
-module.exports = cmd;
+if (argv.android) {
+  require('./android');
+}

@@ -1,4 +1,4 @@
-const { android, iOS } = require('../../appium/capabilities/capabilities')
+const { android, ios } = require('../../appium/capabilities');
 
 module.exports = {
   android: {
@@ -8,6 +8,6 @@ module.exports = {
   },
   ios: {
     appId: 'com.cxagroup.mobile.EmployeePortal',
-    to: iOS.app
+    to: ios.app
   }
 };
