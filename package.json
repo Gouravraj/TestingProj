@@ -5,16 +5,16 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "pkg:ios": "node ./scripts/getiOSPkg.js",
+    "pkg:ios": "node ./scripts/pkg/ios.js",
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
   "dependencies": {
-    "colors": "^1.3.3",
     "react": "16.8.3",
     "react-native": "0.59.5"
   },
   "devDependencies": {
+    "colors": "^1.3.3",
     "@babel/core": "^7.4.3",
     "@babel/runtime": "^7.4.3",
     "appium": "^1.12.1",
