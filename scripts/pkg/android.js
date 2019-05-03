@@ -3,7 +3,7 @@
 const { android } = require('./config');
 const { exec } = require('./helpers');
 
-const { appId, port, to } = android;
+const { appId, to } = android;
 
 exec('Search path in Android emulator', 'adb', [
   'shell',

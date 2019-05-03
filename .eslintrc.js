@@ -3,10 +3,9 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
-    jest: true
+    jest: true,
+    jasmine: true
   },
   extends: 'eslint:recommended',
-  parser: 'babel-eslint',
-  plugins: ['react'],
-  rules: {}
+  parser: 'babel-eslint'
 };
