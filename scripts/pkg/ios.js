@@ -16,7 +16,7 @@ exec('Extract `.app` from running iOS simulator', 'xcrun', [
     .split('\n')
     .join('');
 
-  console.log('>>> '.green, `Copy & Rename - '${pkgDir}' to ${to}`);
+  console.log('>>> '.green, `Copy & Rename - '${pkgDir}' to ${to}`); // eslint-disable-line
 
   exec('cp', ['-r', pkgDir, to]);
 });

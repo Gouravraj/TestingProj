@@ -5,10 +5,7 @@ module.exports = {
     node: true,
     jest: true
   },
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
-  },
+  extends: 'eslint:recommended',
   parser: 'babel-eslint',
   plugins: ['react'],
   rules: {}

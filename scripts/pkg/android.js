@@ -13,7 +13,7 @@ exec('Search path in Android emulator', 'adb', [
 ]).then(({ stdout }) => {
   const pkgDir = stdout.toString().replace(/package:|\n/g, '');
 
-  exec('Extract `.app` from running Android emulator', 'adb', [
+  exec('Extract `.apk` from running Android emulator', 'adb', [
     'pull',
     pkgDir,
     to
