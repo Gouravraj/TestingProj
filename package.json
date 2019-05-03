@@ -5,29 +5,27 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "pkg:android": "node ./scripts/pkg/android.js",
     "pkg:ios": "node ./scripts/pkg/ios.js",
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
   "dependencies": {
     "react": "16.8.3",
-    "react-native": "0.59.5"
+    "react-native": "0.59.5",
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
-    "colors": "^1.3.3",
     "@babel/core": "^7.4.3",
     "@babel/runtime": "^7.4.3",
     "appium": "^1.12.1",
     "appium-doctor": "^1.9.0",
     "babel-jest": "^24.7.1",
     "babel-preset-react-native": "^4.0.1",
+    "colors": "^1.3.3",
     "jest": "^24.7.1",
     "metro-react-native-babel-preset": "^0.53.1",
     "react-test-renderer": "16.8.3",
     "wd": "^1.11.1"
-  },
-  "jest": {
-    "preset": "react-native",
-    "testRegex": "/appium/tests/"
   }
 }
