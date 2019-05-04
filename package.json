@@ -5,9 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "test:android": "npm run pkg:android & jest --detectOpenHandles",
     "pkg": "node ./scripts/pkg/cmd.js --ios --android || exit 0",
     "pkg:ios": "node ./scripts/pkg/cmd.js --ios || exit 0",
     "pkg:android": "node ./scripts/pkg/cmd.js --android || exit 0",
+    "emulator": "./scripts/emulator.sh Nexus6P",
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
@@ -31,8 +33,5 @@
     "react-test-renderer": "16.8.3",
     "wd": "^1.11.1",
     "yargs": "^13.2.2"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

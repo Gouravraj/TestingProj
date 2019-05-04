@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const { android } = require('./config');
-const { exec } = require('./helpers');
+const { android } = require('../config');
+const { exec } = require('../helpers');
 
 const { appId, to } = android;
 
