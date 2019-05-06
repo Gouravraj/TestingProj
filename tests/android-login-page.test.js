@@ -29,51 +29,53 @@ afterAll(async () => {
 test('valid user credential', async () => {
   // await driver.sleep(7000).saveScreenshot('./screenshots/login-page.png');
 
+  const xpath = login.android
+
   // keyboard off
   await driver
     .sleep(7000)
-    .elementByXPath(login.view)
+    .elementByXPath(xpath.view)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(login.clientName)
+    .elementByXPath(xpath.clientName)
     .click()
     .type('twclient3');
 
   // keyboard off
   await driver
     .sleep(1000)
-    .elementByXPath(login.view)
+    .elementByXPath(xpath.view)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(login.username)
+    .elementByXPath(xpath.username)
     .click()
     .type('test3@test.com');
 
   // keyboard off
   await driver
     .sleep(1000)
-    .elementByXPath(login.view)
+    .elementByXPath(xpath.view)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(login.password)
+    .elementByXPath(xpath.password)
     .click()
     .type('P@ssw0rd');
 
   // keyboard off
   await driver
     .sleep(1000)
-    .elementByXPath(login.view)
+    .elementByXPath(xpath.view)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(login.submit)
+    .elementByXPath(xpath.submit)
     .click();
 
   // TODO:

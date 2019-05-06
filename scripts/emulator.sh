@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-cd $(dirname $(which emulator)) && ./emulator -avd $1 &
+# Nexus6P
+# Pixel_2_API_28
+cd $(dirname $(which emulator)) && ./emulator -avd Nexus6P &

@@ -13,3 +13,6 @@ yarn-error.log
 
 # images
 *.png
+
+#
+/scripts/pkg/config.json

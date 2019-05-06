@@ -1,9 +1,6 @@
 const repoDir = process.cwd();
 
-const defaults = {
-  // fullReset: true,
-  // isHeadless: true
-};
+const defaults = {};
 
 const android = Object.assign({}, defaults, {
   platformName: 'Android',
@@ -18,8 +15,10 @@ const ios = Object.assign({}, defaults, {
   app: `${repoDir}/app/app-debug.app`,
   deviceName: 'iPhone X',
   useNewWDA: true,
+  waitForQuiescence: false,
   automationName: 'XCUITest',
-  noReset: true
+  noReset: true,
+  newCommandTimeout: 0
 });
 
 module.exports = {
