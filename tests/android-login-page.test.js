@@ -1,6 +1,6 @@
 import wd from 'wd';
 import server from '../appium/server';
-import { login } from './helpers/xpath';
+import { navi, login } from './helpers/xpath';
 import { android } from '../appium/capabilities';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
@@ -8,78 +8,54 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 const driver = wd.promiseChainRemote(server);
 
 beforeAll(async () => {
-  try {
-    await driver.init(android);
-    await driver.sleep(2000);
-  } catch (err) {
-    // eslint-disable-next-line
-    console.log(err);
-  }
+  await driver.init(android);
+  await driver.sleep(2000);
 });
 
 afterAll(async () => {
-  try {
-    await driver.quit();
-  } catch (err) {
-    // eslint-disable-next-line
-    console.log(err);
-  }
+  await driver.quit();
 });
 
 test('valid user credential', async () => {
-  // await driver.sleep(7000).saveScreenshot('./screenshots/login-page.png');
-
-  const xpath = login.android
-
-  // keyboard off
   await driver
-    .sleep(7000)
-    .elementByXPath(xpath.view)
-    .click();
-
-  await driver
-    .sleep(1000)
-    .elementByXPath(xpath.clientName)
+    .sleep(10000)
+    .elementByXPath(login.android.clientName)
     .click()
     .type('twclient3');
 
-  // keyboard off
   await driver
-    .sleep(1000)
-    .elementByXPath(xpath.view)
+    .sleep(3000)
+    .elementByXPath(login.android.screen)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(xpath.username)
+    .elementByXPath(login.android.username)
     .click()
     .type('test3@test.com');
 
-  // keyboard off
   await driver
-    .sleep(1000)
-    .elementByXPath(xpath.view)
+    .sleep(3000)
+    .elementByXPath(login.android.screen)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(xpath.password)
+    .elementByXPath(login.android.password)
     .click()
     .type('P@ssw0rd');
 
-  // keyboard off
   await driver
-    .sleep(1000)
-    .elementByXPath(xpath.view)
+    .sleep(3000)
+    .elementByXPath(login.android.screen)
     .click();
 
   await driver
     .sleep(1000)
-    .elementByXPath(xpath.submit)
+    .elementByXPath(login.android.submit)
     .click();
 
-  // TODO:
-  // - apply after login
-
-  expect(Boolean('true')).toBe(true);
+  expect(
+    await driver.sleep(10000).elementByXPath(navi.android.health)
+  ).toBeDefined();
 });

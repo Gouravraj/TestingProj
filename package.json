@@ -7,9 +7,6 @@
     "test": "jest",
     "test:ios": "jest ./tests/ios-login-page.test.js --detectOpenHandles",
     "test:android": "jest ./tests/android-login-page.test.js --detectOpenHandles",
-    "gen-conf": "node ./scripts/pkg/generate-config.js",
-    "pkg:ios": "extract-pkg ios --config=./scripts/pkg/config.js",
-    "pkg:android": "extract-pkg android --config=./scripts/pkg/config.js",
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
