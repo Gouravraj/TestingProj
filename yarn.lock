@@ -4337,10 +4337,10 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-pkg@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/extract-pkg/-/extract-pkg-1.1.3.tgz#228ce8471573208fd02a1477255496ae92de7234"
-  integrity sha512-ZQgjWYN4omnkTMCs4Ex8XDx6DFQk3tV+igA6Olmp17WUM2AiE9w1aYr6EtPc4zem0vs1LicOrIfTg2rXa7h26w==
+extract-pkg@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/extract-pkg/-/extract-pkg-1.2.0.tgz#b102062883b7433f24d80503dd295186ec3f5887"
+  integrity sha512-ZdXuRbZl3VBAdU/3ArU9RIe813kP0/qg9ZWS5dHLc6IBQdOP0gzttoUG+8SQceA4V+1Edb31WcrSYqYa2Y/t/w==
   dependencies:
     colors "^1.3.3"
     yargs "^13.2.2"
@@ -7877,6 +7877,11 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 randomatic@^3.0.0:
   version "3.1.1"

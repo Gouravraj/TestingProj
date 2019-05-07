@@ -1,27 +1,15 @@
+const { mergeAll } = require('ramda');
+
 const repoDir = process.cwd();
 
-const defaults = {};
+const ios = require('./ios')(repoDir);
+const android = require('./android')(repoDir);
 
-const android = Object.assign({}, defaults, {
-  platformName: 'Android',
-  deviceName: 'Android Emulator',
-  app: `${repoDir}/app/app-debug.apk`,
-  automationName: 'UiAutomator2'
-});
-
-const ios = Object.assign({}, defaults, {
-  platformName: 'iOS',
-  platformVersion: '12.2',
-  app: `${repoDir}/app/app-debug.app`,
-  deviceName: 'iPhone X',
-  useNewWDA: true,
-  waitForQuiescence: false,
-  automationName: 'XCUITest',
-  noReset: true,
-  newCommandTimeout: 0
-});
+const defaults = {
+  // defaults
+};
 
 module.exports = {
-  android,
-  ios
+  android: mergeAll([defaults, android]),
+  ios: mergeAll([defaults, ios])
 };

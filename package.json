@@ -8,12 +8,13 @@
     "test:ios": "jest ./tests/ios-login-page.test.js --detectOpenHandles",
     "test:android": "jest ./tests/android-login-page.test.js --detectOpenHandles",
     "gen-conf": "node ./scripts/pkg/generate-config.js",
-    "pkg:ios": "npm run gen-conf && extract-pkg ios --config=./scripts/pkg/config.json",
-    "pkg:android": "npm run gen-conf && extract-pkg android --config=./scripts/pkg/config.json",
+    "pkg:ios": "extract-pkg ios --config=./scripts/pkg/config.js",
+    "pkg:android": "extract-pkg android --config=./scripts/pkg/config.js",
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
   "dependencies": {
+    "ramda": "^0.26.1",
     "react": "16.8.3",
     "react-native": "0.59.5"
   },
@@ -26,7 +27,7 @@
     "babel-preset-react-native": "^4.0.1",
     "colors": "^1.3.3",
     "eslint": "^5.16.0",
-    "extract-pkg": "^1.1.3",
+    "extract-pkg": "^1.2.0",
     "jest": "^24.7.1",
     "metro-react-native-babel-preset": "^0.54.0",
     "prettier": "^1.17.0",
