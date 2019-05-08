@@ -1,7 +1,9 @@
 import wd from 'wd';
 import server from '../appium/server';
-import { navi, login } from './helpers/xpath';
+import accid from './helpers/accessibility-id';
 import { ios } from '../appium/capabilities';
+
+const { login: accidLogin, navi: accidNavi } = accid;
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
@@ -16,31 +18,30 @@ afterAll(async () => {
   await driver.quit();
 });
 
-test('valid user credential', async () => {
-  await driver
-    .sleep(7000)
-    .elementByXPath(login.ios.clientName)
+test('valid user credential', async (done) => {
+  const asserters = wd.asserters;
+
+  driver
+    .waitForElementByAccessibilityId(
+      accidLogin.clientName,
+      asserters.isDisplayed,
+      10000
+    )
     .click()
-    .type('twclient3');
-
-  await driver
-    .sleep(1000)
-    .elementByXPath(login.ios.username)
+    .type('twclient3')
+    .elementByAccessibilityId(accidLogin.username)
     .click()
-    .type('test3@test.com');
-
-  await driver
-    .sleep(1000)
-    .elementByXPath(login.ios.password)
+    .type('test3@test.com')
+    .elementByAccessibilityId(accidLogin.password)
     .click()
-    .type('P@ssw0rd');
+    .type('P@ssw0rd')
+    .elementByAccessibilityId(accidLogin.submit)
+    .click()
+    .then(async () => {
+      expect(
+        await driver.waitForElementByAccessibilityId(accidNavi.health, 20000)
+      ).toBeDefined();
 
-  await driver
-    .sleep(1000)
-    .elementByXPath(login.ios.submit)
-    .click();
-
-  expect(
-    await driver.sleep(15000).elementByXPath(navi.ios.health)
-  ).toBeDefined();
+      done();
+    });
 });
