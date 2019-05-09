@@ -68,6 +68,15 @@ extract-pkg ios -id=com.cxagroup.mobile.EmployeePortal --to=./app --rename=app-d
 
 This will test iOS, Android.
 
+To test development app package, you should run before running scripts, (if need)
+
+```bash
+# distribution-employee-mobile
+npm start
+```
+
+Then,
+
 ```bash
 yarn test
 ```

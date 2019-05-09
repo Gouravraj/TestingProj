@@ -18,7 +18,7 @@ afterAll(async () => {
   await driver.quit();
 });
 
-test('valid user credential', async (done) => {
+test('valid user credential', (done) => {
   const asserters = wd.asserters;
 
   driver
