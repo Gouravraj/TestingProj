@@ -35,11 +35,12 @@ test('valid user credential', async (done) => {
     .elementByAccessibilityId(accidLogin.password)
     .click()
     .type('P@ssw0rd')
+    .hideKeyboard()
     .elementByAccessibilityId(accidLogin.submit)
     .click()
     .then(async () => {
       expect(
-        await driver.waitForElementByAccessibilityId(accidNavi.health, 20000)
+        await driver.waitForElementByAccessibilityId(accidNavi.health, 10000)
       ).toBeDefined();
 
       done();

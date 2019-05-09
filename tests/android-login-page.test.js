@@ -1,11 +1,9 @@
 import wd from 'wd';
 import server from '../appium/server';
 import accid from './helpers/accessibility-id';
-import xpath from './helpers/xpath';
 import { android } from '../appium/capabilities';
 
 const { login: accidLogin, navi: accidNavi } = accid;
-const { login: xpathLogin } = xpath;
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
@@ -37,14 +35,13 @@ test('valid user credential', (done) => {
     .elementByAccessibilityId(accidLogin.password)
     .click()
     .type('P@ssw0rd')
-    .elementByXPath(xpathLogin.android.screen)
-    .click()
+    .hideKeyboard()
     .sleep(2000)
     .elementByAccessibilityId(accidLogin.submit)
     .click()
     .then(async () => {
       expect(
-        await driver.waitForElementByAccessibilityId(accidNavi.health, 20000)
+        await driver.waitForElementByAccessibilityId(accidNavi.health, 10000)
       ).toBeDefined();
 
       done();
