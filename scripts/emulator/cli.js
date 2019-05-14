@@ -2,28 +2,23 @@
 
 const exec = require('../utils/exec');
 const yargs = require('yargs');
-
-const deviceOption = {
-  alias: 'd',
-  description: 'device',
-  required: true
-};
+const options = require('./create/options');
 
 // prettier-ignore
 const argv = yargs
   .help('help', 'show help').alias('help', 'h')
   .command('create', 'create virtual device', (yargs) => {
-    yargs.options(require('./create/options'))
+    yargs.options(options)
   })
   .command('list', 'list devices')
   .command('open', 'open a device', (yargs) => {
     yargs.options({
-      device: deviceOption
+      device: options.device
     })
   })
   .command('delete', 'delete virtual device', (yargs) => {
     yargs.options({
-      device: deviceOption
+      device: options.device
     })
   })
   .argv;
