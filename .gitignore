@@ -15,4 +15,5 @@ yarn-error.log
 *.png
 
 #
-/scripts/pkg/config.json
+*.idea
+apps/
