@@ -2,15 +2,18 @@ const { spawnSync } = require('child_process');
 const print = require('./logger');
 
 module.exports = function exec(cmd, args, options = {}) {
+  const printError = print('error');
+  const printInfo = print('info');
+
   if (!Array.isArray(args)) {
-    print('error', 'Argments format is wrong!');
+    printError('Argments format is wrong!');
 
     process.exit(1);
   }
 
   const out = spawnSync(cmd, args, options);
-  const { stdout, stderr = Buffer, error } = out;
-  const err = error || stderr.toString();
+  const { stdout, stderr, error } = out;
+  const err = error || (stderr ? stderr.toString() : null);
 
   if (err) {
     const errMessage = err
@@ -18,12 +21,12 @@ module.exports = function exec(cmd, args, options = {}) {
       .filter((m) => m)
       .join('');
 
-    print('error', errMessage);
+    printError(errMessage);
 
     process.exit(1);
   }
 
-  print('info', stdout.toString());
+  printInfo(stdout.toString());
 
   return out;
 };
