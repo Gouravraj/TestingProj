@@ -4,6 +4,9 @@
   "scripts": {
     "android": "wdio ./config/android.app.conf.js",
     "ios": "wdio ./config/ios.app.conf.js",
+    "pkg": "node ./scripts/pkg/cli.js both",
+    "pkg:ios": "node ./scripts/pkg/cli.js ios",
+    "pkg:android": "node ./scripts/pkg/cli.js android",
     "lint": "eslint config tests"
   },
   "husky": {
@@ -46,6 +49,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-wdio": "^5.7.8",
+    "extract-pkg": "^1.2.3",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",
