@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+const { ios, android } = require('./platforms');
 
 // prettier-ignore
 const argv = yargs
@@ -15,14 +16,14 @@ const { _ } = argv;
 const [command] = _;
 
 if (command === 'ios') {
-  require('./platforms').ios();
+  ios();
 }
 
 if (command === 'android') {
-  require('./platforms').android();
+  android();
 }
 
 if (command === 'both') {
-  require('./platforms').ios();
-  require('./platforms').android();
+  ios();
+  android();
 }
