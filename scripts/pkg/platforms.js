@@ -2,9 +2,7 @@ const conf = require('./config');
 const exec = require('../utils/exec');
 
 function extract({ platform, id, to, rename }) {
-  return (baseDir = process.cwd()) => {
-    const cwd = `${baseDir}/node_modules/.bin`;
-
+  return (cwd = `${process.cwd()}/node_modules/.bin`) => {
     if (to.indexOf('.') > -1) {
       to = to
         .split('/')
