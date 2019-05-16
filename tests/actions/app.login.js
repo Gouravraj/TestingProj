@@ -1,5 +1,5 @@
 import LoginScreen from '../screenobjects/login.screen';
-import NavigationBar from '../screenobjects/navigationbar.component';
+import navigator from './app.navigator';
 
 function loginAs(empDetail) {
   LoginScreen.waitForIsShown(true);
@@ -9,10 +9,10 @@ function loginAs(empDetail) {
   LoginScreen.loginButton().click();
 }
 
-function isLogedin() {
-  return NavigationBar.waitForIsShown(true);
+function isLoggedin() {
+  return navigator.isNavigationBarVisible();
 }
 module.exports = {
   loginAs,
-  isLogedin
+  isLoggedin
 };

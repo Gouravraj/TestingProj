@@ -10,7 +10,7 @@ class NavigationBar extends AppScreen {
   constructor() {
     super(SELECTORS.HEALTH_NAVIGATOR);
   }
-  heakthNavigator() {
+  healthNavigator() {
     return $(SELECTORS.HEALTH_NAVIGATOR);
   }
   claimsNavigator() {
