@@ -1,7 +1,7 @@
 import AppScreen from './app.screen';
 
 const SELECTORS = {
-  BMI_SCREEN: '~Health, tab, 1 of 4',
+  HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
   BMI_BUTTON: ''
 };
 
