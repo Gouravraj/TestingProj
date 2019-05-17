@@ -1,7 +1,5 @@
-const readlineSync = require('readline-sync');
-
 function getDeviceList(stdout) {
-  const deviceList = stdout
+  return stdout
     .toString()
     .split(/\n/g)
     .reduce((acc, line) => {
@@ -9,14 +7,11 @@ function getDeviceList(stdout) {
         return acc;
       }
 
-      const [, device] = line.trim().startsWith('Name') ? line.split(': ') : [];
+      const trimedLine = line.trim();
+      const [, device] = trimedLine.split(': ');
 
-      return device ? [...acc, device] : acc;
+      return [...acc, device];
     }, []);
-
-  const idx = readlineSync.keyInSelect(deviceList, 'Select a device');
-
-  return deviceList[idx];
 }
 
 module.exports = getDeviceList;

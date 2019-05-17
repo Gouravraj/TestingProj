@@ -5,9 +5,10 @@
     "android": "wdio ./config/android.app.conf.js",
     "ios": "wdio ./config/ios.app.conf.js",
     "pkg": "node ./scripts/pkg/cli.js both",
-    "pkg:ios": "node ./scripts/pkg/cli.js ios",
-    "pkg:android": "node ./scripts/pkg/cli.js android",
-    "lint": "eslint config tests"
+    "pkg:ios": "./scripts/pkg/cli.js ios",
+    "pkg:android": "./scripts/pkg/cli.js android",
+    "lint": "eslint config tests",
+    "emulator": "./scripts/emulator/cli.js"
   },
   "husky": {
     "hooks": {

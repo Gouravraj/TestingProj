@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+const readlineSync = require('readline-sync');
 const getDeviceList = require('./getDeviceList');
-const options = require('./create/options');
+const options = require('./options');
 const exec = require('../utils/exec');
 
 // prettier-ignore
@@ -12,12 +13,9 @@ const argv = yargs
     yargs.options(options)
   })
   .command('list', 'list devices')
+  .command('update', 'update packages')
   .command('open', 'open a device')
-  .command('delete', 'delete virtual device', (yargs) => {
-    yargs.options({
-      device: options.device
-    })
-  })
+  .command('delete', 'delete a device')
   .demandCommand(1, 'choose a command')
   .argv;
 
@@ -37,7 +35,13 @@ if (command === 'list') {
   });
 }
 
-if (command === 'open') {
+if (command === 'update') {
+  exec('./cli.sh', [], {
+    cwd
+  });
+}
+
+if (command === 'open' || command === 'delete') {
   const { stdout } = exec(
     './cli.sh',
     [],
@@ -49,17 +53,13 @@ if (command === 'open') {
     }
   );
 
-  const device = getDeviceList(stdout);
+  const deviceList = getDeviceList(stdout);
+  const idx = readlineSync.keyInSelect(deviceList, 'Select a device');
+  const device = deviceList[idx];
 
   if (device) {
     exec('./cli.sh', [device], {
       cwd
     });
   }
-}
-
-if (command === 'delete') {
-  exec('./cli.sh', [argv.device], {
-    cwd
-  });
 }

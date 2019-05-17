@@ -16,10 +16,13 @@ function cmd(name, api, device) {
       '--abi',
       'google_apis/x86_64',
       '--package',
-      `"system-images;android-${api};google_apis;x86_64"`,
+      `'system-images;android-${api};google_apis;x86_64'`,
       '--device',
-      device
-    ]
+      `'${device}'`
+    ],
+    {
+      shell: true
+    }
   ];
 }
 
