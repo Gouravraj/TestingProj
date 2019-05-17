@@ -1,7 +1,6 @@
 const readlineSync = require('readline-sync');
 
 function getDeviceList(stdout) {
-  // TODO: if multiple
   const deviceList = stdout
     .toString()
     .split(/\n/g)

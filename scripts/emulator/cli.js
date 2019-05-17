@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-const exec = require('../utils/exec');
+const getDeviceList = require('./getDeviceList');
 const options = require('./create/options');
-const getDeviceList = require('./open/getDeviceList');
+const exec = require('../utils/exec');
 
 // prettier-ignore
 const argv = yargs
