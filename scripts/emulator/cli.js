@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const exec = require('../utils/exec');
 const yargs = require('yargs');
+const exec = require('../utils/exec');
 const options = require('./create/options');
+const getDeviceList = require('./open/getDeviceList');
 
 // prettier-ignore
 const argv = yargs
@@ -11,16 +12,13 @@ const argv = yargs
     yargs.options(options)
   })
   .command('list', 'list devices')
-  .command('open', 'open a device', (yargs) => {
-    yargs.options({
-      device: options.device
-    })
-  })
+  .command('open', 'open a device')
   .command('delete', 'delete virtual device', (yargs) => {
     yargs.options({
       device: options.device
     })
   })
+  .demandCommand(1, 'choose a command')
   .argv;
 
 const { _, name, api, device } = argv;
@@ -39,7 +37,28 @@ if (command === 'list') {
   });
 }
 
-if (command === 'open' || command === 'delete') {
+if (command === 'open') {
+  const { stdout } = exec(
+    './cli.sh',
+    [],
+    {
+      cwd: `${__dirname}/list`
+    },
+    {
+      silence: true
+    }
+  );
+
+  const device = getDeviceList(stdout);
+
+  if (device) {
+    exec('./cli.sh', [device], {
+      cwd
+    });
+  }
+}
+
+if (command === 'delete') {
   exec('./cli.sh', [argv.device], {
     cwd
   });

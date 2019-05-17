@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-adb devices -l
+# adb devices -l
+avdmanager list avd
