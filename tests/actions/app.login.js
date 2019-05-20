@@ -1,5 +1,6 @@
 import LoginScreen from '../screenobjects/login.screen';
 import navigator from './app.navigator';
+import nativeAlert from '../helpers/NativeAlert';
 
 function loginAs(empDetail) {
   LoginScreen.waitForIsShown(true);
@@ -12,7 +13,20 @@ function loginAs(empDetail) {
 function isLoggedin() {
   return navigator.isNavigationBarVisible();
 }
+function isLoginErrorMessageVisible() {
+  let isVisible;
+  const platform = driver.capabilities.platformName;
+  try {
+    nativeAlert.waitForAlertToVisible[platform]();
+    const errorMessage = nativeAlert.text[platform]();
+    isVisible = errorMessage.includes('Error') ? true : false;
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
 module.exports = {
   loginAs,
-  isLoggedin
+  isLoggedin,
+  isLoginErrorMessageVisible
 };
