@@ -6,7 +6,8 @@ module.exports = {
     jasmine: true
   },
   globals: {
-    $: true
+    $: true,
+    driver: true
   },
   extends: 'eslint:recommended',
   parser: 'babel-eslint'
