@@ -12,6 +12,8 @@ module.exports = function print(type) {
       message = message.replace(/error(.?)/i, '').trim();
     } else if (type === 'info') {
       prefix = chalk.blue('Info: ');
+    } else if (type === 'log') {
+      prefix = '';
     }
 
     // eslint-disable-next-line

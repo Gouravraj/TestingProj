@@ -10,7 +10,7 @@ module.exports = function exec(
   }
 ) {
   const printError = print('error');
-  const printInfo = print('info');
+  const printLog = print('log');
   const out = spawnSync(cmd, args, options);
   const { stdout, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
@@ -31,7 +31,7 @@ module.exports = function exec(
   }
 
   if (!extra.silence) {
-    printInfo(stdout.toString());
+    printLog(stdout.toString());
   }
 
   return out;
