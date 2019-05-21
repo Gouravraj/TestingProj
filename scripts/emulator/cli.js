@@ -2,9 +2,9 @@
 
 const yargs = require('yargs');
 const readlineSync = require('readline-sync');
+const getDeviceList = require('./helpers/getDeviceList');
+const options = require('./helpers/options');
 const conf = require('../pkg/config');
-const getDeviceList = require('./getDeviceList');
-const options = require('./options');
 const exec = require('../utils/exec');
 
 // prettier-ignore
@@ -14,60 +14,40 @@ const argv = yargs
     yargs.options(options)
   })
   .command('list', 'list devices')
-  .command('update', 'update packages')
+  .command('update', 'update SDK')
   .command('open', 'open a device')
   .command('delete', 'delete a device')
   .command('uninstall', 'remove package from device')
   .demandCommand(1, 'choose a command')
   .argv;
 
-const { _, name, api, device } = argv;
+const { _, name, api } = argv;
 const [command] = _;
-const cwd = `${__dirname}/${command}`;
+const baseName = `${__dirname}/commands/${command}`;
+const baseFile = `${baseName}.sh`;
 
 if (command === 'create') {
-  const cmd = require('./create/cli');
-
-  exec(...cmd(name, api, device));
+  exec(...require('./commands/create.js')(name, api));
 }
 
-if (command === 'list') {
-  exec('./cli.sh', [], {
-    cwd
-  });
-}
-
-if (command === 'update') {
-  exec('./cli.sh', [], {
-    cwd
-  });
+if (command === 'list' || command === 'update') {
+  exec(baseFile);
 }
 
 if (command === 'open' || command === 'delete') {
-  const { stdout } = exec(
-    './cli.sh',
-    [],
-    {
-      cwd: `${__dirname}/list`
-    },
-    {
-      silence: true
-    }
-  );
+  const { stdout } = exec(baseFile, null, null, {
+    silence: true
+  });
 
   const deviceList = getDeviceList(stdout);
   const idx = readlineSync.keyInSelect(deviceList, 'Select a device');
   const device = deviceList[idx];
 
   if (device) {
-    exec('./cli.sh', [device], {
-      cwd
-    });
+    exec(baseFile, [device]);
   }
 }
 
 if (command === 'uninstall') {
-  exec('./cli.sh', [conf.android.id], {
-    cwd
-  });
+  exec(baseFile, [conf.android.id]);
 }

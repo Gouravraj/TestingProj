@@ -3,7 +3,7 @@ const print = require('./logger');
 
 module.exports = function exec(
   cmd,
-  args,
+  args = [],
   options = {},
   extra = {
     silence: false
@@ -11,19 +11,15 @@ module.exports = function exec(
 ) {
   const printError = print('error');
   const printInfo = print('info');
-
-  if (!Array.isArray(args)) {
-    printError('Argments format is wrong!');
-
-    process.exit(1);
-  }
-
   const out = spawnSync(cmd, args, options);
   const { stdout, stderr, error } = out;
-  const err = error || (stderr ? stderr.toString() : null);
+  let err = error || (stderr ? stderr.toString() : null);
 
   if (err) {
-    // TODO: err === object -> split
+    if (typeof err !== 'string') {
+      err = JSON.stringify(err, null, 2);
+    }
+
     const errMessage = err
       .split(/null\n/g)
       .filter((m) => m)

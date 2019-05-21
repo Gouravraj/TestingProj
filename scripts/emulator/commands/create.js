@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-const options = require('./options');
+const options = require('../helpers/options');
 const exec = require('../../utils/exec');
 
-function cmd(name, api, device) {
+function cmd(name, api) {
   return [
     'avdmanager',
     [
@@ -16,9 +16,7 @@ function cmd(name, api, device) {
       '--abi',
       'google_apis/x86_64',
       '--package',
-      `'system-images;android-${api};google_apis;x86_64'`,
-      '--device',
-      `'${device}'`
+      `'system-images;android-${api};google_apis;x86_64'`
     ],
     {
       shell: true
@@ -32,8 +30,8 @@ const argv = yargs
   .options(options)
   .argv;
 
-const { name, api, device } = argv;
+const { name, api } = argv;
 
-exec(...cmd(name, api, device));
+exec(...cmd(name, api));
 
 module.exports = cmd;
