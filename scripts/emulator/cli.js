@@ -2,6 +2,7 @@
 
 const yargs = require('yargs');
 const readlineSync = require('readline-sync');
+const conf = require('../pkg/config');
 const getDeviceList = require('./getDeviceList');
 const options = require('./options');
 const exec = require('../utils/exec');
@@ -16,6 +17,7 @@ const argv = yargs
   .command('update', 'update packages')
   .command('open', 'open a device')
   .command('delete', 'delete a device')
+  .command('uninstall', 'remove package from device')
   .demandCommand(1, 'choose a command')
   .argv;
 
@@ -62,4 +64,10 @@ if (command === 'open' || command === 'delete') {
       cwd
     });
   }
+}
+
+if (command === 'uninstall') {
+  exec('./cli.sh', [conf.android.id], {
+    cwd
+  });
 }
