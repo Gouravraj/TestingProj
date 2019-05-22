@@ -11,7 +11,7 @@ config.capabilities = [
     orientation: 'PORTRAIT',
     maxInstances: 1,
     app: join(process.cwd(), 'app', 'app-debug.apk'),
-    noReset: true,
+    // noReset: true,
     newCommandTimeout: 240
   }
 ];

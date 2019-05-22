@@ -1,48 +1,85 @@
-const create = require('./steps/create');
-const open = require('./steps/open');
-const waitEmu = require('./steps/waitEmu');
-const tests = require('./steps/tests');
-const uninstall = require('./steps/uninstall');
-const close = require('./steps/close');
-const print = require('../utils/logger');
-const sleep = require('../utils/sleep');
+const conf = require('../config');
+const exec = require('../helpers/exec');
+const print = require('../helpers/logger');
+const sleep = require('../helpers/sleep');
+const { getDevices } = require('../helpers/parser');
+const { createTab } = require('../helpers/tab');
+const { cli } = require('../helpers/path');
+const waitEmu = require('../helpers/waitEmu');
+const { isRunning } = require('../helpers/check');
+const create = require('../commands/create');
+const sdk = require('../commands/sdk')(cli);
+const list = require('../commands/list')(cli);
+const uninstall = require('../commands/uninstall')(cli);
+const close = require('../commands/close')(cli);
 
-const log = print('ci');
+function ninja(cli) {
+  return exec(...[...cli, { silence: true }]);
+}
 
-async function main(args) {
+async function main(command, args) {
+  const log = print('ci');
   const { name, device, api } = args;
 
-  log('Creating virtual device...');
-  create(name, device, api);
+  if (command === 'run') {
+    log('Creating package(SDK)...');
+    ninja(sdk());
 
-  await sleep(1000);
+    await sleep(1000);
 
-  log('Opening virtual device... (open new tab & launch Android emulator)');
-  open(0);
+    log('Creating virtual device...');
+    ninja(create(name, device, api));
 
-  await sleep(5000);
+    await sleep(1000);
 
-  log('Waiting the emulator...');
-  await waitEmu();
+    log('Opening virtual device... (open new tab & launch Android emulator)');
+    const { stdout } = ninja(list());
+    const deviceList = getDevices(stdout.toString());
 
-  await sleep(1000);
+    if (deviceList[0]) {
+      const cmd = `${cli}/open.sh ${deviceList[0]}`;
 
-  log('Launching test scripts...');
-  tests();
+      createTab([cmd], {
+        silence: true
+      });
+    }
 
-  await sleep(1000);
+    await sleep(20000);
 
-  log('Uninstalling app...');
-  uninstall();
+    log('Waiting the emulator...');
+    await waitEmu(1000);
 
-  await sleep(5000);
+    log('Launching test scripts...');
+    exec('npm', ['run', 'android'], { stdio: 'inherit' });
 
-  log('Closing the emulator...');
-  close();
+    await sleep(1000);
 
-  await sleep(1000);
+    log('Uninstalling app...');
+    ninja(uninstall(conf.android.id));
 
-  log('Finish UI test, awesome!');
+    await sleep(8000);
+
+    log('Closing the emulator...');
+    ninja(close());
+
+    await sleep(1000);
+
+    log('Finish UI test, awesome!');
+  }
+
+  if (command === 'clean' && isRunning()) {
+    log('Uninstalling app...');
+    ninja(uninstall(conf.android.id));
+
+    await sleep(8000);
+
+    log('Closing the emulator...');
+    ninja(close());
+
+    await sleep(1000);
+
+    log('Finish cleanup, awesome!');
+  }
 }
 
 module.exports = main;

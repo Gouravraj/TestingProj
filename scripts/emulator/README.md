@@ -52,6 +52,10 @@ Same as `open` command
 
 - uninstall package from emulator
 
+```bash
+npm run emulator uninstall
+```
+
 - close the emulator
 
 ```bash

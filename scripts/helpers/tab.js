@@ -1,10 +1,13 @@
 const exec = require('./exec');
-const { home } = require('../path');
+const { home } = require('./path');
 
-function createTab(options = [], extra = {}) {
+function createTab(args, extra) {
+  args = args || [];
+  extra = extra || {};
+
   exec(
     './ttab',
-    ['-G', ...options],
+    ['-G', ...args],
     {
       cwd: `${home}/node_modules/.bin`
     },

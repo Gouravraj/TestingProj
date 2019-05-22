@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "scripts": {
     "ci": "./scripts/ci/cli.js run",
+    "cleanup": "./scripts/ci/cli.js clean",
     "android": "wdio ./config/android.app.conf.js",
     "ios": "wdio ./config/ios.app.conf.js",
+    "emulator": "./scripts/emulator/cli.js",
     "pkg": "node ./scripts/pkg/cli.js both",
     "pkg:ios": "./scripts/pkg/cli.js ios",
     "pkg:android": "./scripts/pkg/cli.js android",
-    "lint": "eslint config tests",
-    "emulator": "./scripts/emulator/cli.js"
+    "lint": "eslint config tests"
   },
   "husky": {
     "hooks": {
@@ -52,6 +53,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-wdio": "^5.7.8",
     "extract-pkg": "^1.2.3",
+    "find-up": "^4.0.0",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",

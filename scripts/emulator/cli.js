@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 const main = require('./main');
-const options = require('../yargs/options');
+const options = require('../yargs.options');
 
 // prettier-ignore
 const argv = yargs
@@ -10,11 +10,12 @@ const argv = yargs
   .command('create', 'create virtual device', (yargs) => {
     yargs.options(options)
   })
-  .command('list', 'list devices')
+  .command('list', 'list virtual devices')
   .command('update', 'update SDK')
-  .command('open', 'open a device')
-  .command('delete', 'delete a device')
-  .command('uninstall', 'remove package from device')
+  .command('open', 'open virtual device')
+  .command('delete', 'delete virtual device')
+  .command('uninstall', 'remove .apk from device')
+  .command('close', 'close virtual device')
   .demandCommand(1, 'choose a command')
   .argv;
 
