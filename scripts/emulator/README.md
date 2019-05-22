@@ -11,13 +11,19 @@ npm run emulator <command> # or execute `./scripts/emulator/cli.js`
 - Create virtual device
 
 ```bash
-npm run emulator create --name=<device name> --device=<base device>
+npm run emulator create
+```
+
+with specific name,
+
+```bash
+npm run emulator create --name=<device name>
 ```
 
 with specific API version,
 
 ```bash
-npm run emulator create --name=TonyStark --device=Nexus6P --api=27
+npm run emulator create --api=<API version>
 ```
 
 - List created device(s)
@@ -45,6 +51,12 @@ Virtual device(s) list will display, then pick the number.
 Same as `open` command
 
 - uninstall package from emulator
+
+- close the emulator
+
+```bash
+npm run emulator close
+```
 
 ```bash
 npm run emulator uninstall

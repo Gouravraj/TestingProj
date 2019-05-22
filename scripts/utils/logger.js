@@ -1,25 +1,30 @@
-const chalk = require('chalk');
+const { blue, yellow, red } = require('chalk');
 
 module.exports = function print(type) {
+  let prefix;
+
   return (message) => {
-    let prefix;
+    if (type === 'ci') {
+      // eslint-disable-next-line
+      console.log(blue('[STEP]: '), message);
+    } else {
+      if (type === 'warn') {
+        prefix = yellow('Warning: ');
+      } else if (type === 'error') {
+        prefix = red('Error: ');
 
-    if (type === 'warn') {
-      prefix = chalk.yellow('Warning: ');
-    } else if (type === 'error') {
-      prefix = chalk.red('Error: ');
+        message = message.replace(/error(.?)/i, '').trim();
+      } else if (type === 'info') {
+        prefix = blue('Info: ');
+      } else if (type === 'log') {
+        prefix = '';
+      }
 
-      message = message.replace(/error(.?)/i, '').trim();
-    } else if (type === 'info') {
-      prefix = chalk.blue('Info: ');
-    } else if (type === 'log') {
-      prefix = '';
+      // eslint-disable-next-line
+      console.log(prefix);
+
+      // eslint-disable-next-line
+      console.log(message);
     }
-
-    // eslint-disable-next-line
-    console.log(prefix);
-
-    // eslint-disable-next-line
-    console.log(message);
   };
 };

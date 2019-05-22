@@ -1,16 +1,14 @@
 const { spawnSync } = require('child_process');
 const print = require('./logger');
 
-module.exports = function exec(
-  cmd,
-  args = [],
-  options = {},
-  extra = {
-    silence: false
-  }
-) {
-  const printError = print('error');
-  const printLog = print('log');
+const printError = print('error');
+const printLog = print('log');
+
+function exec(cmd, args, options, extra) {
+  args = args || [];
+  options = options || {};
+  extra = extra || {};
+
   const out = spawnSync(cmd, args, options);
   const { stdout, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
@@ -30,9 +28,17 @@ module.exports = function exec(
     process.exit(1);
   }
 
+  let res = stdout.toString();
+
+  if (typeof extra.after === 'function') {
+    res = extra.after(res);
+  }
+
   if (!extra.silence) {
-    printLog(stdout.toString());
+    printLog(res);
   }
 
   return out;
-};
+}
+
+module.exports = exec;

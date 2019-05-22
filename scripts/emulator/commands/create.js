@@ -1,37 +1,43 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs');
-const options = require('../helpers/options');
-const exec = require('../../utils/exec');
+const { androidHome } = require('../../path');
 
-function cmd(name, api) {
+const isCLI = !module.parent;
+
+function cmd(name, device, api) {
   return [
-    'avdmanager',
+    './avdmanager',
     [
       'create',
       'avd',
-      '--force',
       '--name',
-      name,
-      '--abi',
-      'google_apis/x86_64',
+      `'${name}'`,
       '--package',
-      `'system-images;android-${api};google_apis;x86_64'`
+      `'system-images;android-${api};google_apis;x86_64'`,
+      '--device',
+      `'${device}'`
     ],
     {
+      cwd: `${androidHome}/tools/bin`,
       shell: true
     }
   ];
 }
 
-// prettier-ignore
-const argv = yargs
-  .help('help', 'show help').alias('help', 'h')
-  .options(options)
-  .argv;
+if (isCLI) {
+  const yargs = require('yargs');
+  const options = require('../../yargs/options');
+  const exec = require('../../utils/exec');
 
-const { name, api } = argv;
+  // prettier-ignore
+  const argv = yargs
+    .help('help', 'show help').alias('help', 'h')
+    .options(options)
+    .argv;
 
-exec(...cmd(name, api));
+  const { name, device, api } = argv;
 
-module.exports = cmd;
+  exec(...cmd(name, device, api));
+} else {
+  module.exports = cmd;
+}

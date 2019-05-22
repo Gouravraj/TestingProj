@@ -1,5 +1,5 @@
-const ios = require('../../config/ios.app.conf');
-const android = require('../../config/android.app.conf');
+const ios = require('../config/ios.app.conf');
+const android = require('../config/android.app.conf');
 
 module.exports = {
   ios: {

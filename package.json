@@ -2,6 +2,7 @@
   "name": "distribution-mobile-automation",
   "version": "0.0.1",
   "scripts": {
+    "ci": "./scripts/ci/cli.js run",
     "android": "wdio ./config/android.app.conf.js",
     "ios": "wdio ./config/ios.app.conf.js",
     "pkg": "node ./scripts/pkg/cli.js both",
@@ -56,6 +57,8 @@
     "prettier": "^1.17.0",
     "prettier-eslint": "^8.8.2",
     "readline-sync": "^1.4.9",
+    "shortid": "^2.2.14",
+    "ttab": "^0.6.1",
     "yargs": "^13.2.4"
   }
 }
