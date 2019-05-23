@@ -2,6 +2,9 @@ const exec = require('./exec');
 const sleep = require('./sleep');
 const { cli } = require('./path');
 
+/**
+ * @deprecated shell script will do
+ */
 async function waitEmu(ms) {
   ms = ms || 2000;
 
