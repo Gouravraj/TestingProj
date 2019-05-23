@@ -1,18 +1,11 @@
 const exec = require('./exec');
-const { home } = require('./path');
+const { localBin } = require('./path');
 
 function createTab(args, extra) {
   args = args || [];
   extra = extra || {};
 
-  exec(
-    './ttab',
-    ['-G', ...args],
-    {
-      cwd: `${home}/node_modules/.bin`
-    },
-    extra
-  );
+  exec('./ttab', ['-G', ...args], { cwd: localBin }, extra);
 }
 
 module.exports = {

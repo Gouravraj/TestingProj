@@ -1,12 +1,7 @@
 const exec = require('./exec');
 
 function isRunning() {
-  const { stdout } = exec(
-    'adb',
-    ['devices'],
-    { encoding: 'utf8' },
-    { silence: true }
-  );
+  const { stdout } = exec.ninja(['adb', ['devices'], { encoding: 'utf8' }]);
   const devices = stdout
     .split(/\n/g)
     .filter((line) => line)

@@ -19,7 +19,7 @@ function exec(cmd, args, options, extra) {
     }
 
     const errMessage = err
-      .split(/null\n/g)
+      .split(/null|\n/g)
       .filter((m) => m)
       .join('');
 
@@ -40,5 +40,17 @@ function exec(cmd, args, options, extra) {
 
   return out;
 }
+
+exec.ninja = function ninja(command) {
+  const mergedAgrs = [...command, { silence: true }];
+
+  return exec(...mergedAgrs);
+};
+
+exec.touch = function touch(file) {
+  const fs = require('fs');
+
+  fs.closeSync(fs.openSync(file, 'w'));
+};
 
 module.exports = exec;

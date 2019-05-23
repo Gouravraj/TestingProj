@@ -10,17 +10,14 @@ async function waitEmu(ms) {
   while (!isReady) {
     await sleep(ms);
 
-    const { stdout } = exec(
+    const { stdout } = exec.ninja([
       './check_emulator_ready.sh',
       null,
       {
         encoding: 'utf8',
         cwd: cli
-      },
-      {
-        silence: true
       }
-    );
+    ]);
 
     if (stdout.trim() === '1') {
       isReady = true;
