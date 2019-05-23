@@ -33,7 +33,7 @@ function getAndroidHome() {
   return stdout.trim();
 }
 
-exports.home = repo;
+exports.repo = repo;
 exports.cli = cli;
 exports.localBin = path.resolve(repo, 'node_modules', '.bin');
 exports.emulator = getAbs('emulator');

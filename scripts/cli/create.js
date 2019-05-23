@@ -13,4 +13,4 @@ const argv = yargs
 
 const { name, device, api } = argv;
 
-exec(...create(name, device, api));
+exec.apply(null, create(name, device, api));

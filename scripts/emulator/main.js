@@ -9,19 +9,19 @@ function main(command, args) {
     const conf = require('../config');
     const uninstall = require('../commands/uninstall')(cli);
 
-    exec(...uninstall(conf.android.id));
+    exec.apply(null, uninstall(conf.android.id));
   }
 
   if (command === 'close' && isRunning()) {
     const close = require('../commands/close')(cli);
 
-    exec(...close());
+    exec.apply(null, close());
   }
 
   if (command === 'create') {
     const create = require('../commands/create');
 
-    exec(...create(name, device, api));
+    exec.apply(null, create(name, device, api));
   }
 
   if (command === 'list') {
@@ -37,7 +37,7 @@ function main(command, args) {
         .join('\n');
     };
 
-    exec(...[...list(), { after }]);
+    exec.apply(null, [...list(), { after }]);
   }
 
   if (command === 'open' || command === 'delete') {
@@ -76,7 +76,7 @@ function main(command, args) {
   }
 
   if (command === 'update') {
-    exec('./update.sh', { cwd: cli });
+    exec('./update.sh', null, { cwd: cli });
   }
 }
 

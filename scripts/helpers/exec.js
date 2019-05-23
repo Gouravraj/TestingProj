@@ -42,9 +42,7 @@ function exec(cmd, args, options, extra) {
 }
 
 exec.ninja = function ninja(command) {
-  const mergedAgrs = [...command, { silence: true }];
-
-  return exec(...mergedAgrs);
+  return exec.apply(null, [...command, { silence: true }]);
 };
 
 exec.touch = function touch(file) {
