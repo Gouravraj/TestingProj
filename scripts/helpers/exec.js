@@ -28,7 +28,7 @@ function exec(cmd, args, options, extra) {
     process.exit(1);
   }
 
-  if (options.stdio === 'inherit') {
+  if (options.stdio) {
     return out;
   }
 

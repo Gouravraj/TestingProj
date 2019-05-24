@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # another way is set PATH
-cd $(dirname $(which emulator)) && ./emulator -avd $1
+cd $(dirname $(which emulator)) && exec nohup ./emulator -avd $1 &

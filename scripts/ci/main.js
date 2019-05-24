@@ -2,7 +2,6 @@ const conf = require('../config');
 const exec = require('../helpers/exec');
 const print = require('../helpers/logger');
 const sleep = require('../helpers/sleep');
-const { createTab } = require('../helpers/tab');
 const { cli, osHome } = require('../helpers/path');
 const { isRunning } = require('../helpers/check');
 const create = require('../commands/create');
@@ -61,17 +60,14 @@ async function main(command, args) {
       await sleep(4000);
     }
 
-    dLog(
-      'Opening virtual device (open new tab & launch Android emulator)',
-      (done) => {
-        createTab([`${cli}/open.sh ${DEVICE_NAME}`], { silence: true });
+    dLog('Opening virtual device', (done) => {
+      exec('./open.sh', [DEVICE_NAME], { cwd: cli, stdio: 'ignore' });
 
-        done();
-      }
-    );
+      done();
+    });
 
     // TODO: remove sleep after creating check script
-    await sleep(10000);
+    await sleep(15000);
 
     dLog('Waiting the emulator (is device ready?)', async (done) => {
       exec.ninja(['./check_emulator_ready.sh', null, { cwd: cli }]);
