@@ -19,6 +19,12 @@ async function main(command, args) {
   const { name, device, api } = args;
 
   if (command === 'run') {
+    dLog('Checking ADB status (start if not running)', (done) => {
+      exec('./start_adb.sh', null, { cwd: cli }, { force: true });
+
+      done();
+    });
+
     dLog('Checking SDK config file (create if not exist)', (done) => {
       exec.touch(SDK_CFG);
 

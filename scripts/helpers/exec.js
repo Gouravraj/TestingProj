@@ -13,7 +13,7 @@ function exec(cmd, args, options, extra) {
   const { stdout, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
 
-  if (err) {
+  if (err && !extra.force) {
     if (typeof err !== 'string') {
       err = JSON.stringify(err, null, 2);
     }
@@ -28,7 +28,7 @@ function exec(cmd, args, options, extra) {
     process.exit(1);
   }
 
-  if (options.stdio) {
+  if (options.stdio || extra.force) {
     return out;
   }
 
