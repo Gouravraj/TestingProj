@@ -51,9 +51,15 @@ async function main(command, args) {
 
     // close emulators if already opened
     // it might not be using when multiple devices testing
-    // TODO: remove sleep after create check script
-    exec.ninja(close());
-    await sleep(5000);
+    if (isRunning()) {
+      dLog('Closing opened emulator', async (done) => {
+        exec.ninja(close());
+
+        done();
+      });
+
+      await sleep(4000);
+    }
 
     dLog(
       'Opening virtual device (open new tab & launch Android emulator)',

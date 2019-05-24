@@ -28,6 +28,10 @@ function exec(cmd, args, options, extra) {
     process.exit(1);
   }
 
+  if (options.stdio === 'inherit') {
+    return out;
+  }
+
   let res = stdout.toString();
 
   if (typeof extra.after === 'function') {
