@@ -7,6 +7,9 @@ function loginAs(empDetail) {
   LoginScreen.companyNameField().setValue(empDetail.companyName);
   LoginScreen.emailAddressField().setValue(empDetail.emailAddress);
   LoginScreen.passwordField().setValue(empDetail.password);
+
+  driver.hideKeyboard();
+
   LoginScreen.loginButton().click();
 }
 
