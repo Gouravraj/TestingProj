@@ -51,7 +51,7 @@ async function main(command, args) {
     // close emulators if already opened
     // it might not be using when multiple devices testing
     if (isRunning()) {
-      dLog('Closing opened emulator', async (done) => {
+      dLog('Closing opened emulator', (done) => {
         exec.ninja(close());
 
         done();
@@ -69,7 +69,7 @@ async function main(command, args) {
     // TODO: remove sleep after creating check script
     await sleep(15000);
 
-    dLog('Waiting the emulator (is device ready?)', async (done) => {
+    dLog('Waiting the emulator (is device ready?)', (done) => {
       exec.ninja(['./check_emulator_ready.sh', null, { cwd: cli }]);
 
       done();
