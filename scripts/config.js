@@ -9,6 +9,9 @@ module.exports = {
     android: {
       defaults: {
         api: '28',
+        alu: '64', // ['64', '32']
+
+        // run `./scripts/exec/android/available_devices.sh`
         device: 'Nexus 6P'
       },
 
@@ -22,6 +25,7 @@ module.exports = {
         auto: true,
 
         // add a device name that you want testing with
+        // TODO: parallel testing
         list: ['android_9']
       }
     }

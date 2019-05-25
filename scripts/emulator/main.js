@@ -1,4 +1,4 @@
-const { getCli, androidHome } = require('../helpers/path');
+const { getExec, androidHome } = require('../helpers/path');
 const { isRunning } = require('../helpers/check');
 const exec = require('../helpers/exec');
 const { getDevices, addLineNo } = require('../helpers/parser');
@@ -6,7 +6,7 @@ const { getDevices, addLineNo } = require('../helpers/parser');
 const PLATFORM = 'android';
 
 function main(command, args) {
-  const cli = getCli(PLATFORM);
+  const cli = getExec(PLATFORM);
   const { name, device, api } = args;
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {

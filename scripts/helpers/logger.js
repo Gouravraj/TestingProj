@@ -18,7 +18,7 @@ function print(type) {
       prefix = '';
     }
 
-    process.stdout.write(`${prefix}\n`);
+    process.stdout.write(`\n${prefix}\n`);
     process.stdout.write(`${message}\n`);
   };
 }

@@ -16,9 +16,17 @@ const printLog = print('log');
  */
 function exec(cmd, args = [], options = {}, extra = {}) {
   const out = spawnSync(cmd, args, options);
-  const { stdout, stderr, error } = out;
+  const { status, stdout, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
   let res;
+
+  if (status === 1 && !err) {
+    printError('unexpected error occurred!');
+
+    // if NPM script, they will print error.
+    // So, we don't have to do it again.
+    process.exit(cmd === 'npm' ? 0 : 1);
+  }
 
   if (err && !extra.force) {
     // TODO: display error object properly

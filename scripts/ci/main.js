@@ -16,6 +16,11 @@ async function main(command, platform) {
 
   if (command === 'run') {
     const { auto = false, list = [] } = cfg.devices;
+    let device = {
+      device: cfg.defaults.device,
+      api: cfg.defaults.api,
+      alu: cfg.defaults.alu
+    };
 
     if (platform === 'android') {
       step('Checking ADB status (start if not running)', (done) => {
@@ -29,26 +34,37 @@ async function main(command, platform) {
 
         done();
       });
-
-      step('Installing system-image (sdkmanager)', (done) => {
-        exec.ninja('./sdk.sh', null, { cwd: cli });
-
-        done();
-      });
     }
 
     for (let i = 0, len = list.length; i < len; i++) {
       const item = list[i];
       let isCreated = false;
-      let device = {};
 
       if (typeof item === 'string') {
-        device.name = item;
+        device = {
+          ...device,
+          name: item
+        };
       } else {
-        device = { ...item };
+        device = {
+          ...device,
+          ...item
+        };
       }
 
       dLog('\n>> DEVICE << ', `[${device.name}]\n`);
+
+      step('Installing system-image (sdkmanager)', (done) => {
+        const alu = device.alu === '64' ? '_64' : '';
+
+        exec.ninja(
+          'sdkmanager',
+          [`"system-images;android-${device.api};google_apis;x86${alu}"`],
+          { shell: true }
+        );
+
+        done();
+      });
 
       const isExist = isDeviceExist(device.name);
 
@@ -60,19 +76,20 @@ async function main(command, platform) {
         'Checking whether virtual device existence (create if not exist)',
         (done) => {
           if (!isExist && auto) {
-            const api = device.api || cfg.defaults.ap;
-
             exec.ninja(
               './avdmanager',
               [
                 'create',
                 'avd',
+                '--force',
                 '--name',
                 `'${device.name}'`,
+                '--abi',
+                'google_apis/x86_64',
                 '--package',
-                `'system-images;android-${api};google_apis;x86_64'`,
+                `'system-images;android-${device.api};google_apis;x86_64'`,
                 '--device',
-                `'${device.device || cfg.defaults.device}'`
+                `'${device.device}'`
               ],
               {
                 cwd: `${androidHome}/tools/bin`,
@@ -94,9 +111,6 @@ async function main(command, platform) {
           done();
         });
 
-        // TODO: remove sleep after creating check script
-        await sleep(15000);
-
         step('Waiting until virtual device ready', (done) => {
           exec.ninja('./check_emulator_ready.sh', null, { cwd: cli });
 
@@ -105,19 +119,24 @@ async function main(command, platform) {
 
         // TODO: will apply suite
         step('Launching test scripts', (done) => {
-          exec('npm', ['run', 'android'], { stdio: 'inherit' });
+          exec('npm', ['run', 'android'], {
+            stdio: [process.stdin, process.stdout, process.stderr]
+          });
 
           done();
         });
 
-        log('Finish UI test.');
+        dLog('\n>> Finish << ', `[${device.name}]!\n`);
       }
     }
   }
 
   if (command === 'clean' && isRunning(platform)) {
     step('Uninstalling app', (done) => {
-      exec.ninja('./uninstall.sh', [conf.pkg.android.id], { cwd: cli });
+      exec.ninja('./uninstall.sh', [conf.pkg.android.id], {
+        cwd: cli,
+        force: true
+      });
 
       done();
     });
@@ -125,7 +144,7 @@ async function main(command, platform) {
     await sleep(8000);
 
     step('Closing the emulator', (done) => {
-      exec.ninja('./close.sh', null, { cwd: cli });
+      exec.ninja('./close.sh', null, { cwd: cli, force: true });
 
       done();
     });
