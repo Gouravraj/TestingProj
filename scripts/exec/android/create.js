@@ -2,7 +2,8 @@
 
 const yargs = require('yargs');
 const id = require('shortid');
-const main = require('./main');
+const exec = require('../helpers/exec');
+const { androidHome } = require('../helpers/path');
 
 const defaults = {
   name: id.generate(),
@@ -31,19 +32,25 @@ const options = {
 // prettier-ignore
 const argv = yargs
   .help('help', 'show help').alias('help', 'h')
-  .command('create', 'create virtual device', (yargs) => {
-    yargs.options(options)
-  })
-  .command('list', 'list virtual devices')
-  .command('update', 'update SDK')
-  .command('open', 'open virtual device')
-  .command('delete', 'delete virtual device')
-  .command('uninstall', 'remove .apk from device')
-  .command('close', 'close virtual device')
-  .demandCommand(1, 'choose a command')
+  .options(options)
   .argv;
 
-const { _ } = argv;
-const [command] = _;
+const { name, device, api } = argv;
 
-main(command, argv);
+exec(
+  './avdmanager',
+  [
+    'create',
+    'avd',
+    '--name',
+    `'${name}'`,
+    '--package',
+    `'system-images;android-${api};google_apis;x86_64'`,
+    '--device',
+    `'${device}'`
+  ],
+  {
+    cwd: `${androidHome}/tools/bin`,
+    shell: true
+  }
+);

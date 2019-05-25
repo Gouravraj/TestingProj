@@ -1,38 +1,42 @@
+const { compose } = require('ramda');
 const { spawnSync } = require('child_process');
 const print = require('./logger');
+const { lineTrim } = require('./parser');
 
 const printError = print('error');
 const printLog = print('log');
 
-function exec(cmd, args, options, extra) {
-  args = args || [];
-  options = options || {};
-  extra = extra || {};
-
+/**
+ * child_process.spawnSync
+ * @param  {String}  cmd
+ * @param  {Array?}  args
+ * @param  {Object?} options spawnSync options
+ * @param  {Object?} extra   custom options only for function
+ * @return {Object?}
+ */
+function exec(cmd, args = [], options = {}, extra = {}) {
   const out = spawnSync(cmd, args, options);
   const { stdout, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
+  let res;
 
   if (err && !extra.force) {
+    // TODO: display error object properly
     if (typeof err !== 'string') {
       err = JSON.stringify(err, null, 2);
     }
 
-    const errMessage = err
-      .split(/null|\n/g)
-      .filter((m) => m)
-      .join('');
-
-    printError(errMessage);
-
-    process.exit(1);
+    compose(
+      printError,
+      lineTrim()
+    )(err);
   }
 
   if (options.stdio || extra.force) {
     return out;
   }
 
-  let res = stdout.toString();
+  res = stdout.toString();
 
   if (typeof extra.after === 'function') {
     res = extra.after(res);
@@ -45,7 +49,7 @@ function exec(cmd, args, options, extra) {
   return out;
 }
 
-exec.ninja = function ninja(command) {
+exec.ninja = function ninja(...command) {
   return exec.apply(null, [...command, { silence: true }]);
 };
 

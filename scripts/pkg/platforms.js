@@ -1,6 +1,7 @@
 const conf = require('../config');
 const exec = require('../helpers/exec');
 const { localBin } = require('../helpers/path');
+const { dirOnly } = require('../helpers/parser');
 
 function extract(args) {
   let { platform, id, to, rename } = args;
@@ -9,10 +10,7 @@ function extract(args) {
     cwd = cwd || localBin;
 
     if (to.indexOf('.') > -1) {
-      to = to
-        .split('/')
-        .slice(0, -1)
-        .join('/');
+      to = dirOnly(to);
     }
 
     return exec(

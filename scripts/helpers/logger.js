@@ -1,17 +1,19 @@
-const { green, blue, yellow, red } = require('chalk');
+const chalk = require('chalk');
 
 function print(type) {
   let prefix;
 
   return (message) => {
     if (type === 'warn') {
-      prefix = yellow('Warning: ');
+      prefix = chalk.yellow('Warning: ');
     } else if (type === 'error') {
-      prefix = red('Error: ');
+      prefix = chalk.red('Error: ');
 
       message = message.replace(/error(.?)/i, '').trim();
     } else if (type === 'info') {
-      prefix = blue('Info: ');
+      prefix = chalk.blue('Info: ');
+    } else if (type === 'device') {
+      prefix = chalk.white('Device: ');
     } else if (type === 'log') {
       prefix = '';
     }
@@ -21,21 +23,31 @@ function print(type) {
   };
 }
 
-print.stream = function stream(prefix) {
+print.custom = function custom(color) {
+  color = color || 'white';
+
+  return (prefix = '', message) => {
+    prefix = chalk[color](prefix);
+
+    process.stdout.write(`${prefix}${message}\n`);
+  };
+};
+
+print.stream = function stream(prefix, indent) {
   prefix = prefix || 'STEP:';
+  indent = indent || '...';
 
   return (message, cb) => {
-    const line = `${blue(prefix)} ${message}`;
+    const line = `${chalk.blue(prefix)} ${message}`;
 
-    process.stdout.write(`${line}\r`);
+    process.stdout.write(`${line} ${indent}\r`);
 
     return new Promise((resolve) => {
       if (typeof cb === 'function') {
-        cb((separator, endText) => {
-          separator = separator || '...';
-          endText = endText || 'Done';
+        cb((endText) => {
+          endText = endText || '✓';
 
-          process.stdout.write(`${line} ${separator} ${green(endText)}\n`);
+          process.stdout.write(`${line} ${indent} ${chalk.green(endText)}\n`);
 
           resolve(process.stdout);
         });

@@ -2,105 +2,130 @@ const conf = require('../config');
 const exec = require('../helpers/exec');
 const print = require('../helpers/logger');
 const sleep = require('../helpers/sleep');
-const { cli, osHome } = require('../helpers/path');
-const { isRunning } = require('../helpers/check');
-const create = require('../commands/create');
-const sdk = require('../commands/sdk')(cli);
-const uninstall = require('../commands/uninstall')(cli);
-const close = require('../commands/close')(cli);
+const { getExec, androidHome } = require('../helpers/path');
+const { isRunning, isDeviceExist } = require('../helpers/check');
 
 const log = print('log');
-const dLog = print.stream();
+const dLog = print.custom('cyan');
+const step = print.stream();
 
-const DEVICE_NAME = 'android_9';
-const SDK_CFG = `${osHome}/.android/repositories.cfg`;
-
-async function main(command, args) {
-  const { name, device, api } = args;
+// TODO: multi-platform commands
+async function main(command, platform) {
+  const cfg = conf.ci[platform];
+  const cli = getExec(platform);
 
   if (command === 'run') {
-    dLog('Checking ADB status (start if not running)', (done) => {
-      exec('./start_adb.sh', null, { cwd: cli }, { force: true });
+    const { auto = false, list = [] } = cfg.devices;
 
-      done();
-    });
-
-    dLog('Checking SDK config file (create if not exist)', (done) => {
-      exec.touch(SDK_CFG);
-
-      done();
-    });
-
-    dLog('Installing system-image (sdkmanager)', (done) => {
-      exec.ninja(sdk());
-
-      done();
-    });
-
-    dLog(
-      'Checking whether virtual device existence (create if not exist)',
-      (done) => {
-        const { stdout: isDeviceExist } = exec.ninja([
-          './is_device_exist.sh',
-          [DEVICE_NAME],
-          { cwd: cli, encoding: 'utf8' }
-        ]);
-
-        if (isDeviceExist.trim() === '0') {
-          exec.ninja(create(DEVICE_NAME || name, device, api));
-        }
-
-        done();
-      }
-    );
-
-    // close emulators if already opened
-    // it might not be using when multiple devices testing
-    if (isRunning()) {
-      dLog('Closing opened emulator', (done) => {
-        exec.ninja(close());
+    if (platform === 'android') {
+      step('Checking ADB status (start if not running)', (done) => {
+        exec('./start_adb.sh', null, { cwd: cli }, { force: true });
 
         done();
       });
 
-      await sleep(4000);
+      step('Checking SDK config file (create if not exist)', (done) => {
+        exec.touch(cfg.sdk.repos);
+
+        done();
+      });
+
+      step('Installing system-image (sdkmanager)', (done) => {
+        exec.ninja('./sdk.sh', null, { cwd: cli });
+
+        done();
+      });
     }
 
-    dLog('Opening virtual device', (done) => {
-      exec('./open.sh', [DEVICE_NAME], { cwd: cli, stdio: 'ignore' });
+    for (let i = 0, len = list.length; i < len; i++) {
+      const item = list[i];
+      let isCreated = false;
+      let device = {};
 
-      done();
-    });
+      if (typeof item === 'string') {
+        device.name = item;
+      } else {
+        device = { ...item };
+      }
 
-    // TODO: remove sleep after creating check script
-    await sleep(15000);
+      dLog('\n>> DEVICE << ', `[${device.name}]\n`);
 
-    dLog('Waiting the emulator (is device ready?)', (done) => {
-      exec.ninja(['./check_emulator_ready.sh', null, { cwd: cli }]);
+      const isExist = isDeviceExist(device.name);
 
-      done();
-    });
+      if (isExist) {
+        isCreated = true;
+      }
 
-    dLog('Launching test scripts', (done) => {
-      exec('npm', ['run', 'android'], { stdio: 'inherit' });
+      step(
+        'Checking whether virtual device existence (create if not exist)',
+        (done) => {
+          if (!isExist && auto) {
+            const api = device.api || cfg.defaults.ap;
 
-      done();
-    });
+            exec.ninja(
+              './avdmanager',
+              [
+                'create',
+                'avd',
+                '--name',
+                `'${device.name}'`,
+                '--package',
+                `'system-images;android-${api};google_apis;x86_64'`,
+                '--device',
+                `'${device.device || cfg.defaults.device}'`
+              ],
+              {
+                cwd: `${androidHome}/tools/bin`,
+                shell: true
+              }
+            );
 
-    log('Finish UI test.');
+            isCreated = true;
+          }
+
+          done();
+        }
+      );
+
+      if (isCreated) {
+        step('Opening virtual device', (done) => {
+          exec('./open.sh', [device.name], { cwd: cli, stdio: 'ignore' });
+
+          done();
+        });
+
+        // TODO: remove sleep after creating check script
+        await sleep(15000);
+
+        step('Waiting until virtual device ready', (done) => {
+          exec.ninja('./check_emulator_ready.sh', null, { cwd: cli });
+
+          done();
+        });
+
+        // TODO: will apply suite
+        step('Launching test scripts', (done) => {
+          exec('npm', ['run', 'android'], { stdio: 'inherit' });
+
+          done();
+        });
+
+        log('Finish UI test.');
+      }
+    }
   }
 
-  if (command === 'clean' && isRunning()) {
-    dLog('Uninstalling app', (done) => {
-      exec.ninja(uninstall(conf.android.id));
+  if (command === 'clean' && isRunning(platform)) {
+    step('Uninstalling app', (done) => {
+      exec.ninja('./uninstall.sh', [conf.pkg.android.id], { cwd: cli });
 
       done();
     });
 
     await sleep(8000);
 
-    dLog('Closing the emulator', (done) => {
-      exec.ninja(close());
+    step('Closing the emulator', (done) => {
+      exec.ninja('./close.sh', null, { cwd: cli });
 
       done();
     });

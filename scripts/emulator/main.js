@@ -1,71 +1,60 @@
-const { cli } = require('../helpers/path');
+const { getCli, androidHome } = require('../helpers/path');
 const { isRunning } = require('../helpers/check');
 const exec = require('../helpers/exec');
+const { getDevices, addLineNo } = require('../helpers/parser');
+
+const PLATFORM = 'android';
 
 function main(command, args) {
+  const cli = getCli(PLATFORM);
   const { name, device, api } = args;
 
-  if (command === 'uninstall' && isRunning()) {
+  if (command === 'uninstall' && isRunning(PLATFORM)) {
     const conf = require('../config');
-    const uninstall = require('../commands/uninstall')(cli);
 
-    exec.apply(null, uninstall(conf.android.id));
+    exec('./uninstall.sh', [conf.pkg.android.id], { cwd: cli });
   }
 
-  if (command === 'close' && isRunning()) {
-    const close = require('../commands/close')(cli);
-
-    exec.apply(null, close());
+  if (command === 'close' && isRunning(PLATFORM)) {
+    exec('./close.sh', null, { cwd: cli });
   }
 
   if (command === 'create') {
-    const create = require('../commands/create');
-
-    exec.apply(null, create(name, device, api));
+    exec(
+      './avdmanager',
+      [
+        'create',
+        'avd',
+        '--name',
+        `'${name}'`,
+        '--package',
+        `'system-images;android-${api};google_apis;x86_64'`,
+        '--device',
+        `'${device}'`
+      ],
+      {
+        cwd: `${androidHome}/tools/bin`,
+        shell: true
+      }
+    );
   }
 
   if (command === 'list') {
-    const list = require('../commands/list')(cli);
-    const after = (res) => {
-      return res
-        .split(/\n/g)
-        .reduce(
-          (acc, line, idx) => [...acc, line.replace('Name:', `${idx + 1}.`)],
-          []
-        )
-        .slice(0, -1)
-        .join('\n');
-    };
-
-    exec.apply(null, [...list(), { after }]);
+    exec('./list.sh', null, { cwd: cli }, { after: addLineNo('Name:') });
   }
 
   if (command === 'open' || command === 'delete') {
     const readlineSync = require('readline-sync');
-    const list = require('../commands/list')(cli);
-    const { getDevices } = require('../helpers/parser');
 
-    const { stdout } = exec.ninja(list());
-    const deviceList = getDevices(stdout.toString());
+    const { stdout } = exec.ninja('./list.sh', null, {
+      cwd: cli,
+      encoding: 'utf8'
+    });
+    const deviceList = getDevices(stdout);
 
     if (deviceList.length === 0) {
       process.exit(0);
     }
-
-    // if (command === 'delete' && !pick) {
-    //   deviceList.forEach((name) => {
-    //     exec(
-    //       `./${command}.sh`,
-    //       [name],
-    //       {
-    //         cwd: cli
-    //       },
-    //       {
-    //         silence: true
-    //       }
-    //     );
-    //   });
-    // }
 
     const idx = readlineSync.keyInSelect(deviceList, 'Select a device');
     const device = deviceList[idx];
