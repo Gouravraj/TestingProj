@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const yargs = require('yargs');
 const main = require('./main');
 

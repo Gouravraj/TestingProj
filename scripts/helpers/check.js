@@ -1,9 +1,11 @@
+'use strict';
+
 const { compose } = require('ramda');
 const exec = require('./exec');
 const { getExec } = require('./path');
 const { lineTrim, cut } = require('./parser');
 
-function isRunning(platform) {
+function isRunning(platform = 'android') {
   if (platform === 'android') {
     const { stdout } = exec.ninja('adb', ['devices'], { encoding: 'utf8' });
     const devices = compose(
@@ -19,7 +21,7 @@ function isRunning(platform) {
   }
 }
 
-function isDeviceExist(name) {
+function isDeviceExist(name = '') {
   const { stdout } = exec.ninja('./is_device_exist.sh', [name], {
     // TODO: multi-platform
     cwd: getExec('android'),

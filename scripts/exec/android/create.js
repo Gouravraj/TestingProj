@@ -41,6 +41,7 @@ exec(
   './avdmanager',
   [
     'create',
+    `--force`,
     'avd',
     '--name',
     `'${name}'`,

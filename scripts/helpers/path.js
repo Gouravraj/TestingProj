@@ -9,14 +9,11 @@ function getAbs(...args) {
   return path.resolve(baseDir, ...args);
 }
 
-const repo = (exports.repo = dirOnly(
-  findUp.sync('package.json', { cwd: __dirname })
-));
-exports.localBin = path.resolve(repo, 'node_modules', '.bin');
+const repo = dirOnly(findUp.sync('package.json', { cwd: __dirname }));
 
-const getExec = (exports.getExec = function getExec(platform = '') {
+function getExec(platform = '') {
   return getAbs('exec', platform);
-});
+}
 
 function getOSHome() {
   const { stdout } = exec.ninja('./os_home.sh', null, {
@@ -36,6 +33,9 @@ function getAndroidHome() {
   return stdout.trim();
 }
 
-exports.emulator = getAbs('emulator');
+exports.repo = repo;
+exports.localBin = path.resolve(repo, 'node_modules', '.bin');
+exports.getExec = getExec;
 exports.osHome = getOSHome();
 exports.androidHome = getAndroidHome();
+exports.emulator = getAbs('emulator');

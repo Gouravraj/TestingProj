@@ -9,7 +9,8 @@ module.exports = {
     android: {
       defaults: {
         api: '28',
-        alu: '64', // ['64', '32']
+        alu: '64', // ['64', '32'],
+        abi: 'google_apis/x86_64',
 
         // run `./scripts/exec/android/available_devices.sh`
         device: 'Nexus 6P'
@@ -20,7 +21,7 @@ module.exports = {
       },
 
       devices: {
-        // create automatically if no exist
+        // listed device will create automatically if set `true` here (with `android.defaults`)
         // if set `false`, invalid devices name will be ignored while testing
         auto: true,
 

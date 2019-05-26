@@ -7,7 +7,7 @@ const { isRunning, isDeviceExist } = require('../helpers/check');
 
 const log = print('log');
 const dLog = print.custom('cyan');
-const step = print.stream();
+const step = print.stream('STEP:', '...');
 
 // TODO: multi-platform commands
 async function main(command, platform) {
@@ -19,7 +19,8 @@ async function main(command, platform) {
     let device = {
       device: cfg.defaults.device,
       api: cfg.defaults.api,
-      alu: cfg.defaults.alu
+      alu: cfg.defaults.alu,
+      abi: cfg.defaults.abi
     };
 
     if (platform === 'android') {
@@ -85,7 +86,7 @@ async function main(command, platform) {
                 '--name',
                 `'${device.name}'`,
                 '--abi',
-                'google_apis/x86_64',
+                `${device.abi}`,
                 '--package',
                 `'system-images;android-${device.api};google_apis;x86_64'`,
                 '--device',
@@ -119,9 +120,7 @@ async function main(command, platform) {
 
         // TODO: will apply suite
         step('Launching test scripts', (done) => {
-          exec('npm', ['run', 'android'], {
-            stdio: [process.stdin, process.stdout, process.stderr]
-          });
+          exec('npm', ['run', 'android'], { stdio: 'inherit' });
 
           done();
         });

@@ -1,4 +1,4 @@
-function getDevices(stdout) {
+function getDevices(stdout = '') {
   return stdout.split(/\n/g).reduce((acc, line) => {
     if (!line) {
       return acc;
@@ -11,9 +11,7 @@ function getDevices(stdout) {
   }, []);
 }
 
-function lineTrim(token) {
-  token = token || /\n/g;
-
+function lineTrim(token = /\n/g) {
   return (out) => {
     return out
       .split(token)
@@ -22,17 +20,13 @@ function lineTrim(token) {
   };
 }
 
-lineTrim.stream = function stream(token) {
-  token = token || /\n/g;
-
-  return (out) => {
-    return out.split(token).filter((m) => m);
-  };
+lineTrim.stream = function stream(token = /\n/g) {
+  return (out) => out.split(token).filter((m) => m);
 };
 
 function cut(start, end) {
   return (out = []) => {
-    end = end | out.length;
+    end = end || out.length;
 
     return out.slice(start, end);
   };
@@ -56,10 +50,8 @@ function addLineNo(replace, out = []) {
     .join('\n');
 }
 
-module.exports = {
-  getDevices,
-  lineTrim,
-  cut,
-  dirOnly,
-  addLineNo
-};
+exports.getDevices = getDevices;
+exports.lineTrim = lineTrim;
+exports.cut = cut;
+exports.dirOnly = dirOnly;
+exports.addLineNo = addLineNo;
