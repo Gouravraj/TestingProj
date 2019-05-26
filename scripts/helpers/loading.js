@@ -1,3 +1,5 @@
+'use strict';
+
 function loading(message = '') {
   (function() {
     const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];

@@ -1,3 +1,5 @@
+'use strict';
+
 const { compose } = require('ramda');
 const { spawnSync } = require('child_process');
 const print = require('./logger');

@@ -1,15 +1,16 @@
+'use strict';
+
 const path = require('path');
 const findUp = require('find-up');
 const exec = require('./exec');
 const { dirOnly } = require('./parser');
 
 const baseDir = dirOnly(findUp.sync('config.js', { cwd: __dirname }));
+const repo = dirOnly(findUp.sync('package.json', { cwd: __dirname }));
 
 function getAbs(...args) {
   return path.resolve(baseDir, ...args);
 }
-
-const repo = dirOnly(findUp.sync('package.json', { cwd: __dirname }));
 
 function getExec(platform = '') {
   return getAbs('exec', platform);

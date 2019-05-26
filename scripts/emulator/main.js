@@ -1,7 +1,8 @@
 const { getExec, androidHome } = require('../helpers/path');
 const { isRunning } = require('../helpers/check');
 const exec = require('../helpers/exec');
-const { getDevices, addLineNo } = require('../helpers/parser');
+const { getDevices } = require('../helpers/parser');
+const addLineNo = require('../helpers/lineNo');
 
 const PLATFORM = 'android';
 
@@ -40,7 +41,12 @@ function main(command, args) {
   }
 
   if (command === 'list') {
-    exec('./list.sh', null, { cwd: cli }, { after: addLineNo('Name:') });
+    exec(
+      './list.sh',
+      null,
+      { cwd: cli },
+      { after: addLineNo.replace('Name:') }
+    );
   }
 
   if (command === 'open' || command === 'delete') {

@@ -1,3 +1,5 @@
+'use strict';
+
 function getDevices(stdout = '') {
   return stdout.split(/\n/g).reduce((acc, line) => {
     if (!line) {
@@ -39,19 +41,7 @@ function dirOnly(path = '') {
     .join('/');
 }
 
-function addLineNo(replace, out = []) {
-  return out
-    .split(/\n/g)
-    .reduce(
-      (acc, line, idx) => [...acc, line.replace(replace, `${idx + 1}.`)],
-      []
-    )
-    .slice(0, -1)
-    .join('\n');
-}
-
 exports.getDevices = getDevices;
 exports.lineTrim = lineTrim;
 exports.cut = cut;
 exports.dirOnly = dirOnly;
-exports.addLineNo = addLineNo;
