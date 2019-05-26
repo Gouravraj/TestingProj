@@ -1,67 +1,62 @@
 # Android scripts from emulator
 
-You can execute each single file in ‘./commands’ but you can simply run `./cli.js`.
+You can execute each single file in `./exec/**` but you can simply run `./cli.js` or `npm run emulator`.
 
 ## Usage
 
 ```bash
-npm run emulator <command> # or execute `./scripts/emulator/cli.js`
+./scripts/emulator/cli.js <command>
+#or
+npm run emulator <command>
 ```
 
-- Create virtual device
+## Commands
+
+Except `create`, commands is no require argument. You can check actual commands from `./scripts/exec/android`.
+
+### create
+
+If you not specify arguments, it will use default value.
 
 ```bash
-npm run emulator create
+# check device list `./scripts/exec/android/available_devices.sh`
+npm run emulator create --name=<device name> --api=<API version> ---device=<device>
 ```
 
-with specific name,
-
-```bash
-npm run emulator create --name=<device name>
-```
-
-with specific API version,
-
-```bash
-npm run emulator create --api=<API version>
-```
-
-- List created device(s)
+### list
 
 ```bash
 npm run emulator list
 ```
 
-- Update SDK
+### update
+
+Update only installed one - `sdkmanager`
 
 ```bash
 npm run emulator update
 ```
 
-- open virtual device
+### open
 
 ```bash
 npm run emulator open
 ```
 
-Virtual device(s) list will display, then pick the number.
-
-- delete virtual device
-
-Same as `open` command
-
-- uninstall package from emulator
+### delete
 
 ```bash
-npm run emulator uninstall
+npm run emulator delete
 ```
 
-- close the emulator
+### uninstall
+
+```bash
+npm run emulator uninstall # uninstall app
+```
+
+### close
 
 ```bash
 npm run emulator close
-```
-
-```bash
-npm run emulator uninstall
 ```
