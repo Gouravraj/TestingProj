@@ -2,7 +2,7 @@
 
 This script designed only for CI pipeline but it can execute on local.
 
-## Options
+## Configure
 
 `./scripts/config.js`.
 

@@ -1,16 +1,20 @@
-const conf = require('../config');
+'use strict';
+
 const exec = require('../helpers/exec');
 const print = require('../helpers/logger');
 const sleep = require('../helpers/sleep');
+const step = require('../helpers/step').withConf('STEP:');
 const { getExec, androidHome } = require('../helpers/path');
 const { isRunning, isDeviceExist } = require('../helpers/check');
 
 const log = print('log');
 const dLog = print.custom('cyan');
-const step = print.stream('STEP:', '...');
 
 // TODO: multi-platform commands
-async function main(command, platform) {
+async function main(argv, conf) {
+  const { _, platform, tests } = argv;
+  const [command] = _;
+
   const cfg = conf.ci[platform];
   const cli = getExec(platform);
 
@@ -24,6 +28,7 @@ async function main(command, platform) {
     };
 
     if (platform === 'android') {
+      // TODO: multiple ports
       step('Checking ADB status (start if not running)', (done) => {
         exec('./start_adb.sh', null, { cwd: cli }, { force: true });
 
@@ -118,12 +123,14 @@ async function main(command, platform) {
           done();
         });
 
-        // TODO: will apply suite
-        step('Launching test scripts', (done) => {
-          exec('npm', ['run', 'android'], { stdio: 'inherit' });
+        if (tests) {
+          // TODO: will apply suite
+          step('Launching test scripts', (done) => {
+            exec('npm', ['run', 'android'], { stdio: 'inherit' });
 
-          done();
-        });
+            done();
+          });
+        }
 
         dLog('\n>> Finish << ', `[${device.name}]!\n`);
       }

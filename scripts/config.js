@@ -1,3 +1,5 @@
+'use strict';
+
 const { osHome } = require('./helpers/path');
 const ios = require('../config/ios.app.conf');
 const android = require('../config/android.app.conf');

@@ -1,3 +1,5 @@
+'use strict';
+
 const conf = require('../config');
 const exec = require('../helpers/exec');
 const { localBin } = require('../helpers/path');

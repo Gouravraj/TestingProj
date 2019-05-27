@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+'use strict';
 
 const yargs = require('yargs');
 const id = require('shortid');

@@ -1,19 +1,25 @@
 {
   "name": "distribution-mobile-automation",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "private": true,
   "scripts": {
     "dev": "ndb npm run",
     "ci": "node ./scripts/ci/cli.js run",
+    "ci:dev": "node ./scripts/ci/cli.js run --no-tests",
     "ci:ios": "node ./scripts/ci/cli.js run ios",
     "ci:android": "node ./scripts/ci/cli.js run android",
+    "ci:clean": "node ./scripts/ci/cli.js clean",
     "ci:debug": "ndb npm run ci",
-    "cleanup": "node ./scripts/ci/cli.js clean",
-    "android": "wdio ./config/android.app.conf.js",
+    "cleanup": "npm run ci:clean",
     "ios": "wdio ./config/ios.app.conf.js",
-    "emulator": "./scripts/emulator/cli.js",
+    "android": "wdio ./config/android.app.conf.js",
+    "emulator": "node ./scripts/emulator/cli.js",
     "pkg": "node ./scripts/pkg/cli.js both",
-    "pkg:ios": "./scripts/pkg/cli.js ios",
-    "pkg:android": "./scripts/pkg/cli.js android",
+    "pkg:ios": "node ./scripts/pkg/cli.js ios",
+    "pkg:android": "node ./scripts/pkg/cli.js android",
     "lint": "eslint config tests"
   },
   "husky": {

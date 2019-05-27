@@ -2,30 +2,34 @@
 
 const yargs = require('yargs');
 const main = require('./main');
+const conf = require('../config');
 
-const option = [
-  'platform',
-  {
+const options = {
+  platform: {
     alias: 'p',
     describe: 'choose a platform',
     choices: ['ios', 'android'],
     default: 'android'
   }
-];
+};
 
 // prettier-ignore
 const argv = yargs
   .help('help', 'show help').alias('help', 'h')
   .command('run', 'only for CI pipeline', (yargs) => {
-    yargs.option(...option)
+    yargs.options({
+      ...options,
+      tests: {
+        alias: 't',
+        describe: 'run tests',
+        default: true
+      }
+    })
   })
   .command('clean', 'uninstall app and close the emulator', (yargs) => {
-    yargs.option(...option)
+    yargs.options(options)
   })
   .demandCommand(1, 'choose a command')
   .argv;
 
-const { _, platform } = argv;
-const [command] = _;
-
-main(command, platform);
+main(argv, conf);

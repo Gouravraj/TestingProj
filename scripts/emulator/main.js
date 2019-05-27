@@ -1,3 +1,5 @@
+'use strict';
+
 const { getExec, androidHome } = require('../helpers/path');
 const { isRunning } = require('../helpers/check');
 const exec = require('../helpers/exec');
