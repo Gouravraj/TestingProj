@@ -1,7 +1,7 @@
 'use strict';
 
 const yargs = require('yargs');
-const { ios, android } = require('./platforms');
+const { ios, android } = require('./extract/platforms');
 
 // prettier-ignore
 const argv = yargs

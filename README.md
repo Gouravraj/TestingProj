@@ -1,6 +1,6 @@
 # dstribution-mobile-automation
 
-# Install with dependencies
+## Install with dependencies
 
 ```bash
 yarn install # npm install
@@ -39,18 +39,6 @@ you can do this as alternatively way. Because you cannot install directly to `/u
 
 You can download [here](https://github.com/google/bundletool/releases). Once you've download finished, you can rename as `bundletool.jar` and put into `$ANDRIOD_SDK/bundle-tools/bundletool.jar`. Then, make sure the file is applied in `$PATH`.
 
-## Extract app packages (.app, .apk)
-
-WebDriver will install app package on simulator before running scripts. So you must put file(s) inside `/path/current_repo/app`. Like `./app/app-debug.apk`. You can put files manually.
-
-Also, you can extract app package direct from simulator by `extract-pkg`. [Github](https://github.com/jsveron23/extract-pkg)
-
-To extract, simulator already booted and should be installed package on that. then,
-
-```bash
-extract-pkg ios -id=com.cxagroup.mobile.EmployeePortal --to=./app --rename=app-debug.app
-```
-
 Android is also same.
 
 ## Run tests
@@ -58,6 +46,10 @@ Android is also same.
 ```bash
 yarn run ios # yarn run android
 ```
+
+## Scripts
+
+Follow doc from [`here`](./scripts/README.md)
 
 ## Troubleshooting
 

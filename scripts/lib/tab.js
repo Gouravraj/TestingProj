@@ -1,7 +1,7 @@
 'use strict';
 
+const { localBinDir } = require('./path');
 const exec = require('./exec');
-const { localBin } = require('./path');
 
 // NOTE: will use for parallel devices testing
 function createTab(option = '') {
@@ -10,7 +10,7 @@ function createTab(option = '') {
       args = [option, ...args];
     }
 
-    return exec('./ttab', args, { cwd: localBin });
+    return exec('./ttab', args, { cwd: localBinDir });
   };
 }
 

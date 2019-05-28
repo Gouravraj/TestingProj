@@ -1,18 +1,16 @@
 'use strict';
 
-const conf = require('../config');
-const exec = require('../helpers/exec');
-const { localBin } = require('../helpers/path');
-const { dirOnly } = require('../helpers/parser');
+const conf = require('../../config');
+const { localBinDir } = require('../../lib/path');
+const exec = require('../../lib/exec');
+const { dir } = require('../../lib/parser');
 
 function extract(args) {
   let { platform, id, to, rename } = args;
 
-  return (cwd) => {
-    cwd = cwd || localBin;
-
+  return (cwd = localBinDir) => {
     if (to.indexOf('.') > -1) {
-      to = dirOnly(to);
+      to = dir(to);
     }
 
     return exec(

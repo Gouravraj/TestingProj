@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 const id = require('shortid');
-const main = require('./main');
+const main = require('./emulator/main');
 
 const defaults = {
   name: id.generate(),
@@ -37,8 +37,8 @@ const argv = yargs
   .command('list', 'list virtual devices')
   .command('update', 'update SDK')
   .command('open', 'open virtual device')
-  .command('delete', 'delete virtual device')
-  .command('uninstall', 'remove .apk from device')
+  .command('remove', 'remove virtual device')
+  .command('uninstall', 'uninstall .apk')
   .command('close', 'close virtual device')
   .demandCommand(1, 'choose a command')
   .argv;
