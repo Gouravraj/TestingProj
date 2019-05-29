@@ -16,7 +16,8 @@ fi
 mkdir -p app && cp "$packagePath" "app/app-debug.pkg"
 
 trap cleanup EXIT
+
 echo "---------npm installation-----------"
-npm ci --verbose
+echo $(npm ci --verbose)
 
 npm run ci
