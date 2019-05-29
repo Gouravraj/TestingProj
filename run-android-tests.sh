@@ -17,10 +17,4 @@ mkdir -p app && cp "$packagePath" "app/app-debug.pkg"
 
 trap cleanup EXIT
 
-npm install yarn
-
-export PATH=$PWD/node_modules/yarn/bin/:$PATH
-
-yarn install
-
 npm run ci
