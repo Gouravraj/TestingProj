@@ -1,5 +1,5 @@
+import navigator from './navigator.action';
 import LoginScreen from '../screenobjects/login.screen';
-import navigator from './app.navigator';
 import nativeAlert from '../helpers/NativeAlert';
 
 function loginAs(empDetail) {

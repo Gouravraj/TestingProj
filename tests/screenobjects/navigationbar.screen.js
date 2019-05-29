@@ -2,10 +2,11 @@ import AppScreen from './app.screen';
 
 const SELECTORS = {
   HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
-  CLAIMS_NAVIGATOR: '',
+  CLAIMS_NAVIGATOR: '~Claims, tab, 2 of 4',
   SHOP_NAVIGATOR: '',
   PROFILE_NAVIGATOR: ''
 };
+
 class NavigationBar extends AppScreen {
   constructor() {
     super(SELECTORS.HEALTH_NAVIGATOR);

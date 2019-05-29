@@ -1,4 +1,4 @@
-import NavigationBar from '../screenobjects/navigationbar.component';
+import NavigationBar from '../screenobjects/navigationbar.screen';
 
 function navigateToHealthScreen() {
   NavigationBar.healthNavigator().click();

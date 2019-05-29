@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "ndb npm run",
+    "start": "ndb npm run",
     "ci": "node ./scripts/bin/ci.js run",
     "ci:dev": "node ./scripts/bin/ci.js run --no-tests",
     "ci:ios": "node ./scripts/bin/ci.js run ios",
