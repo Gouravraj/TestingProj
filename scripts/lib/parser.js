@@ -1,5 +1,15 @@
 'use strict';
 
+function json(out) {
+  let tmp = out;
+
+  if (typeof out !== 'string') {
+    tmp = out.string();
+  }
+
+  return JSON.parse(tmp);
+}
+
 function dir(path = '') {
   if (path.indexOf('.') === -1) {
     return path;
@@ -42,3 +52,4 @@ function cut(start, end) {
 exports.dir = dir;
 exports.trim = trim;
 exports.cut = cut;
+exports.json = json;

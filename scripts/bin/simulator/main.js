@@ -1,15 +1,27 @@
 'use strict';
 
-const { compose } = require('ramda');
+const { compose, join, map, uniq, prop } = require('ramda');
 const { getExecDir } = require('../../lib/path');
 const { isRunning } = require('../../lib/check');
 const { readline } = require('../../lib/line');
 const print = require('../../lib/logger');
 const exec = require('../../lib/exec');
-const { list, open, create, remove } = require('../../process/ios');
+const {
+  getDevices,
+  getVMInfo,
+  getDeviceTypes,
+  getRuntimes
+} = require('../../compute/ios');
 
 const log = print('log');
 const PLATFORM = 'ios';
+
+// TODO: move to `lib`
+const _getProps = (propName) =>
+  compose(
+    uniq,
+    map(prop(propName))
+  );
 
 function main(command, args) {
   const cwd = getExecDir(PLATFORM);
@@ -26,14 +38,34 @@ function main(command, args) {
   }
 
   if (command === 'create') {
-    const { stdout } = exec.ninja('xcrun', ['simctl', 'list', '--json'], {
-      encoding: 'utf8'
-    });
+    const { stdout: tOut } = exec.ninja(
+      'xcrun',
+      ['simctl', 'list', '--json', 'devicetypes'],
+      { encoding: 'utf8' }
+    );
+    const deviceTypes = getDeviceTypes(tOut);
+    const tNames = _getProps('name')(deviceTypes);
+    const tIdx = readline(tNames, 'Select a device type');
+    const deviceType = compose(
+      prop(tIdx),
+      _getProps('identifier')
+    )(deviceTypes);
 
-    const { deviceId, runtimeId } = create(stdout);
+    const { stdout: rOut } = exec.ninja(
+      'xcrun',
+      ['simctl', 'list', '--json', 'runtimes'],
+      { encoding: 'utf8' }
+    );
+    const runtimes = getRuntimes(rOut);
+    const rNames = _getProps('name')(runtimes);
+    const rIdx = readline(rNames, 'Select a runtime');
+    const runtime = compose(
+      prop(rIdx),
+      _getProps('identifier')
+    )(runtimes);
 
-    if (deviceId && runtimeId) {
-      exec('./create.sh', [`${name}`, deviceId, runtimeId], {
+    if (deviceType && runtime) {
+      exec('xcrun', ['simctl', 'create', `${name}`, deviceType, runtime], {
         cwd,
         shell: true
       });
@@ -41,45 +73,34 @@ function main(command, args) {
   }
 
   if (command === 'list') {
-    const { stdout } = exec.ninja('xcrun', ['simctl', 'list', '--json'], {
-      encoding: 'utf8'
-    });
+    const { stdout } = exec.ninja(
+      'xcrun',
+      ['simctl', 'list', '--json', 'devices', 'available'],
+      { encoding: 'utf8' }
+    );
 
     compose(
       log,
-      list
+      join('\n'),
+      _getProps('name'),
+      getDevices
     )(stdout);
   }
 
-  if (command === 'open') {
+  if (command === 'open' || command === 'remove') {
     const { stdout } = exec.ninja(
       'xcrun',
       ['simctl', 'list', '--json', 'devices', 'available'],
       { encoding: 'utf8' }
     );
-
-    const { ids, names } = open(stdout);
-    const idx = readline(names, 'Select a device name');
+    const vm = getVMInfo(stdout);
+    const names = _getProps('name')(vm);
+    const idx = readline(names, 'Select a device');
+    const ids = _getProps('udid')(vm);
     const udid = ids[idx];
 
     if (udid) {
-      exec('./open.sh', [udid], { cwd });
-    }
-  }
-
-  if (command === 'remove') {
-    const { stdout } = exec.ninja(
-      'xcrun',
-      ['simctl', 'list', '--json', 'devices', 'available'],
-      { encoding: 'utf8' }
-    );
-
-    const { ids, names } = remove(stdout);
-    const idx = readline(names, 'Select a device name');
-    const udid = ids[idx];
-
-    if (udid) {
-      exec('./remove.sh', [udid], { cwd });
+      exec(`./${command}.sh`, [udid], { cwd });
     }
   }
 }

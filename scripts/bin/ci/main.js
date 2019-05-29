@@ -5,7 +5,6 @@ const clean = require('./commands/clean');
 const { getExecDir } = require('../../lib/path');
 const { isRunning } = require('../../lib/check');
 
-// TODO: multi-platform commands
 async function main(argv, conf) {
   const { _, platform } = argv;
   const [command] = _;

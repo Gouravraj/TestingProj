@@ -4,7 +4,7 @@ const { isRunning } = require('../../lib/check');
 const { getExecDir, androidHomeDir } = require('../../lib/path');
 const { addLineNo, readline } = require('../../lib/line');
 const exec = require('../../lib/exec');
-const { open } = require('../../process/android');
+const { open } = require('../../compute/android');
 
 const PLATFORM = 'android';
 
