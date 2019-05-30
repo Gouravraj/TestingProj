@@ -18,6 +18,6 @@ mkdir -p app && cp "$packagePath" "app/app-debug.pkg"
 trap cleanup EXIT
 
 echo "---------npm installation-----------"
-echo $(npm ci --verbose)
+npm install ionic --loglevel verbose
 
 npm run ci
