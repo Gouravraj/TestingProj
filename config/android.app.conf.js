@@ -1,7 +1,7 @@
 const { join } = require('path');
 const { config } = require('./wdio.shared.conf');
 
-config.specs = ['./tests/specs/**/claims.spec.js'];
+config.specs = ['./tests/specs/**/*.spec.js'];
 
 config.capabilities = [
   {
