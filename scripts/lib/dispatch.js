@@ -10,7 +10,7 @@ dispatch.ninja = function ninja(exec) {
   return exec({ silence: true });
 };
 
-dispatch.force = function ninja(exec) {
+dispatch.force = function force(exec) {
   return exec({ force: true, silence: true });
 };
 
