@@ -1,16 +1,15 @@
 'use strict';
 
-const { localBinDir } = require('./path');
-const exec = require('./exec');
+const dispatch = require('./dispatch');
+const { ttab } = require('../process/ttab');
 
-// NOTE: will use for parallel devices testing
 function createTab(option = '') {
   return (...args) => {
     if (option) {
       args = [option, ...args];
     }
 
-    return exec('./ttab', args, { cwd: localBinDir });
+    return dispatch(ttab(args));
   };
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const { compose } = require('ramda');
+const { compose, curry } = require('ramda');
 const { spawnSync } = require('child_process');
 const { trim } = require('./parser');
 const print = require('./logger');
@@ -8,21 +8,15 @@ const print = require('./logger');
 const printErr = print('error');
 const printLog = print('log');
 
-/**
- * child_process.spawnSync
- * @param  {String}  cmd
- * @param  {Array?}  args
- * @param  {Object?} options spawnSync options
- * @param  {Object?} extra   custom options only for function
- * @return {Object}
- */
-function exec(cmd, args = [], options = {}, extra = {}) {
-  const out = spawnSync(cmd, args, options);
+function exec(cmd, args, options, extra) {
+  extra = extra || {};
+
+  const out = spawnSync(cmd, args || [], { encoding: 'utf8', ...options });
   const { stdout, stderr } = out;
   let res = '';
 
   if (!extra.force) {
-    errorHandler(cmd, out);
+    _errorHandler(cmd, out);
   }
 
   if (options.stdio || extra.force) {
@@ -42,24 +36,9 @@ function exec(cmd, args = [], options = {}, extra = {}) {
   return out;
 }
 
-/**
- * Comparing between silence mode and stdio: 'ignore' option
- *
- * - `stdio: ignore`
- * cannot get `stdout, stderr`
- *
- * - silence (custom)
- * don't print `stdout, stderr`, but you can get those
- */
-exec.ninja = function ninja(...command) {
-  let [cmd, args, options, extra] = command;
+module.exports = curry(exec);
 
-  extra = Object.assign({}, extra, { silence: true });
-
-  return exec(cmd, args, options, extra);
-};
-
-function errorHandler(cmd, out) {
+function _errorHandler(cmd, out) {
   const { status, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
 
@@ -83,5 +62,3 @@ function errorHandler(cmd, out) {
 
   return err;
 }
-
-module.exports = exec;

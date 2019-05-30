@@ -1,17 +1,13 @@
 'use strict';
 
-const { androidHomeDir } = require('../../../lib/path');
-const { isDeviceExist } = require('../../../lib/check');
-const step = require('../../../lib/step').withConf('STEP:');
-const exec = require('../../../lib/exec');
-const { touch } = require('../../../lib/files');
-const print = require('../../../lib/logger');
+const step = require('../../lib/step').withConf('STEP:');
+const dispatch = require('../../lib/dispatch');
+const print = require('../../lib/logger');
 
-const dLog = print.custom('cyan');
-
-function run(argv, cfg, cli) {
+function run(argv, cfg) {
   const { platform, tests } = argv;
   const { auto = false, list = [] } = cfg.devices;
+  const dLog = print.custom('cyan');
   let device = {
     device: cfg.defaults.device,
     api: cfg.defaults.api,
@@ -22,12 +18,16 @@ function run(argv, cfg, cli) {
   if (platform === 'android') {
     // TODO: multiple ports
     step('Checking ADB status (start if not running)', (done) => {
-      exec('./start_adb.sh', null, { cwd: cli }, { force: true });
+      const startAdb = require('../../process/android/startAdb')();
+
+      dispatch.force(startAdb());
 
       done();
     });
 
     step('Checking SDK config file (create if not exist)', (done) => {
+      const { touch } = require('../../lib/files');
+
       touch(cfg.sdk.repos);
 
       done();
@@ -54,18 +54,16 @@ function run(argv, cfg, cli) {
 
     if (platform === 'android') {
       step('Installing system-image (sdkmanager)', (done) => {
+        const installSdk = require('../../process/android/installSdk')();
         const alu = device.alu === '64' ? '_64' : '';
 
-        exec.ninja(
-          'sdkmanager',
-          [`"system-images;android-${device.api};google_apis;x86${alu}"`],
-          { shell: true }
-        );
+        dispatch.ninja(installSdk(device.api, alu));
 
         done();
       });
     }
 
+    const isDeviceExist = require('../../lib/check').isDeviceExist(platform);
     const isExist = isDeviceExist(device.name);
 
     if (isExist) {
@@ -76,25 +74,10 @@ function run(argv, cfg, cli) {
       'Checking whether virtual device existence (`auto: true` - create if not exist)',
       (done) => {
         if (!isExist && auto) {
-          exec.ninja(
-            './avdmanager',
-            [
-              'create',
-              'avd',
-              '--force',
-              '--name',
-              `'${device.name}'`,
-              '--abi',
-              `${device.abi}`,
-              '--package',
-              `'system-images;android-${device.api};google_apis;x86_64'`,
-              '--device',
-              `'${device.device}'`
-            ],
-            {
-              cwd: `${androidHomeDir}/tools/bin`,
-              shell: true
-            }
+          const create = require(`../../process/${platform}/create`)();
+
+          dispatch.ninja(
+            create(device.name, device.abi, device.api, device.device)
           );
 
           isCreated = true;
@@ -106,21 +89,31 @@ function run(argv, cfg, cli) {
 
     if (isCreated) {
       step('Opening virtual device', (done) => {
-        exec('./open.sh', [device.name], { cwd: cli, stdio: 'ignore' });
+        const open = require(`../../process/${platform}/open`)({
+          stdio: 'ignore'
+        });
+
+        dispatch(open(device.name));
 
         done();
       });
 
       step('Waiting until virtual device ready', (done) => {
-        exec.ninja('./check_emulator_ready.sh', null, { cwd: cli });
+        const ready = require(`../../process/${platform}/ready`)();
+
+        dispatch.force(ready());
 
         done();
       });
 
       if (tests) {
-        // TODO: will apply suite
+        // TODO: apply suite
         step('Launching UI test scripts', (done) => {
-          exec('npm', ['run', 'android'], { stdio: 'inherit' });
+          const test = require(`../../process/${platform}/test`)({
+            stdio: 'inherit'
+          });
+
+          dispatch(test());
 
           done();
         });

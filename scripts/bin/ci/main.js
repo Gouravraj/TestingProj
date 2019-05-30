@@ -1,21 +1,19 @@
 'use strict';
 
-const run = require('./commands/run');
-const clean = require('./commands/clean');
-const { getExecDir } = require('../../lib/path');
+const run = require('./run');
+const clean = require('./clean');
 const { isRunning } = require('../../lib/check');
 
-async function main(argv, conf) {
+function main(argv, conf) {
   const { _, platform } = argv;
   const [command] = _;
-  const cli = getExecDir(platform);
 
   if (command === 'run') {
-    run(argv, conf.ci[platform], cli);
+    run(argv, conf.ci[platform]);
   }
 
   if (command === 'clean' && isRunning(platform)) {
-    clean(conf.pkg[platform], cli);
+    clean(platform, conf.pkg[platform]);
   }
 }
 

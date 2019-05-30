@@ -1,22 +1,20 @@
 'use strict';
 
-const { compose, length } = require('ramda');
-const { getExecDir } = require('./path');
+const { compose, length, equals, prop } = require('ramda');
 const { trim, cut } = require('./parser');
-const exec = require('./exec');
+const dispatch = require('./dispatch');
 
 function isRunning(platform = '') {
+  const listBooted = require(`../process/${platform}/listBooted`)();
+  const stdout = compose(
+    prop('stdout'),
+    dispatch.ninja,
+    listBooted
+  )();
+
   if (platform === 'ios') {
     return (id) => {
-      const { stdout } = exec.ninja(
-        'xcrun',
-        ['simctl', 'list', '|', 'grep', 'Booted'],
-        {
-          encoding: 'utf8',
-          shell: true
-        }
-      );
-
+      // TODO: move to `parser`
       const found = stdout.split(/\n/g).find((line) => {
         const [name] = /[^(]*/.exec(line.trim());
         const [, udid] = /\((.*?)\)/.exec(line.trim());
@@ -28,7 +26,6 @@ function isRunning(platform = '') {
     };
   } else if (platform === 'android') {
     // TODO: check with device name
-    const { stdout } = exec.ninja('adb', ['devices'], { encoding: 'utf8' });
     const len = compose(
       length,
       cut(1),
@@ -40,15 +37,17 @@ function isRunning(platform = '') {
 }
 
 function isDeviceExist(platform = '') {
-  const cwd = getExecDir(platform);
-
   return (name = '') => {
-    const { stdout } = exec.ninja('./is_device_exist.sh', [name], {
-      cwd,
-      encoding: 'utf8'
-    });
+    // TODO: create ios `process`
+    const isDeviceExist = require(`../process/${platform}/isDeviceExist`)();
 
-    return stdout.trim() === '1';
+    return compose(
+      equals('1'),
+      trim,
+      prop('stdout'),
+      dispatch.ninja,
+      isDeviceExist
+    )(name);
   };
 }
 

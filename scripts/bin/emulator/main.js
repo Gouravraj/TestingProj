@@ -1,68 +1,70 @@
 'use strict';
 
 const { isRunning } = require('../../lib/check');
-const { getExecDir, androidHomeDir } = require('../../lib/path');
+const dispatch = require('../../lib/dispatch');
 const { addLineNo, readline } = require('../../lib/line');
-const exec = require('../../lib/exec');
-const { open } = require('../../compute/android');
 
 const PLATFORM = 'android';
 
 function main(command, args) {
-  const cwd = getExecDir(PLATFORM);
   const { name, device, api } = args;
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {
     const { pkg } = require('../../config');
+    const uninstall = require('../../process/android/uninstall')();
 
-    exec('./uninstall.sh', [pkg.android.id], { cwd });
+    dispatch(uninstall(pkg.android.id));
   }
 
   if (command === 'close' && isRunning(PLATFORM)) {
-    exec('./close.sh', null, { cwd });
+    const closeAll = require('../../process/android/closeAll')();
+
+    dispatch(closeAll());
   }
 
   if (command === 'create') {
-    exec(
-      './avdmanager',
-      [
-        'create',
-        'avd',
-        '--name',
-        `'${name}'`,
-        '--package',
-        `'system-images;android-${api};google_apis;x86_64'`,
-        '--device',
-        `'${device}'`
-      ],
-      {
-        cwd: `${androidHomeDir}/tools/bin`,
-        shell: true
-      }
-    );
+    const create = require('../../process/android/create')();
+
+    dispatch(create(name, 'google_apis/x86_64', api, device));
   }
 
   if (command === 'list') {
-    exec('./list.sh', null, { cwd }, { after: addLineNo.replace('Name:') });
+    const log = require('../../lib/logger')('log');
+    const list = require('../../process/android/list')();
+    const applyLineNo = addLineNo.replace(/^Name:/);
+    const { stdout } = dispatch.ninja(list());
+
+    log(applyLineNo(stdout));
   }
 
   if (command === 'open' || command === 'remove') {
-    const { stdout } = exec.ninja('./list.sh', null, {
-      cwd,
-      encoding: 'utf8'
-    });
+    const list = require('../../process/android/list')();
+    const { stdout } = dispatch(list());
+    const deviceList = stdout.split(/\n/g).reduce((acc, line) => {
+      if (!line) {
+        return acc;
+      }
 
-    const deviceList = open(stdout);
+      const device = line.trim().replace('Name: ', '');
+
+      return [...acc, device];
+    }, []);
     const idx = readline(deviceList, 'Select a device');
     const device = deviceList[idx];
 
     if (device) {
-      exec(`./${command}.sh`, [device], { cwd, stdio: 'ignore' });
+      const ps = require(`../../process/android/${command}`)({
+        stdio: 'ignore'
+      });
+
+      dispatch(ps(device));
     }
   }
 
   if (command === 'update') {
-    exec('./update.sh', null, { cwd });
+    const update = require('../../process/android/update')();
+
+    dispatch(update());
   }
 }
 

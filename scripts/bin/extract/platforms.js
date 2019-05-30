@@ -1,23 +1,20 @@
 'use strict';
 
 const conf = require('../../config');
-const { localBinDir } = require('../../lib/path');
-const exec = require('../../lib/exec');
+const dispatch = require('../../lib/dispatch');
 const { dir } = require('../../lib/parser');
 
 function extract(args) {
   let { platform, id, to, rename } = args;
 
-  return (cwd = localBinDir) => {
+  return () => {
+    const extractPkg = require('../../process/extractPkg')();
+
     if (to.indexOf('.') > -1) {
       to = dir(to);
     }
 
-    return exec(
-      './extract-pkg',
-      [platform, '--id', id, '--to', to, '--rename', rename],
-      { cwd }
-    );
+    return dispatch(extractPkg(platform, id, to, rename));
   };
 }
 
