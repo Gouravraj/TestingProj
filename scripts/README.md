@@ -2,7 +2,7 @@
 
 **!! Before running CI scripts !!**
 
-App package file(s) must be provided already in './app’ directory.
+App package file(s) must be provided in './app’ directory.
 
 ## Structure
 
@@ -46,29 +46,46 @@ module.exports = {
   ci: {
     ios: {
       defaults: {
-        devicetype: 'iPhone X', // device types
-        runtime: '12.2' // runtime (to install different iOS runtimes, use Xcode)
+        // device type
+        // xcrun simctl list --json devicetypes | jq -r '.[]'
+        devicetype: 'iPhone X',
+
+        // runtime (to install different iOS runtimes, use Xcode)
+        // xcrun simctl list --json runtimes | jq -r '.[]'
+        runtime: '12.2'
       },
 
       devices: {
-        auto: true, // will create list name(s) if set `true`
+        // will create device if not exist
+        auto: true,
 
-        list: ['iPhone X'] // currently only 1 device support
+        // currently only 1 device support
+        list: ['iPhone X']
       }
     },
 
     android: {
       defaults: {
-        api: '28', // android API version (https://source.android.com/setup/start/build-numbers)
-        alu: '64', // 64 bits or 32 bits, if no 64 will create 32 bits
-        abi: 'google_apis/x86_64', // https://developer.android.com/ndk/guides/abis
-        device: 'Nexus 6P' // base device
+        // android API version (https://source.android.com/setup/start/build-numbers)
+        api: '28',
+
+        // 64 bits or 32 bits
+        alu: '64',
+
+        // https://developer.android.com/ndk/guides/abis
+        abi: 'google_apis/x86_64',
+
+        // base device
+        // avdmanager list device | grep "id:" | sed 's/[^"]*"\([^"]*\)".*/\1/'
+        device: 'Nexus 6P'
       },
 
       sdk: {
-        repos: `${homeDir}/.android/repositories.cfg` // preventing warning message
+        // preventing warning message
+        repos: `${homeDir}/.android/repositories.cfg`
       },
 
+      // same as 'ios' config
       devices: {
         auto: true,
 
