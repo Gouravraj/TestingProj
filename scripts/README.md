@@ -1,81 +1,121 @@
-# scripts
+# SCRIPTS
 
-## bin
+**!! Before running CI scripts !!**
 
-Executable scripts
+App package file(s) must be provided already in './app’ directory.
 
-### CI pipeline
+## Structure
+
+- `bin` - executable scripts (e.g. `node ./scripts/bin/simulator.js`)
+- `lib` - libraries
+- `process` - executable child processes by Node.js or bash scripts
+- `config.js` - configure file for scripts
+
+## CLI
 
 ```bash
-npm run ci # actual ci flow
-npm run ci:dev # without ui testing
-npm run ci:ios # run ios ui testing scripts
-npm run ci:android # run android ui testing scripts
+# without platform arg, <android> is default
+npm run ci # actual CI flow (same as `ci:android`)
+npm run ci:dev # without UI testing (`npm run ci:dev -- ios`)
 npm run ci:clean # same as `npm run cleanup` script - uninstall app and close
-npm run ci:debug # debug mode - will open Chrome inspector with sources
+
+# `npm run ci:ios -- --no-tests`
+npm run ci:ios
+npm run ci:android
+
+# debug - Inspector of Chrome browser
+# npm start <NPM script name>
+npm start ci
+npm start simulator list
+
+# to add arg, `-- --no-tests`, `-- --name=cxagroup`
+npm run emulator create -- --name=cxagroup
+
+# extract package
+npm run pkg # ios, android
+npm run pkg:ios
+npm run pkg:android
 ```
-
-#### Before running scripts
-
-App package file(s) must be provided already from './app’ directory.
 
 #### Configure
 
-Will update...
+`./scripts/config.js` for CI, extract packages
+
+```javascript
+module.exports = {
+  ci: {
+    ios: {
+      defaults: {
+        devicetype: 'iPhone X', // device types
+        runtime: '12.2' // runtime (to install different iOS runtimes, use Xcode)
+      },
+
+      devices: {
+        auto: true, // will create list name(s) if set `true`
+
+        list: ['iPhone X'] // currently only 1 device support
+      }
+    },
+
+    android: {
+      defaults: {
+        api: '28', // android API version (https://source.android.com/setup/start/build-numbers)
+        alu: '64', // 64 bits or 32 bits, if no 64 will create 32 bits
+        abi: 'google_apis/x86_64', // https://developer.android.com/ndk/guides/abis
+        device: 'Nexus 6P' // base device
+      },
+
+      sdk: {
+        repos: `${homeDir}/.android/repositories.cfg` // preventing warning message
+      },
+
+      devices: {
+        auto: true,
+
+        list: ['android_9']
+      }
+    }
+  },
+
+  // for `npm run pkg` - without args, will use this as defaults
+  pkg: {
+    ios: {
+      id: 'com.cxagroup.mobile.EmployeePortal',
+      to: ios.config.capabilities[0].app,
+      rename: 'app-debug.app'
+    },
+
+    android: {
+      id: 'com.employeefrontend',
+      to: android.config.capabilities[0].app,
+      rename: 'app-debug.apk'
+    }
+  }
+};
+```
 
 ### iOS Simulator
 
-Will update
+will update
 
 ### Android Emulator
 
-```bash
-./scripts/bin/emulator.js <command>
-#or
-npm run emulator <command>
-```
-
-Except `create` command, no require argument. You can check actual commands from `./scripts/exec/android`.
-
-```bash
-# check device list `./scripts/exec/android/available_devices.sh`
-npm run emulator create --name=<device name> --api=<API version> ---device=<device> # arguments is not required
-npm run emulator list
-npm run emulator update # sdkmanager
-npm run emulator open
-npm run emulator delete
-npm run emulator uninstall # uninstall app
-npm run emulator close
-```
+will update
 
 ### Extract app package from simulator, emulator (.app, .apk)
 
-You must put file(s) inside `/path/current_repo/app`. Like `./app/app-debug.apk`. Or, you can put file(s) manually.
+To put file(s) inside like `./app/app-debug.apk`, you can extract app package direct from simulator by `extract-pkg`. [Github](https://github.com/jsveron23/extract-pkg)
 
-You can extract app package direct from simulator by `extract-pkg`. [Github](https://github.com/jsveron23/extract-pkg)
-
-To extract, simulator already booted and should be installed package on that. then,
+To extract, simulator already booted and should be installed package on virtual device.
 
 ```bash
 extract-pkg ios -id=com.cxagroup.mobile.EmployeePortal --to=./app --rename=app-debug.app
 ```
 
-The scripts to be handled by NPM scripts. You should open one of simulator which already installed app package. (`./scripts/config.js#pkg`)
+Extract package by those NPM commands. (arguments already set from `./scripts/config.js#pkg`)
 
 ```bash
 npm run pkg # extract both platforms
 npm run pkg:ios
 npm run pkg:android
 ```
-
----
-
-## exec
-
-actual commands
-
----
-
-## lib
-
-helpers, utils
