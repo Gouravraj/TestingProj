@@ -5,7 +5,7 @@ do
   sleep 1
 done
 
-sleep 3
+sleep 4
 
 while [ "`adb shell getprop sys.boot_completed | tr -d '\r' `" != "1" ]
 do
