@@ -9,10 +9,6 @@ const { dir } = require('./parser');
 const repoDir = dir(findUp.sync('package.json', { cwd: __dirname }));
 const scriptsDir = dir(findUp.sync('config.js', { cwd: __dirname }));
 
-function getExecDir(platform = '') {
-  return _getAbsDir('exec', platform);
-}
-
 function getHomeDir() {
   const osHome = require('../process/osHome')();
 
@@ -31,7 +27,6 @@ function getEmulatorHomeDir() {
   return _trim(emulatorHome());
 }
 
-exports.getExecDir = getExecDir;
 exports.repoDir = repoDir;
 exports.localBinDir = path.resolve(repoDir, 'node_modules', '.bin');
 exports.homeDir = getHomeDir();
