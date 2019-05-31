@@ -12,7 +12,6 @@
     "ci:ios": "node ./scripts/bin/ci.js run ios",
     "ci:android": "node ./scripts/bin/ci.js run android",
     "ci:clean": "node ./scripts/bin/ci.js clean",
-    "ci:debug": "ndb npm run ci -- --no-tests",
     "cleanup": "npm run ci:clean",
     "ios": "wdio ./config/ios.app.conf.js",
     "android": "wdio ./config/android.app.conf.js",
