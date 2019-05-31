@@ -17,7 +17,4 @@ const tab = createTab();
 
 tab.backround = createTab('-G');
 
-// force to open a new tab in iTerm2
-tab.force = createTab('-a iTerm2');
-
 module.exports = tab;

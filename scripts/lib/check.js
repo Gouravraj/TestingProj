@@ -1,7 +1,7 @@
 'use strict';
 
-const { compose, length, equals, prop } = require('ramda');
-const { trim, cut } = require('./parser');
+const { compose, length, equals, prop, find } = require('ramda');
+const { trim, cut, iosOnly } = require('./parser');
 const dispatch = require('./dispatch');
 
 function isRunning(platform = '') {
@@ -41,13 +41,25 @@ function isDeviceExist(platform = '') {
     // TODO: create ios `process`
     const isDeviceExist = require(`../process/${platform}/isDeviceExist`)();
 
-    return compose(
-      equals('1'),
-      trim,
-      prop('stdout'),
-      dispatch.ninja,
-      isDeviceExist
-    )(name);
+    if (platform === 'ios') {
+      const found = compose(
+        find((item) => item.name === name),
+        iosOnly('devices', 'name'),
+        prop('stdout'),
+        dispatch.ninja,
+        isDeviceExist
+      )();
+
+      return !!found;
+    } else if (platform === 'android') {
+      return compose(
+        equals('1'),
+        trim,
+        prop('stdout'),
+        dispatch.ninja,
+        isDeviceExist
+      )(name);
+    }
   };
 }
 

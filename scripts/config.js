@@ -6,7 +6,18 @@ const android = require('../config/android.app.conf');
 
 module.exports = {
   ci: {
-    ios: {},
+    ios: {
+      defaults: {
+        devicetype: 'iPhone X',
+        runtime: '12.2'
+      },
+
+      devices: {
+        auto: true,
+
+        list: ['iPhone X']
+      }
+    },
 
     android: {
       defaults: {
@@ -23,7 +34,6 @@ module.exports = {
       devices: {
         auto: true,
 
-        // TODO: parallel testing
         list: ['android_9']
       }
     }

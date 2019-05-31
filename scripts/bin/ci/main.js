@@ -5,8 +5,8 @@ const clean = require('./clean');
 const { isRunning } = require('../../lib/check');
 
 function main(argv, conf) {
-  const { _, platform } = argv;
-  const [command] = _;
+  const { _ } = argv;
+  const [command, platform] = _;
 
   if (command === 'run') {
     run(argv, conf.ci[platform]);

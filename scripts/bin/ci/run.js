@@ -5,15 +5,25 @@ const dispatch = require('../../lib/dispatch');
 const print = require('../../lib/logger');
 
 function run(argv, cfg) {
-  const { platform, tests } = argv;
+  const { _, tests } = argv;
+  const [, platform] = _;
   const { auto = false, list = [] } = cfg.devices;
   const dLog = print.custom('cyan');
-  let device = {
-    device: cfg.defaults.device,
-    api: cfg.defaults.api,
-    alu: cfg.defaults.alu,
-    abi: cfg.defaults.abi
-  };
+  let device = {};
+
+  if (platform === 'ios') {
+    device = {
+      devicetype: cfg.defaults.devicetype,
+      runtime: cfg.defaults.runtime
+    };
+  } else if (platform === 'android') {
+    device = {
+      device: cfg.defaults.device,
+      api: cfg.defaults.api,
+      alu: cfg.defaults.alu,
+      abi: cfg.defaults.abi
+    };
+  }
 
   if (platform === 'android') {
     // TODO: multiple ports
@@ -75,10 +85,22 @@ function run(argv, cfg) {
       (done) => {
         if (!isExist && auto) {
           const create = require(`../../process/${platform}/create`)();
+          let ps = function() {};
 
-          dispatch.ninja(
-            create(device.name, device.abi, device.api, device.device)
-          );
+          if (platform === 'ios') {
+            const typePrefix = 'com.apple.CoreSimulator.SimDeviceType';
+            const runtimePrefix = 'com.apple.CoreSimulator.SimRuntime';
+
+            ps = create(
+              device.name,
+              `${typePrefix}.${device.devicetype.replace(' ', '-')}`,
+              `${runtimePrefix}.iOS-${device.runtime.replace('.', '-')}`
+            );
+          } else if (platform === 'android') {
+            ps = create(device.name, device.abi, device.api, device.device);
+          }
+
+          dispatch.ninja(ps);
 
           isCreated = true;
         }
@@ -101,7 +123,7 @@ function run(argv, cfg) {
       step('Waiting until virtual device ready', (done) => {
         const ready = require(`../../process/${platform}/ready`)();
 
-        dispatch.force(ready());
+        dispatch.force(ready(device.name));
 
         done();
       });

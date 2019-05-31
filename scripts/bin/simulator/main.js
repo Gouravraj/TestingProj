@@ -1,11 +1,11 @@
 'use strict';
 
-const { compose, map, join } = require('ramda');
+const { compose, map, join, prop } = require('ramda');
 const { isRunning } = require('../../lib/check');
 const print = require('../../lib/logger');
 const dispatch = require('../../lib/dispatch');
 const { addLineNo, readline } = require('../../lib/line');
-const _iosOnly = require('./internal/_iosOnly');
+const { iosOnly } = require('../../lib/parser');
 
 const PLATFORM = 'ios';
 
@@ -30,9 +30,10 @@ function main(command, args) {
     // device types
     const listDeviceTypes = require('../../process/ios/listDeviceTypes')();
     const deviceTypes = compose(
-      _iosOnly('devicetypes', 'name'),
+      iosOnly('devicetypes', 'name'),
+      prop('stdout'),
       dispatch.ninja,
-      listDeviceTypes()
+      listDeviceTypes
     )();
     const dtNames = deviceTypes.map(({ name }) => name);
     const dtIdx = readline(dtNames, 'Select a device type');
@@ -42,9 +43,10 @@ function main(command, args) {
     // runtimes
     const listRuntimes = require('../../process/ios/listRuntimes')();
     const runtimes = compose(
-      _iosOnly('runtimes', 'name'),
+      iosOnly('runtimes', 'name'),
+      prop('stdout'),
       dispatch.ninja,
-      listRuntimes()
+      listRuntimes
     )();
 
     const rtNames = runtimes.map(({ name }) => name);
@@ -67,29 +69,30 @@ function main(command, args) {
       addLineNo,
       join('\n'),
       map(({ name }) => ` ${name}`),
-      _iosOnly('devices', 'name'),
+      iosOnly('devices', 'name'),
+      prop('stdout'),
       dispatch.ninja,
-      list()
+      list
     )();
   }
 
   if (command === 'open' || command === 'remove') {
     const list = require('../../process/ios/list')();
-    const out = compose(
+    const vm = compose(
+      iosOnly('devices', 'name'),
+      prop('stdout'),
       dispatch.ninja,
-      list()
+      list
     )();
-
-    const names = compose(
-      map(({ name }) => name),
-      _iosOnly('devices', 'name')
-    )(out);
-
-    const ids = compose(
-      map(({ udid }) => udid),
-      _iosOnly('devices', 'name')
-    )(out);
-
+    const { names, ids } = vm.reduce(
+      (acc, item) => {
+        return {
+          names: [...acc.names, item.name],
+          ids: [...acc.ids, item.udid]
+        };
+      },
+      { names: [], ids: [] }
+    );
     const idx = readline(names, 'Select a device');
     const udid = ids[idx];
 

@@ -1,5 +1,8 @@
 'use strict';
 
+const { compose, filter } = require('ramda');
+const _getExtractInfo = require('./internal/_getExtractInfo');
+
 function json(out) {
   let tmp = out;
 
@@ -49,7 +52,16 @@ function cut(start, end) {
   };
 }
 
+function iosOnly(rootName, name) {
+  return compose(
+    filter((item) => !/iPad|Watch|TV/i.test(item[name])),
+    _getExtractInfo(rootName),
+    json
+  );
+}
+
 exports.dir = dir;
 exports.trim = trim;
 exports.cut = cut;
 exports.json = json;
+exports.iosOnly = iosOnly;
