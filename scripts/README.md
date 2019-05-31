@@ -96,11 +96,28 @@ module.exports = {
 
 ### iOS Simulator
 
-will update
+```bash
+# npm run simulator <command>
+npm run simulator list # list simulator that available to open
+npm run simulator open # show simulator list and choose to open
+npm run simulator remove # show simulator list and choose to remove
+npm run simulator close # close all simulators
+npm run simulator uninstall # uninstall all from opened simulator
+npm run simulator create # create custom simulator
+```
 
 ### Android Emulator
 
-will update
+```bash
+# npm run emulator <command>
+npm run emulator list # list emulator that available to open
+npm run emulator update # update installed SDK package(s)
+npm run emulator open # show emulator list and choose to open
+npm run emulator remove # show emulator list and choose to remove
+npm run emulator close # close all emulators
+npm run emulator uninstall # uninstall all from opened emulator
+npm run emulator create # create custom emulator
+```
 
 ### Extract app package from simulator, emulator (.app, .apk)
 
