@@ -21,7 +21,7 @@ async function clean(platform, cfg) {
   step('Closing the emulator', (done) => {
     const closeAll = require(`../../process/${platform}/closeAll`)();
 
-    dispatch.ninja(closeAll(cfg.id));
+    dispatch.ninja(closeAll());
 
     done();
   });
