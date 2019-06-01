@@ -1,3 +1,5 @@
+'use strict';
+
 function _getExtractInfo(propName) {
   return (obj) => {
     const parent = obj[propName];
