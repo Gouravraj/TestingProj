@@ -28,7 +28,7 @@ function run(argv, cfg) {
   if (platform === 'android') {
     // TODO: multiple ports
     step('Checking ADB status (start if not running)', (done) => {
-      const startAdb = require('../../process/android/startAdb')();
+      const startAdb = require('../../ps/android/startAdb')();
 
       dispatch.force(startAdb());
 
@@ -64,7 +64,7 @@ function run(argv, cfg) {
 
     if (platform === 'android') {
       step('Installing system-image (sdkmanager)', (done) => {
-        const installSdk = require('../../process/android/installSdk')();
+        const installSdk = require('../../ps/android/installSdk')();
         const alu = device.alu === '64' ? '_64' : '';
 
         dispatch.ninja(installSdk(device.api, alu));
@@ -84,7 +84,7 @@ function run(argv, cfg) {
       'Checking whether virtual device existence (`auto: true` - create if not exist)',
       (done) => {
         if (!isExist && auto) {
-          const create = require(`../../process/${platform}/create`)();
+          const create = require(`../../ps/${platform}/create`)();
           let ps = function() {};
 
           if (platform === 'ios') {
@@ -111,7 +111,7 @@ function run(argv, cfg) {
 
     if (isCreated) {
       step('Opening virtual device', (done) => {
-        const open = require(`../../process/${platform}/open`)({
+        const open = require(`../../ps/${platform}/open`)({
           stdio: 'ignore'
         });
 
@@ -121,7 +121,7 @@ function run(argv, cfg) {
       });
 
       step('Waiting until virtual device ready', (done) => {
-        const ready = require(`../../process/${platform}/ready`)();
+        const ready = require(`../../ps/${platform}/ready`)();
 
         dispatch.force(ready(device.name));
 
@@ -131,7 +131,7 @@ function run(argv, cfg) {
       if (tests) {
         // TODO: apply suite
         step('Launching UI test scripts', (done) => {
-          const test = require(`../../process/${platform}/test`)({
+          const test = require(`../../ps/${platform}/test`)({
             stdio: 'inherit'
           });
 

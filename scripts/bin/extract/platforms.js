@@ -8,7 +8,7 @@ function extract(args) {
   let { platform, id, to, rename } = args;
 
   return () => {
-    const extractPkg = require('../../process/extractPkg')();
+    const extractPkg = require('../../ps/extractPkg')();
 
     if (to.indexOf('.') > -1) {
       to = dir(to);

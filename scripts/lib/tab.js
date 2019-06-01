@@ -1,7 +1,7 @@
 'use strict';
 
 const dispatch = require('./dispatch');
-const ttab = require('../process/ttab');
+const ttab = require('../ps/ttab');
 
 function createTab(option = '') {
   return (...args) => {

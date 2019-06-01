@@ -5,7 +5,7 @@ const { trim, cut, iosOnly } = require('./parser');
 const dispatch = require('./dispatch');
 
 function isRunning(platform = '') {
-  const listBooted = require(`../process/${platform}/listBooted`)();
+  const listBooted = require(`../ps/${platform}/listBooted`)();
   const stdout = compose(
     prop('stdout'),
     dispatch.ninja,
@@ -38,8 +38,7 @@ function isRunning(platform = '') {
 
 function isDeviceExist(platform = '') {
   return (name = '') => {
-    // TODO: create ios `process`
-    const isDeviceExist = require(`../process/${platform}/isDeviceExist`)();
+    const isDeviceExist = require(`../ps/${platform}/isDeviceExist`)();
 
     if (platform === 'ios') {
       const found = compose(

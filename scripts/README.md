@@ -8,7 +8,7 @@ App package file(s) must be provided in './app’ directory.
 
 - `bin` - executable scripts (e.g. `node ./scripts/bin/simulator.js`)
 - `lib` - libraries
-- `process` - executable child processes by Node.js or bash scripts
+- `ps` - executable child processes by Node.js or bash scripts
 - `config.js` - configure file for scripts
 
 ## CLI

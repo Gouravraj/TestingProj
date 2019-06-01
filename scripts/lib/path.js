@@ -10,19 +10,19 @@ const repoDir = dir(findUp.sync('package.json', { cwd: __dirname }));
 // const scriptsDir = dir(findUp.sync('config.js', { cwd: __dirname }));
 
 function getHomeDir() {
-  const osHome = require('../process/osHome')();
+  const osHome = require('../ps/osHome')();
 
   return _trim(osHome());
 }
 
 function getAndroidHomeDir() {
-  const androidHome = require('../process/androidHome')();
+  const androidHome = require('../ps/androidHome')();
 
   return _trim(androidHome());
 }
 
 function getEmulatorHomeDir() {
-  const emulatorHome = require('../process/emulatorHome')();
+  const emulatorHome = require('../ps/emulatorHome')();
 
   return _trim(emulatorHome());
 }

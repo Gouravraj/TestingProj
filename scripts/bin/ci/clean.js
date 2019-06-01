@@ -9,7 +9,7 @@ const dLog = print.custom('cyan');
 
 async function clean(platform, cfg) {
   step('Uninstalling app', (done) => {
-    const uninstall = require(`../../process/${platform}/uninstall`)();
+    const uninstall = require(`../../ps/${platform}/uninstall`)();
 
     dispatch.ninja(uninstall(cfg.id));
 
@@ -19,7 +19,7 @@ async function clean(platform, cfg) {
   await sleep(8000);
 
   step('Closing the emulator', (done) => {
-    const closeAll = require(`../../process/${platform}/closeAll`)();
+    const closeAll = require(`../../ps/${platform}/closeAll`)();
 
     dispatch.ninja(closeAll());
 

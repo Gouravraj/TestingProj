@@ -11,26 +11,26 @@ function main(command, args) {
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {
     const { pkg } = require('../../config');
-    const uninstall = require('../../process/android/uninstall')();
+    const uninstall = require('../../ps/android/uninstall')();
 
     dispatch(uninstall(pkg.android.id));
   }
 
   if (command === 'close' && isRunning(PLATFORM)) {
-    const closeAll = require('../../process/android/closeAll')();
+    const closeAll = require('../../ps/android/closeAll')();
 
     dispatch(closeAll());
   }
 
   if (command === 'create') {
-    const create = require('../../process/android/create')();
+    const create = require('../../ps/android/create')();
 
     dispatch(create(name, 'google_apis/x86_64', api, device));
   }
 
   if (command === 'list') {
     const log = require('../../lib/logger')('log');
-    const list = require('../../process/android/list')();
+    const list = require('../../ps/android/list')();
     const applyLineNo = addLineNo.replace(/^Name:/);
     const { stdout } = dispatch.ninja(list());
 
@@ -38,7 +38,7 @@ function main(command, args) {
   }
 
   if (command === 'open' || command === 'remove') {
-    const list = require('../../process/android/list')();
+    const list = require('../../ps/android/list')();
     const { stdout } = dispatch(list());
     const deviceList = stdout.split(/\n/g).reduce((acc, line) => {
       if (!line) {
@@ -53,7 +53,7 @@ function main(command, args) {
     const device = deviceList[idx];
 
     if (device) {
-      const ps = require(`../../process/android/${command}`)({
+      const ps = require(`../../ps/android/${command}`)({
         stdio: 'ignore'
       });
 
@@ -62,7 +62,7 @@ function main(command, args) {
   }
 
   if (command === 'update') {
-    const update = require('../../process/android/update')();
+    const update = require('../../ps/android/update')();
 
     dispatch(update());
   }

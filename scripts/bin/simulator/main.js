@@ -15,20 +15,20 @@ function main(command, args) {
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {
     const { pkg } = require('../../config');
-    const uninstall = require('../../process/ios/uninstall')();
+    const uninstall = require('../../ps/ios/uninstall')();
 
     dispatch(uninstall(pkg.ios.id));
   }
 
   if (command === 'close' && isRunning(PLATFORM)) {
-    const closeAll = require('../../process/ios/closeAll')();
+    const closeAll = require('../../ps/ios/closeAll')();
 
     dispatch(closeAll());
   }
 
   if (command === 'create') {
     // device types
-    const listDeviceTypes = require('../../process/ios/listDeviceTypes')();
+    const listDeviceTypes = require('../../ps/ios/listDeviceTypes')();
     const deviceTypes = compose(
       iosOnly('devicetypes', 'name'),
       prop('stdout'),
@@ -41,7 +41,7 @@ function main(command, args) {
     const deviceType = dtIds[dtIdx];
 
     // runtimes
-    const listRuntimes = require('../../process/ios/listRuntimes')();
+    const listRuntimes = require('../../ps/ios/listRuntimes')();
     const runtimes = compose(
       iosOnly('runtimes', 'name'),
       prop('stdout'),
@@ -55,14 +55,14 @@ function main(command, args) {
     const runtime = rtIds[rtIdx];
 
     if (deviceType && runtime) {
-      const create = require('../../process/ios/create')();
+      const create = require('../../ps/ios/create')();
 
       dispatch(create(name, deviceType, runtime));
     }
   }
 
   if (command === 'list') {
-    const list = require('../../process/ios/list')();
+    const list = require('../../ps/ios/list')();
 
     compose(
       log,
@@ -77,7 +77,7 @@ function main(command, args) {
   }
 
   if (command === 'open' || command === 'remove') {
-    const list = require('../../process/ios/list')();
+    const list = require('../../ps/ios/list')();
     const vm = compose(
       iosOnly('devices', 'name'),
       prop('stdout'),
@@ -97,7 +97,7 @@ function main(command, args) {
     const udid = ids[idx];
 
     if (udid) {
-      const ps = require(`../../process/ios/${command}`)();
+      const ps = require(`../../ps/ios/${command}`)();
 
       dispatch(ps(udid));
     }
