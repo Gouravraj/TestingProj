@@ -6,7 +6,7 @@ packagePath=$1
 
 function cleanup {
     echo "cleaning up..."
-	# npm run cleanup
+	npm run cleanup
 }
 
 if [ ! -f "$packagePath" ]; then
@@ -20,4 +20,4 @@ trap cleanup EXIT
 echo "---------npm installation-----------"
 npm install ionic --loglevel verbose
 
-# npm run ci
+npm run ci
