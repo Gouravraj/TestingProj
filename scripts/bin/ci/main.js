@@ -9,7 +9,7 @@ function main(argv, conf) {
   const [command] = _;
 
   if (command === 'run') {
-    run(argv, conf.ci[platform]);
+    run(argv, platform, conf.ci[platform]);
   }
 
   if (command === 'clean' && isRunning(platform)) {
