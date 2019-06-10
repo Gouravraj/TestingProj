@@ -39,7 +39,7 @@ function main(command, args) {
 
   if (command === 'open' || command === 'remove') {
     const list = require('../../ps/android/list')();
-    const { stdout } = dispatch(list());
+    const { stdout } = dispatch.ninja(list());
     const deviceList = stdout.split(/\n/g).reduce((acc, line) => {
       if (!line) {
         return acc;

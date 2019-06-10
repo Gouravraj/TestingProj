@@ -1,6 +1,6 @@
 'use strict';
 
-function _getExtractInfo(propName) {
+function _extractInfo(propName) {
   return (obj) => {
     const parent = obj[propName];
     const isArray = Array.isArray(parent);
@@ -16,4 +16,4 @@ function _getExtractInfo(propName) {
   };
 }
 
-module.exports = _getExtractInfo;
+module.exports = _extractInfo;

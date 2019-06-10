@@ -4,9 +4,8 @@ const step = require('../../lib/step').withConf('STEP:');
 const dispatch = require('../../lib/dispatch');
 const print = require('../../lib/logger');
 
-function run(argv, cfg) {
-  const { _, tests } = argv;
-  const [, platform] = _;
+function run(argv, platform, cfg) {
+  const { tests } = argv;
   const { auto = false, list = [] } = cfg.devices;
   const dLog = print.custom('cyan');
   let device = {};

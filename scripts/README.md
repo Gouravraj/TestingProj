@@ -11,7 +11,7 @@ App package file(s) must be provided in './app’ directory.
 - `ps` - executable child processes by Node.js or bash scripts
 - `config.js` - configure file for scripts
 
-## CLI
+## Commands
 
 ```bash
 # without platform arg, <android> is default
@@ -37,7 +37,7 @@ npm run pkg:ios
 npm run pkg:android
 ```
 
-#### Configure
+## Configure
 
 `./scripts/config.js` for CI, extract packages
 
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-### iOS Simulator
+## iOS Simulator
 
 ```bash
 # npm run simulator <command>
@@ -123,7 +123,7 @@ npm run simulator uninstall # uninstall all from opened simulator
 npm run simulator create # create custom simulator
 ```
 
-### Android Emulator
+## Android Emulator
 
 ```bash
 # npm run emulator <command>
@@ -136,7 +136,7 @@ npm run emulator uninstall # uninstall all from opened emulator
 npm run emulator create # create custom emulator
 ```
 
-### Extract app package from simulator, emulator (.app, .apk)
+## Extract app package from simulator, emulator (.app, .apk)
 
 To put file(s) inside like `./app/app-debug.apk`, you can extract app package direct from simulator by `extract-pkg`. [Github](https://github.com/jsveron23/extract-pkg)
 

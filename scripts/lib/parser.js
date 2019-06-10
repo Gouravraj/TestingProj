@@ -1,27 +1,24 @@
 'use strict';
 
-const { compose, filter } = require('ramda');
-const _getExtractInfo = require('./internal/_getExtractInfo');
+const { compose, map, filter, reduce, split } = require('ramda');
+const _extractInfo = require('./internal/_extractInfo');
 
 function json(out) {
-  let tmp = out;
-
-  if (typeof out !== 'string') {
-    tmp = out.string();
-  }
-
-  return JSON.parse(tmp);
+  return JSON.parse(out);
 }
 
 function dir(path = '') {
-  if (path.indexOf('.') === -1) {
-    return path;
+  let stream = path.split('/');
+
+  if (path.indexOf('.') > -1) {
+    stream = stream.slice(0, -1);
   }
 
-  return path
-    .split('/')
-    .slice(0, -1)
-    .join('/');
+  if (stream[stream.length - 1]) {
+    stream = [...stream, ''];
+  }
+
+  return stream.join('/');
 }
 
 function trim(str = '') {
@@ -29,19 +26,25 @@ function trim(str = '') {
 }
 
 trim.line = function line(token = /\n/g) {
-  return (out) => {
-    return out.split(token).reduce((acc, ln) => {
+  return compose(
+    trim,
+    reduce((acc, ln) => {
       if (!ln) {
         return acc;
       }
 
-      return `${acc}\n${ln}`;
-    }, '');
-  };
+      return `${acc}\n${trim(ln)}`;
+    }, ''),
+    split(token)
+  );
 };
 
 trim.stream = function stream(token = /\n/g) {
-  return (out) => out.split(token).filter((m) => m);
+  return compose(
+    filter((m) => m),
+    map(trim),
+    split(token)
+  );
 };
 
 function cut(start, end) {
@@ -55,7 +58,7 @@ function cut(start, end) {
 function iosOnly(rootName, name) {
   return compose(
     filter((item) => !/iPad|Watch|TV/i.test(item[name])),
-    _getExtractInfo(rootName),
+    _extractInfo(rootName),
     json
   );
 }
