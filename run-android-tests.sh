@@ -13,6 +13,7 @@ if [ ! -f "$packagePath" ]; then
         echo "App package file doesn't exist"; 
 fi
 
+export PATH=/usr/local/opt/node@10/bin:$PATH
 mkdir -p app && cp "$packagePath" "app/app-debug.pkg"
 
 trap cleanup EXIT
