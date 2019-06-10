@@ -7,7 +7,8 @@ module.exports = {
   },
   globals: {
     $: true,
-    driver: true
+    driver: true,
+    browser: true
   },
   extends: 'eslint:recommended',
   parser: 'babel-eslint'
