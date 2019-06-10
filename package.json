@@ -20,7 +20,9 @@
     "pkg": "node ./scripts/bin/extract.js both",
     "pkg:ios": "node ./scripts/bin/extract.js ios",
     "pkg:android": "node ./scripts/bin/extract.js android",
-    "lint": "eslint config tests"
+    "lint": "eslint config tests",
+    "test": "ava ./scripts/test/**/* --verbose",
+    "web:emp": "wdio ./config/wdio.shared.web.conf.js"
   },
   "husky": {
     "hooks": {
@@ -44,7 +46,9 @@
     "@wdio/sauce-service": "^5.7.8",
     "@wdio/spec-reporter": "^5.7.9",
     "@wdio/sync": "^5.7.9",
-    "webdriverio": "^5.8.3"
+    "@wdio/selenium-standalone-service": "^5.2.2",
+    "webdriverio": "^5.8.3",
+    "selenium-standalone": "^6.15.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -54,6 +58,7 @@
     "@babel/traverse": "^7.4.3",
     "@babel/types": "^7.4.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.12.0",
     "chalk": "^2.4.2",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
