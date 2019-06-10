@@ -8,13 +8,13 @@ function extract(args) {
   let { platform, id, to, rename } = args;
 
   return () => {
-    const extractPkg = require('../../ps/extractPkg')();
+    const extract = require(`../../ps/${platform}/extract`)();
 
     if (to.indexOf('.') > -1) {
       to = dir(to);
     }
 
-    return dispatch(extractPkg(platform, id, to, rename));
+    return dispatch(extract(id, `${to}/${rename}`));
   };
 }
 
