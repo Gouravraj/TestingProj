@@ -1,7 +1,7 @@
 'use strict';
 
 const { compose, filter } = require('ramda');
-const _getExtractInfo = require('./internal/_getExtractInfo');
+const _extractInfo = require('./internal/_extractInfo');
 
 function json(out) {
   let tmp = out;
@@ -55,7 +55,7 @@ function cut(start, end) {
 function iosOnly(rootName, name) {
   return compose(
     filter((item) => !/iPad|Watch|TV/i.test(item[name])),
-    _getExtractInfo(rootName),
+    _extractInfo(rootName),
     json
   );
 }
