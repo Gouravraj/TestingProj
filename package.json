@@ -21,7 +21,6 @@
     "pkg:ios": "node ./scripts/bin/extract.js ios",
     "pkg:android": "node ./scripts/bin/extract.js android",
     "lint": "eslint config tests",
-    "test": "ava ./scripts/test/**/* --verbose",
     "web:emp": "wdio ./config/wdio.shared.web.conf.js"
   },
   "husky": {
