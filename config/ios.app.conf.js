@@ -14,7 +14,7 @@ config.capabilities = [
     useNewWDA: true,
     waitForQuiescence: false,
     automationName: 'XCUITest',
-    // noReset: true,
+    connectHardwareKeyboard: false,
     newCommandTimeout: 240
   }
 ];
