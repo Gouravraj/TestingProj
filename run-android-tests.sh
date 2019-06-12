@@ -14,11 +14,11 @@ if [ ! -f "$packagePath" ]; then
 fi
 
 export PATH=/usr/local/opt/node@10/bin:$PATH
-mkdir -p app && cp "$packagePath" "app/app-debug.pkg"
+mkdir -p app && cp "$packagePath" "app/app-debug.apk"
 
 trap cleanup EXIT
 
 echo "---------npm installation-----------"
 npm install
 
-npm run ci
+npm run ci:android
