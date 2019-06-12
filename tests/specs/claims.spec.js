@@ -1,5 +1,5 @@
 import login from '../actions/login.action';
-import claims from '../actions/claims.action';
+// import claims from '../actions/claims.action';
 import loginData from '../data/login.data';
 
 describe('Employee should be', () => {
@@ -12,7 +12,7 @@ describe('Employee should be', () => {
   });
 
   it('able to submit a claim for self', () => {
-    claims.makeClaim();
+    //claims.makeClaim();
     // - assert `claim id` is generated after claim submit
   });
 
