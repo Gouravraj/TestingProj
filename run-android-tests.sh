@@ -7,7 +7,7 @@ packagePath=$1
 function cleanup {
     echo "cleaning up..."
 	npm run cleanup
-    exit EXIT_CODE
+    exit $EXIT_CODE
 }
 
 if [ ! -f "$packagePath" ]; then
