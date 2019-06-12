@@ -7,6 +7,7 @@ packagePath=$1
 function cleanup {
     echo "cleaning up..."
 	npm run cleanup
+    exit EXIT_CODE
 }
 
 if [ ! -f "$packagePath" ]; then
@@ -22,3 +23,4 @@ echo "---------npm installation-----------"
 npm install
 
 npm run ci:android
+EXIT_CODE=$?
