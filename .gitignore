@@ -18,4 +18,4 @@ yarn-error.log
 *.idea
 apps/
 nohup.out
-package-lock.json
+yarn.lock

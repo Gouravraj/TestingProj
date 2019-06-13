@@ -3,7 +3,7 @@
 ## Install with dependencies
 
 ```bash
-yarn install # npm install
+npm install
 ```
 
 - appium-doctor
@@ -44,7 +44,7 @@ Android is also same.
 ## Run tests
 
 ```bash
-yarn run ios # yarn run android
+npm run ios # npm run android
 ```
 
 ## Scripts
