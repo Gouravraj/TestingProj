@@ -16,7 +16,7 @@ function exec(cmd, args, options, extra) {
   let res = '';
 
   if (!extra.force) {
-    _errorHandler(cmd, out);
+    _errorHandler(out);
   }
 
   if (options.stdio || extra.force) {
@@ -38,14 +38,12 @@ function exec(cmd, args, options, extra) {
 
 module.exports = curry(exec);
 
-function _errorHandler(cmd, out) {
+function _errorHandler(out) {
   const { status, stderr, error } = out;
   let err = error || (stderr ? stderr.toString() : null);
 
-  if (status === 1 && !err) {
-    // if NPM script, they will print error.
-    // So, we don't have to do it again.
-    process.exit(cmd === 'npm' ? 0 : 1);
+  if (status !== 0 && !err) {
+    process.exit(status);
   }
 
   if (err) {
@@ -58,6 +56,8 @@ function _errorHandler(cmd, out) {
       printErr,
       trim.line()
     )(err);
+
+    process.exit(status);
   }
 
   return err;
