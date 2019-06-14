@@ -30,7 +30,7 @@ function isLoginErrorMessageVisible() {
   try {
     nativeAlert.waitForAlertToVisible[platform]();
     const errorMessage = nativeAlert.text[platform]();
-    isVisible = errorMessage.includes('Error') ? true : false;
+    isVisible = errorMessage.includes('Unable to log in') ? true : false;
   } catch (error) {
     isVisible = false;
   }
