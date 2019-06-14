@@ -22,6 +22,11 @@ exports.config = {
 
   port: 4723,
 
+  suites: {
+    login: ['./tests/specs/login.spec.js'],
+    claims: ['./tests/specs/claims.spec.js']
+  },
+
   beforeSession: (/* config, capabilities, specs */) => {
     require('@babel/register');
   }
