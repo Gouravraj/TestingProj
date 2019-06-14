@@ -4,8 +4,14 @@ import nativeAlert from '../helpers/NativeAlert';
 
 function loginAs(empDetail) {
   LoginScreen.waitForIsShown(true);
+
+  LoginScreen.companyNameField().click();
   LoginScreen.companyNameField().setValue(empDetail.companyName);
+
+  LoginScreen.emailAddressField().click();
   LoginScreen.emailAddressField().setValue(empDetail.emailAddress);
+
+  LoginScreen.passwordField().click();
   LoginScreen.passwordField().setValue(empDetail.password);
 
   driver.hideKeyboard();
