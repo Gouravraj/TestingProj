@@ -1,10 +1,11 @@
 import Page from './page';
 
 const SELECTORS = {
-  USER_NAME: 'id=username',
-  PASSWORD: 'id=password',
-  LOGIN_BUTTON: "//button[@type='submit']",
-  FORGOT_PWD: "//span[contains(text(),'Forgot Password?')]"
+  USER_NAME: "//input[@data-testid='input-email']",
+  PASSWORD: "//input[@data-testid='input-password']",
+  LOGIN_BUTTON: "//button[@data-testid='btn-login']",
+  FORGOT_PWD: "//a[contains(text(),'Forgot Password?')]",
+  LOGIN_PAGE_LABEL: "//span[contains(text(),'Employee Portal')]"
 };
 
 class LoginPage extends Page {
@@ -27,6 +28,9 @@ class LoginPage extends Page {
 
   forgotPasswordLink() {
     return $(SELECTORS.FORGOT_PWD);
+  }
+  loginPageLabel() {
+    return $(SELECTORS.LOGIN_PAGE_LABEL);
   }
 }
 export default new LoginPage();
