@@ -21,7 +21,8 @@
     "pkg:ios": "node ./scripts/bin/extract.js ios",
     "pkg:android": "node ./scripts/bin/extract.js android",
     "lint": "eslint config tests",
-    "web:emp": "wdio ./config/web.emp.chrome.conf.js"
+    "web:emp": "wdio ./config/web.emp.chrome.conf.js",
+    "web.admin":"wdio ./config/web.admin.chrome.conf.js"
   },
   "husky": {
     "hooks": {

@@ -13,8 +13,21 @@ const invalidCredentials = {
 const forgotPwdEmail = {
   emailAddress: 'kumar@thoughtworks.com'
 };
+
+const hrCredentials = {
+  emailAddress: 'testuser1@gmail.com',
+  password: 'P@$$w0rd'
+};
+
+const csCredentials = {
+  emailAddress: 'testuser2@gmail.com',
+  password: 'P@$$w0rd'
+};
+
 module.exports = {
   validCredentials,
   invalidCredentials,
+  hrCredentials,
+  csCredentials,
   forgotPwdEmail
 };
