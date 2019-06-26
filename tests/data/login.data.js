@@ -10,7 +10,19 @@ const invalidCredentials = {
   password: 'P@ssw0rd'
 };
 
+const hrCredentials = {
+  emailAddress: 'testuser1@gmail.com',
+  password: 'P@$$w0rd'
+};
+
+const csCredentials = {
+  emailAddress: 'testuser2@gmail.com',
+  password: 'P@$$w0rd'
+};
+
 module.exports = {
   validCredentials,
-  invalidCredentials
+  invalidCredentials,
+  hrCredentials,
+  csCredentials
 };
