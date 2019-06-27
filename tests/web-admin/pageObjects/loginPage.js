@@ -1,9 +1,9 @@
 import Page from './page';
 
 const SELECTORS = {
-  EMAIL_ID: 'id=email',
-  PASSWORD: 'id=password',
-  LOGIN_BUTTON: 'id=login'
+  EMAIL_ID: ".//input[@id='email']",
+  PASSWORD: ".//input[@id='password']",
+  LOGIN_BUTTON: ".//button[@id='login']"
 };
 
 class LoginPage extends Page {
