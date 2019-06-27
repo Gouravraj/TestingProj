@@ -3,8 +3,9 @@ import Page from './page';
 const SELECTORS = {
   FORGOTPWD_SUCCESS_LABEL: "//span[contains(text(),'Check')]",
   FORGOTPWD_SUCCESS_EMAIL_MSG: "//span[contains(text(),'sent')]",
-  FORGOTPWD_SUCCESS_LOGIN_BUTTON: "//a[@data-testid='btn-backToLogin']",
-  FORGOTPWD_SUCCESS_RESENDLINK_BUTTON: '//button[@data-testid="btn-resendLink"]'
+  FORGOTPWD_SUCCESS_LOGIN_BUTTON: "//button[@data-testid='btn-back-to-login']",
+  FORGOTPWD_SUCCESS_RESENDLINK_BUTTON:
+    '//button[@data-testid="btn-resend-link"]'
 };
 
 class ForgotPasswordSuccessPage extends Page {
