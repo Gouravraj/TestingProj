@@ -3,7 +3,8 @@ import { DEFAULT_TIMEOUT } from '../../constants';
 
 const SELECTORS = {
   EMPLOYEE_CENSUS_UPLOAD_BUTTON: 'data-testid=file-upload-input',
-  DOWNLOAD_EMPLOYEE_CENSUS_TEMPLATE: 'id=download-employee-template',
+  DOWNLOAD_EMPLOYEE_CENSUS_TEMPLATE:
+    ".//button[@id='download-employee-template']",
   CENSUS_CAPTION: "//span[text()='Census']"
 };
 

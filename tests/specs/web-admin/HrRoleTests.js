@@ -7,15 +7,11 @@ describe('HR should,', () => {
     login.loginAs(loginData.hrCredentials);
     expect(login.isHrLoggedin()).toBeTruthy();
   });
+});
 
+describe('HR should be ,', () => {
   it('be able to download employee census template', () => {
     census.downloadEmployeeCensusTemplate();
-    // expect(census.isCensusDownloaded()).toBeTruthy();
+    expect(census.isEmpCensusDownloaded()).toBeTruthy();
   });
-
-  it('be able to upload employee census csv file', () => {});
-
-  it('be able to download Dependant census template', () => {});
-
-  it('be able to upload Dependant census csv file', () => {});
 });
