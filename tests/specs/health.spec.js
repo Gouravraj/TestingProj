@@ -1,14 +1,23 @@
 //import health from '../actions/health.action';
 //import healthData from '../data/health.data';
+import login from '../actions/login.action';
+import loginData from '../data/login.data';
 
 describe('Employee should,', () => {
+  beforeAll(() => {
+    login.loginAs(loginData.validCredentials);
+  });
+
+  afterAll(() => {
+    driver.reset();
+  });
+
   it('be able to submit health data', () => {
-    //health.submitHealthAs(healthData.submitHealthData);
-    //expect(health.isHealthResult()).toBeTruthy();
+    //(health.isHealthResult()).toBeTruthy();
   });
 
   it('be able to update health data', () => {
-    //health.submitHealthAs(healthData.submitHealthData);
+    //health.updateHealthAs()(healthData.updateHealthData);
     //expect(health.isHealthResult()).toBeTruthy();
   });
 
@@ -18,9 +27,5 @@ describe('Employee should,', () => {
 
   it('be able to view Face aging details', () => {
     //ToDo :
-  });
-
-  afterEach(() => {
-    driver.reset();
   });
 });
