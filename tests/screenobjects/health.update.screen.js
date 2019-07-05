@@ -1,6 +1,6 @@
 import AppScreen from './app.screen';
-import { getElementByText } from '../selectors';
 import Scroll from '../helpers/Scroll';
+import txt from '../helpers/text';
 
 const SELECTORS = {
   HEALTH_UPDATE_SCREEN: '~Height',
@@ -29,7 +29,7 @@ class HealthUpdateScreen extends AppScreen {
   }
 
   get AboutMe() {
-    return getElementByText(SELECTORS.ABOUT_ME);
+    return $(txt(SELECTORS.ABOUT_ME));
   }
 
   get next() {

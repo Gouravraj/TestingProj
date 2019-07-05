@@ -1,5 +1,5 @@
 import AppScreen from './app.screen';
-import { getElementByText } from '../selectors';
+import txt from '../helpers/text';
 
 const SELECTORS = {
   HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
@@ -21,19 +21,19 @@ class HealthScreen extends AppScreen {
   }
 
   bmiScore(score) {
-    return getElementByText(score);
+    return $(txt(score));
   }
 
   bmiText(bmiText) {
-    return getElementByText(bmiText);
+    return $(txt(bmiText));
   }
 
   diabetesScore(score) {
-    return getElementByText(score);
+    return $(txt(score));
   }
 
   diabetesText(diabetesText) {
-    return getElementByText(diabetesText);
+    return $(txt(diabetesText));
   }
 }
 
