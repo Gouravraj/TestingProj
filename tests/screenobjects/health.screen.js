@@ -1,10 +1,11 @@
 import AppScreen from './app.screen';
+import { getElementByText } from '../selectors';
 
 const SELECTORS = {
-  HEALTH_SCREEN: '~Health, tab, 1 of 4',
   HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
   BMI_BUTTON: '',
   UPDATE_HEALTH_DATA_BUTTON: '~Update Health Data',
+  //  UPDATE_HEALTH_DATA_BUTTON: '~BMI',
   HEIGHT_FIELD: '~Height',
   WEIGHT_FIELD: '~Weight',
   WAIST_FIELD: '~Waist'
@@ -12,31 +13,27 @@ const SELECTORS = {
 
 class HealthScreen extends AppScreen {
   constructor() {
-    super(SELECTORS.HEALTH_SCREEN);
+    super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
   }
 
-  healthScreen() {
-    return $(SELECTORS.HEALTH_SCREEN);
-  }
-
-  updateHealthDataButton() {
+  get updateHealthDataButton() {
     return $(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
   }
 
-  HeightField() {
-    return $(SELECTORS.HEIGHT_FIELD);
+  bmiScore(score) {
+    return getElementByText(score);
   }
 
-  WeightField() {
-    return $(SELECTORS.WEIGHT_FIELD);
+  bmiText(bmiText) {
+    return getElementByText(bmiText);
   }
 
-  WaistField() {
-    return $(SELECTORS.WAIST_FIELD);
+  diabetesScore(score) {
+    return getElementByText(score);
   }
 
-  waitForComponent() {
-    SELECTORS.UPDATE_HEALTH_DATA_BUTTON.waitForExist();
+  diabetesText(diabetesText) {
+    return getElementByText(diabetesText);
   }
 }
 
