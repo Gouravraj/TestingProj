@@ -11,16 +11,21 @@ exports.config = {
   waitforTimeout: 10000,
   reporters: ['spec'],
 
+  port: 4723,
   services: ['appium'],
   appium: {
+    command: './node_modules/.bin/appium',
+
+    /**
+     * @see {@link http://appium.io/docs/en/writing-running-appium/server-args/index.html}
+     */
     args: {
-      // https://github.com/webdriverio/webdriverio/tree/master/packages/wdio-appium-service
       debugLogSpacing: true,
-      platformName: 'iOS'
+
+      /** @see {@link http://appium.io/docs/en/advanced-concepts/memory-collection/} */
+      enableHeapdump: true
     }
   },
-
-  port: 4723,
 
   suites: {
     login: ['./tests/specs/login.spec.js'],

@@ -1,35 +1,66 @@
-/*
+import {
+  _getStarted,
+  _patientDetails,
+  _claimDetails,
+  _addDocuments,
+  _reviewClaim,
+  _termsConditions
+} from './internal/_claims';
+import { details, detailsRefer, receiptAmount } from '../data/claims.data';
+import { screen, navi } from '../helpers/api';
 
-# Navigation headers
+export function makeClaim() {
+  _getStarted();
 
-- Patient Details
-  /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView
+  navi('Patient Details', () => _patientDetails());
+  navi('Claim Details', () =>
+    _claimDetails(details.type, details.diagnosis, receiptAmount)
+  );
+  navi('Add Documents', () => _addDocuments());
+  navi('Review Claim', () => _reviewClaim());
+  navi('Terms & Conditions', () => _termsConditions());
 
-- Claim Detail
-  /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView
-
-# Buttons
-
-- Make a Claim
-  /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup
-
-- Add Claim Detail
-  /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[8]
-
- */
-
-import navigator from './navigator.action';
-import ClaimScreen from '../screenobjects/claims.screen';
-
-function makeClaim() {
-  // const platform = driver.capabilities.platformName;
-
-  navigator.isNavigationBarVisible();
-  navigator.navigateToClaimsScreen();
-  ClaimScreen.waitForIsShown(true);
-  ClaimScreen.makeClaimButton().click();
+  return screen('Claim submitted');
 }
 
-module.exports = {
-  makeClaim
-};
+export function makeClaimWithRef() {
+  _getStarted();
+
+  navi('Patient Details', () => _patientDetails());
+  navi('Claim Details', () =>
+    _claimDetails(detailsRefer.type, detailsRefer.diagnosis, receiptAmount)
+  );
+  navi('Add Documents', () => _addDocuments(true));
+  navi('Review Claim', () => _reviewClaim());
+  navi('Terms & Conditions', () => _termsConditions());
+
+  return screen('Claim submitted');
+}
+
+export function makeClaimWithDep() {
+  _getStarted();
+
+  navi('Patient Details', () => _patientDetails(true));
+  navi('Claim Details', () =>
+    _claimDetails(details.type, details.diagnosis, receiptAmount)
+  );
+  navi('Add Documents', () => _addDocuments());
+  navi('Review Claim', () => _reviewClaim());
+  navi('Terms & Conditions', () => _termsConditions());
+
+  return screen('Claim submitted');
+}
+
+export function makeClaimWithContact() {
+  _getStarted();
+
+  navi('Patient Details', () => _patientDetails(false, true));
+  navi('Claim Details', () =>
+    _claimDetails(details.type, details.diagnosis, receiptAmount)
+  );
+  navi('Add Documents', () => _addDocuments());
+  navi('Review Claim', () => _reviewClaim());
+  navi('Terms & Conditions', () => _termsConditions());
+
+  return screen('Claim submitted');
+}

@@ -51,6 +51,24 @@ npm run ios # npm run android
 
 Follow doc from [`here`](./scripts/README.md)
 
+## Heap Snapshot
+
+Once you have finished running scripts, you can save `.heapsnapshot` and you can debug by Chrome. First of, run this command after finished,
+
+```bash
+ps -a
+```
+
+Then, you can find process of Appium scripts, and put process id(number),
+
+```bash
+kill -USR2 <pid>
+```
+
+Once you tried, it automatically generating `.heapsnapshot` on the repo. Now, open Chrome browser and open `inspector`. Go to `memory` tab then press `Load` button.
+
+Now, you can see memory information, which is useful when we faced memory leaks issue.
+
 ## Troubleshooting
 
 - 'RoutingHTTPServer/RoutingConnection.h' file not found FBWebServer.m

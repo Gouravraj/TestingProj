@@ -9,10 +9,9 @@ config.capabilities = [
     deviceName: 'emulator-5554',
     platformName: 'Android',
     orientation: 'PORTRAIT',
-    maxInstances: 1,
     app: join(process.cwd(), 'app', 'app-debug.apk'),
-    // noReset: true,
-    newCommandTimeout: 240
+    newCommandTimeout: 240,
+    autoGrantPermissions: true
   }
 ];
 

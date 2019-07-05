@@ -13,9 +13,7 @@ config.capabilities = [
     app: join(process.cwd(), 'app', 'app-debug.app'),
     // useNewWDA: true,
     waitForQuiescence: false,
-    automationName: 'XCUITest',
-    connectHardwareKeyboard: false,
-    newCommandTimeout: 240
+    automationName: 'XCUITest'
   }
 ];
 

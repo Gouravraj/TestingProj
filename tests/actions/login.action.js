@@ -1,7 +1,7 @@
 import navigator from './navigator.action';
 import LoginScreen from '../screenobjects/login.screen';
 import nativeAlert from '../helpers/NativeAlert';
-import { getElementByText } from '../selectors';
+import txt from '../helpers/text';
 
 function loginAs(empDetail) {
   LoginScreen.waitForIsShown(true);
@@ -15,8 +15,7 @@ function loginAs(empDetail) {
   LoginScreen.passwordField().click();
   LoginScreen.passwordField().setValue(empDetail.password);
 
-  // driver.hideKeyboard();
-  getElementByText('Welcome to').click();
+  $(txt('Welcome to')).click();
 
   LoginScreen.loginButton().click();
 }

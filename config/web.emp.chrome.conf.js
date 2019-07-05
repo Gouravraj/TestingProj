@@ -9,6 +9,6 @@ config.capabilities = [
   }
 ];
 
-config.baseUrl = 'https://distribution-employee-frontend.cxapalawandev.com/';
+config.baseUrl = 'https://twclient3.cxapalawandev.com';
 
 exports.config = { ...config };

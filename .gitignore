@@ -10,12 +10,11 @@ yarn-error.log
 *.apk
 *.ipa
 *.app
-
-# images
-*.png
+*.zip
 
 #
 *.idea
-apps/
 nohup.out
 yarn.lock
+app-debug.zip
+*.heapsnapshot

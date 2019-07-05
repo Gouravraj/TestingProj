@@ -7,10 +7,6 @@ function loginAs(empDetail) {
   LoginPage.loginButton().click();
 }
 
-function getLoginPageLabel() {
-  return LoginPage.loginPageLabel().getText();
-}
 module.exports = {
-  loginAs,
-  getLoginPageLabel
+  loginAs
 };
