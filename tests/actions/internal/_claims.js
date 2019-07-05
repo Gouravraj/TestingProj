@@ -1,17 +1,10 @@
 import navigator from '../navigator.action';
 import cs from '../../screenobjects/claims.screen';
 import { image, dependent } from '../../data/claims.data';
-import {
-  select,
-  date,
-  kbd,
-  photo,
-  swipe,
-  scroll,
-  tap
-} from '../../helpers/api';
+import { select, date, kbd, photo, tap } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import getPlatform from '../../helpers/platform';
+import scroll from '../../helpers/Scroll';
 
 export function _getStarted() {
   navigator.isNavigationBarVisible();
@@ -95,36 +88,18 @@ export function _addDocuments(isRefer = false) {
       photo: image[platform]
     });
 
-    if (platform === 'ios') {
-      swipe({ direction: 'up' }, () => cs.buttonReviewClaim.click());
-    } else if (platform === 'android') {
-      scroll({ text: 'Review Claim' }, () => cs.buttonReviewClaim.click());
-    }
-  } else {
-    cs.buttonReviewClaim.click();
+    scroll.checkIfDisplayedWithScrollDown(cs.buttonReviewClaim, 100, 0);
   }
+
+  cs.buttonReviewClaim.click();
 }
 
 export function _reviewClaim() {
-  const platform = getPlatform();
-
   // NOTE: hack; to prevent previous event (click)
   tap(1, 1);
 
-  if (platform === 'ios') {
-    scroll(
-      {
-        name: 'Submit Claim',
-        direction: 'down',
-        toVisible: true
-      },
-      () => tap(188, 727)
-    );
-  } else if (platform === 'android') {
-    scroll({ text: 'Submit Claim' }, () => {
-      cs.buttonSubmitClaim.click();
-    });
-  }
+  scroll.checkIfDisplayedWithScrollDown(cs.buttonSubmitClaim, 100, 0);
+  cs.buttonSubmitClaim.click();
 }
 
 export function _termsConditions() {
