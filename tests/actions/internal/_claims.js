@@ -1,10 +1,16 @@
 import navigator from '../navigator.action';
 import cs from '../../screenobjects/claims.screen';
 import { image, dependent } from '../../data/claims.data';
-import { select, date, kbd, photo, tap } from '../../helpers/api';
+import {
+  select,
+  date,
+  kbd,
+  photo,
+  tap,
+  checkIfDisplayedWithScrollDown
+} from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import getPlatform from '../../helpers/platform';
-import scroll from '../../helpers/Scroll';
 
 export function _getStarted() {
   navigator.isNavigationBarVisible();
@@ -13,7 +19,7 @@ export function _getStarted() {
   cs.buttonMakeClaim.click();
 }
 
-export function _patientDetails(isPN = false, isCT = false) {
+export function _patientDetails(isPN = false, isCN = false) {
   if (isPN) {
     const selectPName = select(
       cs.selectPatientName,
@@ -23,9 +29,12 @@ export function _patientDetails(isPN = false, isCT = false) {
     selectPName(txtTo(dependent));
   }
 
-  if (isCT) {
+  if (isCN) {
     cs.inputContactNumber.click();
+
+    // TODO: implement for ios
     // $('~Contact number').clearValue();
+
     cs.inputContactNumber.setValue(87654321);
     kbd('hide');
   }
@@ -88,7 +97,7 @@ export function _addDocuments(isRefer = false) {
       photo: image[platform]
     });
 
-    scroll.checkIfDisplayedWithScrollDown(cs.buttonReviewClaim, 100, 0);
+    checkIfDisplayedWithScrollDown(cs.buttonReviewClaim, 100, 0);
   }
 
   cs.buttonReviewClaim.click();
@@ -98,7 +107,7 @@ export function _reviewClaim() {
   // NOTE: hack; to prevent previous event (click)
   tap(1, 1);
 
-  scroll.checkIfDisplayedWithScrollDown(cs.buttonSubmitClaim, 100, 0);
+  checkIfDisplayedWithScrollDown(cs.buttonSubmitClaim, 100, 0);
   cs.buttonSubmitClaim.click();
 }
 

@@ -1,5 +1,5 @@
 import AppScreen from './app.screen';
-import Scroll from '../helpers/Scroll';
+import { checkIfDisplayedWithScrollDown } from '../helpers/api';
 import txt from '../helpers/text';
 
 const SELECTORS = {
@@ -37,7 +37,7 @@ class HealthUpdateScreen extends AppScreen {
   }
 
   scrollToNext() {
-    Scroll.checkIfDisplayedWithScrollDown($(SELECTORS.NEXT), 100, 0);
+    checkIfDisplayedWithScrollDown($(SELECTORS.NEXT), 100, 0);
   }
 }
 
