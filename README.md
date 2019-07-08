@@ -74,8 +74,6 @@ Because you cannot install directly to `/usr/bin` in macOS, we should install in
 
 You can download [here](https://github.com/google/bundletool/releases). Once you've download finished, you can rename as `bundletool.jar` and put into `$ANDRIOD_SDK/bundle-tools/bundletool.jar`. Then, make sure the file is applied in `$PATH`.
 
-Android is also same.
-
 - 'RoutingHTTPServer/RoutingConnection.h' file not found FBWebServer.m
 
 If you see this error message when testing iOS, WebDriver dependencies is not install properly. You can follow this,
