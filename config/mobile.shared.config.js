@@ -2,13 +2,13 @@ exports.config = {
   runner: 'local',
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 120000
+    defaultTimeoutInterval: 150000
   },
   sync: true,
   logLevel: 'debug',
   deprecationWarnings: true,
   bail: 1,
-  waitforTimeout: 10000,
+  waitforTimeout: 30000,
   reporters: ['spec'],
 
   port: 4723,
