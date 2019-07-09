@@ -1,6 +1,6 @@
 'use strict';
 
-const conf = require('../../config');
+const conf = require('../../../config/scripts.config');
 const dispatch = require('../../lib/dispatch');
 const { dir } = require('../../lib/parser');
 

@@ -6,7 +6,13 @@ import {
   _reviewClaim,
   _termsConditions
 } from './internal/_claims';
-import { details, detailsRefer, receiptAmount } from '../data/claims.data';
+import {
+  details,
+  detailsRefer,
+  receiptAmount,
+  image,
+  dependent
+} from '../../data/mobile.claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
 
@@ -15,9 +21,9 @@ export function makeClaim() {
 
   _getStarted();
 
-  navi('Patient Details', _patientDetails);
+  navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
-  navi('Add Documents', _addDocuments);
+  navi('Add Documents', () => _addDocuments(image));
   navi('Review Claim', _reviewClaim);
   navi('Terms & Conditions', _termsConditions);
 
@@ -29,9 +35,9 @@ export function makeClaimWithRef() {
 
   _getStarted();
 
-  navi('Patient Details', _patientDetails);
+  navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
-  navi('Add Documents', () => _addDocuments(true));
+  navi('Add Documents', () => _addDocuments(image, true));
   navi('Review Claim', _reviewClaim);
   navi('Terms & Conditions', _termsConditions);
 
@@ -43,9 +49,9 @@ export function makeClaimWithDep() {
 
   _getStarted();
 
-  navi('Patient Details', () => _patientDetails(true));
+  navi('Patient Details', () => _patientDetails(dependent, true));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
-  navi('Add Documents', _addDocuments);
+  navi('Add Documents', () => _addDocuments(image));
   navi('Review Claim', _reviewClaim);
   navi('Terms & Conditions', _termsConditions);
 
@@ -57,9 +63,9 @@ export function makeClaimWithContact() {
 
   _getStarted();
 
-  navi('Patient Details', () => _patientDetails(false, true));
+  navi('Patient Details', () => _patientDetails(dependent, false, true));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
-  navi('Add Documents', _addDocuments);
+  navi('Add Documents', () => _addDocuments(image));
   navi('Review Claim', _reviewClaim);
   navi('Terms & Conditions', _termsConditions);
 

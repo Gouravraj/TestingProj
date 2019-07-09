@@ -1,5 +1,5 @@
 import { swipeUp } from './swipe';
-import getPlatform from '../platform';
+import getPlatform from './platform';
 
 function noop() {}
 
@@ -16,7 +16,9 @@ export default function scroll(options, cb) {
     driver.execute('mobile:scroll', options);
   } else if (platform === 'android') {
     $(
-      `android=new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains("**/${options.text}/**").instance(0))`
+      `android=new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains("**/${
+        options.text
+      }/**").instance(0))`
     );
   }
 

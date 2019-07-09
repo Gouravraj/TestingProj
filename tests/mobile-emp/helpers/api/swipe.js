@@ -1,5 +1,5 @@
 import { _swipe, _swipeOnPercentage, _calculateXY } from './internal/_swipe';
-import getPlatform from '../platform';
+import getPlatform from './platform';
 
 /**
  * The values in the below object are percentages of the screen

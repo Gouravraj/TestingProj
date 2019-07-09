@@ -1,6 +1,6 @@
 import login from '../actions/login.action';
 import * as claims from '../actions/claims.action';
-import loginData from '../data/login.data';
+import loginData from '../../data/mobile.login.data';
 
 describe('Employee should be', () => {
   beforeEach(() => {

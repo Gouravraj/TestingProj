@@ -1,5 +1,5 @@
 import txt from '../text';
-import getPlatform from '../platform';
+import getPlatform from './platform';
 
 /**
  * Input to open native date

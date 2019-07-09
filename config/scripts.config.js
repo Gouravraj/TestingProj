@@ -1,8 +1,8 @@
 'use strict';
 
-const { homeDir } = require('./lib/path');
-const ios = require('../config/ios.app.conf');
-const android = require('../config/android.app.conf');
+const { homeDir } = require('../scripts/lib/path');
+const ios = require('./mobile.ios.config');
+const android = require('./mobile.android.config');
 
 module.exports = {
   ci: {

@@ -1,5 +1,5 @@
 import tap from './tap';
-import getPlatform from '../platform';
+import getPlatform from './platform';
 
 /**
  * Keyboard actions (currently onlt hide action)

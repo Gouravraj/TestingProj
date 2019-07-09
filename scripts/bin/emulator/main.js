@@ -10,7 +10,7 @@ function main(command, args) {
   const { name, device, api } = args;
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {
-    const { pkg } = require('../../config');
+    const { pkg } = require('../../../config/scripts.config');
     const uninstall = require('../../ps/android/uninstall')();
 
     dispatch(uninstall(pkg.android.id));

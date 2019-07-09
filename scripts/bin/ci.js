@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 const main = require('./ci/main');
-const conf = require('../config');
+const conf = require('../../config/scripts.config');
 
 const options = {
   platform: {

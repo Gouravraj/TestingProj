@@ -1,16 +1,15 @@
 import navigator from '../navigator.action';
 import cs from '../../screenobjects/claims.screen';
-import { image, dependent } from '../../data/claims.data';
 import {
   select,
   date,
   kbd,
   photo,
   tap,
+  platform as getPlatform,
   checkIfDisplayedWithScrollDown
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
-import getPlatform from '../../helpers/platform';
 
 export function _getStarted() {
   navigator.isNavigationBarVisible();
@@ -19,7 +18,7 @@ export function _getStarted() {
   cs.buttonMakeClaim.click();
 }
 
-export function _patientDetails(isPN = false, isCN = false) {
+export function _patientDetails(dependent, isPN = false, isCN = false) {
   if (isPN) {
     const selectPName = select(
       cs.selectPatientName,
@@ -63,7 +62,7 @@ export function _claimDetails(type, diagnosis, amount) {
   cs.buttonButtonAddDocuments.click();
 }
 
-export function _addDocuments(isRefer = false) {
+export function _addDocuments(image, isRefer = false) {
   const platform = getPlatform();
 
   if (platform === 'ios') {
