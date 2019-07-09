@@ -1,7 +1,7 @@
-//import health from '../actions/health.action';
-//import healthData from '../data/health.data';
+// import health from '../actions/health.action';
+// import healthData from '../../data/mobile.health.data';
 import login from '../actions/login.action';
-import loginData from '../data/login.data';
+import loginData from '../../data/mobile.login.data';
 
 describe('Employee should,', () => {
   beforeAll(() => {
@@ -13,12 +13,12 @@ describe('Employee should,', () => {
   });
 
   it('be able to submit health data', () => {
-    //(health.isHealthResult()).toBeTruthy();
+    // expect(health.isHealthResult()).toBeTruthy();
   });
 
   it('be able to update health data', () => {
-    //health.updateHealthAs(healthData.updateHealthData);
-    //expect(health.isHealthResult()).toBeTruthy();
+    // health.updateHealthAs(healthData.updateHealthData);
+    // expect(health.isHealthResult()).toBeTruthy();
   });
 
   it('be able to submit health data with Image', () => {

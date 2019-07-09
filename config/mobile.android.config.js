@@ -1,7 +1,7 @@
 const { join } = require('path');
 const { config } = require('./mobile.shared.config');
 
-config.specs = ['./tests/specs/**/*.spec.js'];
+config.specs = ['./tests/mobile-emp/specs/**/*.spec.js'];
 
 config.capabilities = [
   {
