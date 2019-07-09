@@ -6,10 +6,10 @@ import {
   kbd,
   photo,
   tap,
+  platform as getPlatform,
   checkIfDisplayedWithScrollDown
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
-import getPlatform from '../../helpers/platform';
 
 export function _getStarted() {
   navigator.isNavigationBarVisible();

@@ -1,5 +1,5 @@
 import { compose } from 'ramda';
-import getPlatform from './platform';
+import { platform as getPlatform } from './api';
 
 const PREFIX = {
   ios: '-ios predicate string:',

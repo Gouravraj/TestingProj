@@ -1,6 +1,6 @@
 import wait from './wait';
 import txt from '../text';
-import getPlatform from '../platform';
+import getPlatform from './platform';
 
 /**
  * Input to open image native gallery

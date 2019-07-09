@@ -16,3 +16,4 @@ export {
   default as scroll,
   checkIfDisplayedWithScrollDown
 } from './api/scroll';
+export { default as platform } from './api/platform';
