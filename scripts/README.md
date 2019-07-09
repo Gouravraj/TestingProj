@@ -39,7 +39,7 @@ npm run pkg:android
 
 ## Configure
 
-`./scripts/config.js` for CI, extract packages
+`../config/scripts.config.js` for CI, extract packages
 
 ```javascript
 module.exports = {
@@ -146,7 +146,7 @@ To extract, simulator already booted and should be installed package on virtual 
 extract-pkg ios -id=com.cxagroup.mobile.EmployeePortal --to=./app --rename=app-debug.app
 ```
 
-Extract package by those NPM commands. (arguments already set from `./scripts/config.js#pkg`)
+Extract package by those NPM commands. (arguments already set from `../scripts.config.js#pkg`)
 
 ```bash
 npm run pkg # extract both platforms

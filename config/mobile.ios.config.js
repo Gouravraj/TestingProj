@@ -1,5 +1,5 @@
 const { join } = require('path');
-const { config } = require('./wdio.shared.conf');
+const { config } = require('./mobile.shared.config');
 
 config.specs = ['./tests/specs/**/*.spec.js'];
 
