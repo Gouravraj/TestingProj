@@ -1,5 +1,5 @@
 import login from '../actions/login.action';
-// import * as claims from '../actions/claims.action';
+import * as claims from '../actions/claims.action';
 import loginData from '../data/login.data';
 
 describe('Employee should be', () => {
@@ -8,7 +8,7 @@ describe('Employee should be', () => {
   });
 
   it('able to submit a claim for self', () => {
-    // expect(claims.makeClaim()).toBeTruthy();
+    expect(claims.makeClaim()).toBeTruthy();
   });
 
   it('able to submit a claim for self with referral document', () => {
