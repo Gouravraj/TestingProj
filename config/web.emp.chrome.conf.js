@@ -1,4 +1,4 @@
-const { config } = require('./wdio.shared.web.conf.js');
+const { config } = require('./web.shared.web.conf.js');
 
 config.specs = ['./tests/specs/web-employee/*.js'];
 
