@@ -18,7 +18,19 @@ exports.config = {
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
-  services: ['selenium-standalone'],
+  // services: ['selenium-standalone'],
+
+  sync: true,
+  services: ['docker'],
+  dockerOptions: {
+    image: 'selenium/standalone-chrome-debug',
+    healthCheck: 'http://localhost:4444',
+    options: {
+      p: ['4444:4444', '5900:5900'],
+      shmSize: '2g'
+    }
+  },
+
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: 60000,
