@@ -11,10 +11,10 @@ describe('Employee should be', () => {
     expect(claims.makeClaim()).toBeTruthy();
   });
 
-  // it('able to submit a claim for self with referral document', () => {
-  //   expect(claims.makeClaimWithRef()).toBeTruthy();
-  // });
-  //
+  it('able to submit a claim for self with referral document', () => {
+    expect(claims.makeClaimWithRef()).toBeTruthy();
+  });
+
   // it('able to submit a claim for a dependent', () => {
   //   expect(claims.makeClaimWithDep()).toBeTruthy();
   // });

@@ -16,9 +16,7 @@ export default function scroll(options, cb) {
     driver.execute('mobile:scroll', options);
   } else if (platform === 'android') {
     $(
-      `android=new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains("**/${
-        options.text
-      }/**").instance(0))`
+      `android=new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains("**/${options.text}/**").instance(0))`
     );
   }
 
@@ -34,7 +32,7 @@ export function checkIfDisplayedWithScrollDown(
     (!element.isExisting() || !element.isDisplayed()) &&
     amount <= maxScrolls
   ) {
-    swipeUp(0.75);
+    swipeUp(0.65);
     checkIfDisplayedWithScrollDown(element, maxScrolls, amount + 1);
   } else if (amount > maxScrolls) {
     throw new Error(
