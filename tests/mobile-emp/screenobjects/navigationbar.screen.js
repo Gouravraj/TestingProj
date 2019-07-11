@@ -1,7 +1,7 @@
 import AppScreen from './app.screen';
 
 const SELECTORS = {
-  HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
+  HEALTH_NAVIGATOR: '~Lifestyle, tab, 1 of 4',
   CLAIMS_NAVIGATOR: '~Claims, tab, 2 of 4',
   SHOP_NAVIGATOR: '',
   PROFILE_NAVIGATOR: ''

@@ -2,7 +2,7 @@ import AppScreen from './app.screen';
 import txt from '../helpers/text';
 
 const SELECTORS = {
-  HEALTH_NAVIGATOR: '~Health, tab, 1 of 4',
+  HEALTH_NAVIGATOR: '~Lifestyle, tab, 1 of 4',
   BMI_BUTTON: '',
   UPDATE_HEALTH_DATA_BUTTON: '~Update Health Data',
   //  UPDATE_HEALTH_DATA_BUTTON: '~BMI',
