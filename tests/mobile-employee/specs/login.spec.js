@@ -1,5 +1,5 @@
 import login from '../actions/login.action';
-import loginData from '../../data/mobile.login.data';
+import loginData from '../../data/login.data';
 
 describe('Employee should,', () => {
   it('be able to login to app with valid credentials', () => {

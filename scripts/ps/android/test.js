@@ -3,5 +3,11 @@
 const exec = require('../../lib/exec');
 
 module.exports = function test(options = {}) {
-  return () => exec('npm', ['run', 'android'], options);
+  return (suite) => {
+    const args = suite
+      ? ['run', 'android', '--', '--suite', suite]
+      : ['run', 'android'];
+
+    return exec('npm', args, options);
+  };
 };

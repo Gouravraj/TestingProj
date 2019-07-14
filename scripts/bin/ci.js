@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 const main = require('./ci/main');
-const conf = require('../../config/scripts.config');
+const conf = require('../config');
 
 const options = {
   platform: {
@@ -19,10 +19,14 @@ const argv = yargs
   .command('run', 'only for CI pipeline', (yargs) => {
     yargs.options({
       ...options,
-      tests: {
+      test: {
         alias: 't',
         describe: 'run tests',
         default: true
+      },
+      suite: {
+        alias: 's',
+        describe: 'webdriver.io suite'
       }
     })
   })

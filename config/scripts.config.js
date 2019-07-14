@@ -1,55 +1,72 @@
 'use strict';
 
-const { homeDir } = require('../scripts/lib/path');
-const ios = require('./mobile.ios.config');
-const android = require('./mobile.android.config');
+const {
+  config: { capabilities: iosCaps }
+} = require('./mobile.ios.config');
+const {
+  config: { capabilities: androidCaps }
+} = require('./mobile.android.config');
 
-module.exports = {
-  ci: {
-    ios: {
-      defaults: {
-        devicetype: 'iPhone X',
-        runtime: '12.2'
-      },
-
-      devices: {
-        auto: true,
-
-        list: ['iPhone X']
+module.exports = function configure(homeDir) {
+  // NOTE: it should be same length as webdriver `capabilities` setting
+  const pre = {
+    ios: [
+      {
+        devicetype: 'iPhone X'
       }
-    },
+    ],
 
-    android: {
-      defaults: {
+    android: [
+      {
         api: '28',
-        alu: '64', // ['64', '32'],
         abi: 'google_apis/x86_64',
         device: 'Nexus 6P'
-      },
-
-      sdk: {
-        repos: `${homeDir}/.android/repositories.cfg`
-      },
-
-      devices: {
-        auto: true,
-
-        list: ['android_9']
       }
-    }
-  },
+    ]
+  };
 
-  pkg: {
-    ios: {
-      id: 'com.cxagroup.mobile.EmployeePortal',
-      to: ios.config.capabilities[0].app,
-      rename: 'app-debug.app'
+  return {
+    ci: {
+      ios: {
+        auto: true,
+        devices: iosCaps.map((cap, idx) => {
+          return {
+            ...pre.ios[idx],
+            // if you want to change iOS version, the version should be installed from the Xcode
+            // please ensure that before try new version
+            runtime: cap.platformVersion,
+            name: cap.deviceName
+          };
+        })
+      },
+
+      android: {
+        sdk: {
+          repos: `${homeDir}/.android/repositories.cfg`
+        },
+
+        auto: true,
+        devices: androidCaps.map((cap, idx) => {
+          return {
+            ...pre.android[idx],
+            name: cap.deviceName
+          };
+        })
+      }
     },
 
-    android: {
-      id: 'com.employeefrontend',
-      to: android.config.capabilities[0].app,
-      rename: 'app-debug.apk'
+    pkg: {
+      ios: {
+        id: 'com.cxagroup.mobile.EmployeePortal',
+        to: iosCaps[0].app,
+        rename: 'app-debug.app'
+      },
+
+      android: {
+        id: 'com.employeefrontend',
+        to: androidCaps[0].app,
+        rename: 'app-debug.apk'
+      }
     }
-  }
+  };
 };

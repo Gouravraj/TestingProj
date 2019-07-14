@@ -1,6 +1,6 @@
 import wait from './wait';
-import txt from '../text';
 import getPlatform from './platform';
+import txt, { $txt } from '../text';
 
 /**
  * Input to open image native gallery
@@ -29,15 +29,15 @@ export default function photo(action, options) {
       $('~Moments').click();
     } else if (platform === 'android') {
       wait(txt('Choose from Library'));
-      $(txt('Choose from Library')).click();
+      $txt('Choose from Library').click();
 
       if (options.permit) {
-        $(txt('ALLOW', 'android.widget.Button')).click();
-        $(txt('ALLOW', 'android.widget.Button')).click();
+        $txt('ALLOW', 'android.widget.Button').click();
+        $txt('ALLOW', 'android.widget.Button').click();
       }
 
       wait(txt('Pictures'));
-      $(txt('Pictures')).click();
+      $txt('Pictures').click();
     }
 
     $(options.photo).click();
@@ -46,11 +46,11 @@ export default function photo(action, options) {
       // not support
     } else if (platform === 'android') {
       wait(txt('Take a Photo'));
-      $(txt('Take a Photo')).click();
+      $txt('Take a Photo').click();
 
       if (options.permit) {
-        $(txt('ALLOW', 'android.widget.Button')).click();
-        $(txt('ALLOW', 'android.widget.Button')).click();
+        $txt('ALLOW', 'android.widget.Button').click();
+        $txt('ALLOW', 'android.widget.Button').click();
       }
 
       $('~Shutter').click();

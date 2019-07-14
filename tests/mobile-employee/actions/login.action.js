@@ -1,9 +1,9 @@
-import navigator from './navigator.action';
+import { isNavigationBarVisible } from './navigator.action';
 import LoginScreen from '../screenobjects/login.screen';
 import nativeAlert from '../helpers/NativeAlert';
 import txt from '../helpers/text';
 
-function loginAs(empDetail) {
+export function loginAs(empDetail) {
   LoginScreen.waitForIsShown(true);
 
   LoginScreen.companyNameField().click();
@@ -20,10 +20,11 @@ function loginAs(empDetail) {
   LoginScreen.loginButton().click();
 }
 
-function isLoggedin() {
-  return navigator.isNavigationBarVisible();
+export function isLoggedin() {
+  return isNavigationBarVisible();
 }
-function isLoginErrorMessageVisible() {
+
+export function isLoginErrorMessageVisible() {
   let isVisible;
   const platform = driver.capabilities.platformName;
   try {
@@ -35,8 +36,3 @@ function isLoginErrorMessageVisible() {
   }
   return isVisible;
 }
-module.exports = {
-  loginAs,
-  isLoggedin,
-  isLoginErrorMessageVisible
-};

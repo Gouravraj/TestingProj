@@ -1,16 +1,16 @@
-import txt from '../text';
 import getPlatform from './platform';
+import txt from '../text';
 
 /**
  * Input to open native date
  * @param  {string}    action
- * @param  {Element}   el
+ * @param  {string}    el
  * @return {undefined}
  */
-export default function date(action, el) {
+export default function date(action, dateSelector) {
   const platform = getPlatform();
 
-  el.click();
+  $(dateSelector).click();
 
   if (action === 'toggle') {
     const selector =

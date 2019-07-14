@@ -1,5 +1,4 @@
 import {
-  _getStarted,
   _patientDetails,
   _claimDetails,
   _addDocuments,
@@ -12,14 +11,12 @@ import {
   receiptAmount,
   image,
   dependent
-} from '../../data/mobile.claims.data';
+} from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
 
 export function makeClaim() {
   const { type, diagnosis } = details;
-
-  _getStarted();
 
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
@@ -33,8 +30,6 @@ export function makeClaim() {
 export function makeClaimWithRef() {
   const { type, diagnosis } = detailsRefer;
 
-  _getStarted();
-
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
   navi('Add Documents', () => _addDocuments(image, true));
@@ -47,8 +42,6 @@ export function makeClaimWithRef() {
 export function makeClaimWithDep() {
   const { type, diagnosis } = details;
 
-  _getStarted();
-
   navi('Patient Details', () => _patientDetails(dependent, true));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
   navi('Add Documents', () => _addDocuments(image));
@@ -60,8 +53,6 @@ export function makeClaimWithDep() {
 
 export function makeClaimWithContact() {
   const { type, diagnosis } = details;
-
-  _getStarted();
 
   navi('Patient Details', () => _patientDetails(dependent, false, true));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));

@@ -11,7 +11,7 @@ const SELECTORS = {
   }
 };
 
-const waitForAlertToVisible = {
+export const waitForAlertToVisible = {
   Android: () => {
     const selector = SELECTORS.ANDROID.ALERT_TITLE;
     $(selector).waitForExist(11000, false);
@@ -22,7 +22,7 @@ const waitForAlertToVisible = {
   }
 };
 
-const text = {
+export const text = {
   Android: () => {
     return `${$(SELECTORS.ANDROID.ALERT_TITLE).getText()}\n${$(
       SELECTORS.ANDROID.ALERT_MESSAGE
@@ -31,9 +31,4 @@ const text = {
   iOS: () => {
     return driver.getAlertText();
   }
-};
-
-module.exports = {
-  waitForAlertToVisible,
-  text
 };

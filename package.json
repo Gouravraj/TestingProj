@@ -1,5 +1,5 @@
 {
-  "name": "distribution-mobile-automation",
+  "name": "distribution-ui-automation",
   "version": "0.0.1",
   "engines": {
     "node": ">=8.0.0"
@@ -20,7 +20,8 @@
     "pkg:ios": "node ./scripts/bin/extract.js ios",
     "pkg:android": "node ./scripts/bin/extract.js android",
     "lint": "eslint config tests",
-    "web:emp": "wdio ./config/web.emp.chrome.conf.js"
+    "web:emp": "wdio ./config/web.emp.chrome.conf.js",
+    "web:admin": "wdio ./config/web.admin.chrome.conf.js"
   },
   "husky": {
     "hooks": {
@@ -48,6 +49,7 @@
     "appium": "^1.13.0",
     "heapdump": "^0.3.14",
     "selenium-standalone": "^6.16.0",
+    "wdio-docker-service": "^2.1.1",
     "webdriverio": "^5.10.9"
   },
   "devDependencies": {

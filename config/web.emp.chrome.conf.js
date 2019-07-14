@@ -1,6 +1,6 @@
-const { config } = require('./web.shared.web.conf.js');
+const { config } = require('./web.shared.conf.js');
 
-config.specs = ['./tests/specs/web-employee/*.js'];
+config.specs = ['./tests/web-employee/specs/*.js'];
 
 config.capabilities = [
   {
@@ -9,6 +9,6 @@ config.capabilities = [
   }
 ];
 
-config.baseUrl = 'https://twclient3.cxapalawandev.com';
+config.baseUrl = 'https://distribution-employee-frontend.cxapalawandev.com/';
 
 exports.config = { ...config };

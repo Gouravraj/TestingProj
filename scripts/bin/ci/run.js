@@ -5,24 +5,9 @@ const dispatch = require('../../lib/dispatch');
 const print = require('../../lib/logger');
 
 function run(argv, platform, cfg) {
-  const { tests } = argv;
-  const { auto = false, list = [] } = cfg.devices;
+  const { test, suite } = argv;
+  const { auto = false, devices = [] } = cfg;
   const dLog = print.custom('cyan');
-  let device = {};
-
-  if (platform === 'ios') {
-    device = {
-      devicetype: cfg.defaults.devicetype,
-      runtime: cfg.defaults.runtime
-    };
-  } else if (platform === 'android') {
-    device = {
-      device: cfg.defaults.device,
-      api: cfg.defaults.api,
-      alu: cfg.defaults.alu,
-      abi: cfg.defaults.abi
-    };
-  }
 
   if (platform === 'android') {
     // TODO: multiple ports
@@ -43,37 +28,24 @@ function run(argv, platform, cfg) {
     });
   }
 
-  for (let i = 0, len = list.length; i < len; i++) {
-    const item = list[i];
+  for (let i = 0, len = devices.length; i < len; i++) {
+    const { name, devicetype, runtime, api, abi, device } = devices[i];
     let isCreated = false;
 
-    if (typeof item === 'string') {
-      device = {
-        ...device,
-        name: item
-      };
-    } else {
-      device = {
-        ...device,
-        ...item
-      };
-    }
-
-    dLog('\n>> Device << ', `[${device.name}]\n`);
+    dLog('\n>> Device << ', `[${name}]\n`);
 
     if (platform === 'android') {
       step('Installing system-image (sdkmanager)', (done) => {
         const installSdk = require('../../ps/android/installSdk')();
-        const alu = device.alu === '64' ? '_64' : '';
 
-        dispatch.ninja(installSdk(device.api, alu));
+        dispatch.ninja(installSdk(api, '_64'));
 
         done();
       });
     }
 
     const isDeviceExist = require('../../lib/check').isDeviceExist(platform);
-    const isExist = isDeviceExist(device.name);
+    const isExist = isDeviceExist(name);
 
     if (isExist) {
       isCreated = true;
@@ -91,12 +63,12 @@ function run(argv, platform, cfg) {
             const runtimePrefix = 'com.apple.CoreSimulator.SimRuntime';
 
             ps = create(
-              device.name,
-              `${typePrefix}.${device.devicetype.replace(' ', '-')}`,
-              `${runtimePrefix}.iOS-${device.runtime.replace('.', '-')}`
+              name,
+              `${typePrefix}.${devicetype.replace(' ', '-')}`,
+              `${runtimePrefix}.iOS-${runtime.replace('.', '-')}`
             );
           } else if (platform === 'android') {
-            ps = create(device.name, device.abi, device.api, device.device);
+            ps = create(name, abi, api, device);
           }
 
           dispatch.ninja(ps);
@@ -114,7 +86,7 @@ function run(argv, platform, cfg) {
           stdio: 'ignore'
         });
 
-        dispatch(open(device.name));
+        dispatch(open(name));
 
         done();
       });
@@ -122,26 +94,26 @@ function run(argv, platform, cfg) {
       step('Waiting until virtual device ready', (done) => {
         const ready = require(`../../ps/${platform}/ready`)();
 
-        dispatch.force(ready(device.name));
+        dispatch.force(ready(name));
 
         done();
       });
 
-      if (tests) {
+      if (test) {
         // TODO: apply suite
         step('Launching UI test scripts', (done) => {
           const test = require(`../../ps/${platform}/test`)({
             stdio: 'inherit'
           });
 
-          dispatch(test());
+          dispatch(test(suite));
 
           done();
         });
       }
     }
 
-    dLog('\n>> Finish << ', `[${device.name}]\n`);
+    dLog('\n>> Finish << ', `[${name}]\n`);
   }
 }
 

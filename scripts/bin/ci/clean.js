@@ -4,7 +4,6 @@ const step = require('../../lib/step').withConf('STEP:');
 const dispatch = require('../../lib/dispatch');
 const print = require('../../lib/logger');
 const sleep = require('../../lib/sleep');
-
 const dLog = print.custom('cyan');
 
 async function clean(platform, cfg) {

@@ -2,7 +2,7 @@ import HealthScreen from '../screenobjects/health.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 //import NavigationBar from '../screenobjects/navigationbar.screen';
 
-function updateHealthAs(updateHealthData) {
+export function updateHealthAs(updateHealthData) {
   HealthScreen.waitForIsShown(true);
 
   HealthScreen.updateHealthDataButton.click();
@@ -33,14 +33,9 @@ function updateHealthAs(updateHealthData) {
   HealthScreen.waitForIsShown(true);
 }
 
-function isHealthResult() {
+export function isHealthResult() {
   return (
     HealthScreen.diabetesText('Low risk').isExisting() &&
     HealthScreen.bmiScore('27.2').isExisting()
   );
 }
-
-module.exports = {
-  updateHealthAs,
-  isHealthResult
-};

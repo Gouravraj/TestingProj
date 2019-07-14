@@ -3,10 +3,10 @@ const { config } = require('./mobile.shared.config');
 
 exports.config = {
   ...config,
-  specs: ['./tests/mobile-emp/specs/**/*.spec.js'],
+  specs: ['./tests/mobile-employee/specs/**/*.spec.js'],
   capabilities: [
     {
-      deviceName: 'iPhone X',
+      deviceName: 'iphone_x_12_2',
       platformName: 'iOS',
       platformVersion: '12.2',
       orientation: 'PORTRAIT',

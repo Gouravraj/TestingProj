@@ -14,7 +14,7 @@ function main(command, args) {
   const log = print('log');
 
   if (command === 'uninstall' && isRunning(PLATFORM)) {
-    const { pkg } = require('../../../config/scripts.config');
+    const { pkg } = require('../../config');
     const uninstall = require('../../ps/ios/uninstall')();
 
     dispatch(uninstall(pkg.ios.id));

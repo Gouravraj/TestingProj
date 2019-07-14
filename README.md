@@ -1,14 +1,23 @@
 # dstribution-mobile-automation
 
+## Structure
+
+- `app` - App package files (e.g app-debug.apk) **create if no exist**
+- `config` - Config files
+- `scripts` - Implements of `NPM` scripts (package.json#scripts)
+- `tests` - UI test scripts
+
 ## Install
 
 ```bash
 npm install
 ```
 
+It will install dependencies only for repository. You should install another dependencies to run script as well. Important thing is Xcode and Android SDK. You can check from below.
+
 ## Check dependencies
 
-Use Appium Doctor
+Use Appium Doctor to check dependencies. If you install everything in `required` section, you are ready to run test scripts.
 
 ```bash
 npm install appium-doctor -g
@@ -17,13 +26,21 @@ appium-doctor
 
 ## Run tests
 
+If you run CI script, it will launch (si|e)mulator automatically. Otherwise, you should run it manually. You can check [`here`](./scripts/README.md)
+
 ```bash
+# run test scripts
 npm run ios
 npm run android
 
-# or run suite only
+# run CI script on local
+npm run ci:android
+npm run ci:ios
+
+# run suite only
 # you shoud set `claims` script in config file (`config/wdio.shared.conf.js`)
 npm run ios -- --suite claims
+npm run ci:android -- --suite claims
 ```
 
 ## Scripts
@@ -32,7 +49,7 @@ Document [`here`](./scripts/README.md)
 
 ## Heap Snapshot
 
-Once you have finished running scripts, you can save `.heapsnapshot` and you can debug by Chrome. First of, run this command after finished,
+Once you have finished running scripts, you can save `.heapsnapshot` and you can debug from Chrome. Run this command after finished,
 
 ```bash
 ps -a

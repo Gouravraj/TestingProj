@@ -3,11 +3,11 @@ const { config } = require('./mobile.shared.config');
 
 exports.config = {
   ...config,
-  specs: ['./tests/mobile-emp/specs/**/*.spec.js'],
+  specs: ['./tests/mobile-employee/specs/**/*.spec.js'],
   capabilities: [
     {
       automationName: 'UiAutomator2',
-      deviceName: 'emulator-5554',
+      deviceName: 'android_28',
       platformName: 'Android',
       orientation: 'PORTRAIT',
       maxInstances: 1,

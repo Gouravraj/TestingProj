@@ -6,16 +6,16 @@ import wait from './wait';
  * @param  {string}   pageSelector
  * @return {Function}
  */
-export default function select(selectEl, pageSelector) {
+export default function select(selectSelector, pageSelector) {
   /**
    * @param  {string}  pageSelector
    * @return {Element}
    */
   return (optionSelector) => {
-    selectEl.click();
+    $(selectSelector).click();
     wait(pageSelector);
     $(optionSelector).click();
 
-    return selectEl;
+    return $(selectSelector);
   };
 }

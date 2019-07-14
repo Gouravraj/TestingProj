@@ -1,5 +1,3 @@
-import navigator from '../navigator.action';
-import cs from '../../screenobjects/claims.screen';
 import {
   select,
   date,
@@ -10,18 +8,12 @@ import {
   checkIfDisplayedWithScrollDown
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
-
-export function _getStarted() {
-  navigator.isNavigationBarVisible();
-  navigator.navigateToClaimsScreen();
-
-  cs.buttonMakeClaim.click();
-}
+import { CLAIMS as SELECTOR } from '../../selectors';
 
 export function _patientDetails(dependent, isPN = false, isCN = false) {
   if (isPN) {
     const selectPName = select(
-      cs.selectPatientName,
+      SELECTOR.selectPatientName,
       txt('Select Patient Name')
     );
 
@@ -29,44 +21,44 @@ export function _patientDetails(dependent, isPN = false, isCN = false) {
   }
 
   if (isCN) {
-    cs.inputContactNumber.click();
+    $(SELECTOR.inputContactNumber).click();
 
     // TODO: implement for ios
     // $('~Contact number').clearValue();
 
-    cs.inputContactNumber.setValue(87654321);
+    $(SELECTOR.inputContactNumber).setValue(87654321);
     kbd('hide');
   }
 
   driver.pause(1000);
 
-  cs.buttonAddClaimDetails.click();
+  $(SELECTOR.buttonAddClaimDetails).click();
 }
 
 export function _claimDetails(type, diagnosis, amount) {
   const selectCType = select(
-    cs.selectConsultationType,
+    SELECTOR.selectConsultationType,
     txt('Consultation Type')
   );
-  const selectDia = select(cs.selectDiagnosis, txt('Diagnosis'));
+  const selectDia = select(SELECTOR.selectDiagnosis, txt('Diagnosis'));
 
   selectCType(txtTo(type));
   selectDia(txtTo(diagnosis));
 
-  date('toggle', cs.dateConsultationDate);
+  date('toggle', SELECTOR.dateConsultationDate);
 
-  cs.inputReceiptAmount.click();
-  cs.inputReceiptAmount.setValue(amount);
+  $(SELECTOR.inputReceiptAmount).click();
+  $(SELECTOR.inputReceiptAmount).setValue(amount);
   kbd('hide');
 
-  cs.buttonButtonAddDocuments.click();
+  $(SELECTOR.buttonAddDocuments).click();
 }
 
 export function _addDocuments(image, isRefer = false) {
   const platform = getPlatform();
 
   if (platform === 'ios') {
-    cs.photoAddDocumentReceipts.click();
+    $(SELECTOR.photoAddDocumentReceipts).click();
   } else if (platform === 'android') {
     // $(
     //   '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]'
@@ -83,33 +75,31 @@ export function _addDocuments(image, isRefer = false) {
   });
 
   if (isRefer) {
-    const refEl =
+    const refSelector =
       platform === 'ios'
-        ? $(
-            '(//XCUIElementTypeOther[@name="Add document for Referral letter"])[6]'
-          )
-        : cs.photoAddDocumentForReferralLetter;
+        ? '(//XCUIElementTypeOther[@name="Add document for Referral letter"])[6]'
+        : SELECTOR.photoAddDocumentForReferralLetter;
 
-    refEl.click();
+    $(refSelector).click();
     photo('select', {
       permit: false,
       photo: image[platform]
     });
 
-    checkIfDisplayedWithScrollDown(cs.buttonReviewClaim, 100, 0);
+    checkIfDisplayedWithScrollDown($(SELECTOR.buttonReviewClaim), 100, 0);
   }
 
-  cs.buttonReviewClaim.click();
+  $(SELECTOR.buttonReviewClaim).click();
 }
 
 export function _reviewClaim() {
   // NOTE: hack; to prevent previous event (click)
   tap(1, 1);
 
-  checkIfDisplayedWithScrollDown(cs.buttonSubmitClaim, 100, 0);
-  cs.buttonSubmitClaim.click();
+  checkIfDisplayedWithScrollDown($(SELECTOR.buttonSubmitClaim), 100, 0);
+  $(SELECTOR.buttonSubmitClaim).click();
 }
 
 export function _termsConditions() {
-  cs.buttonAcceptTermsConditions.click();
+  $(SELECTOR.buttonAcceptTermsConditions).click();
 }
