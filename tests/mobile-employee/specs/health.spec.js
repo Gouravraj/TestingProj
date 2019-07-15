@@ -1,11 +1,11 @@
 // import health from '../actions/health.action';
 // import healthData from '../../data/health.data';
-import login from '../actions/login.action';
-import loginData from '../../data/login.data';
+import { loginAs } from '../actions/login.action';
+import { validCredentials } from '../../data/login.data';
 
 describe('Employee should,', () => {
   beforeAll(() => {
-    login.loginAs(loginData.validCredentials);
+    loginAs(validCredentials);
   });
 
   afterAll(() => {
