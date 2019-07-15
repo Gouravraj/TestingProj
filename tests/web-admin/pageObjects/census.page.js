@@ -1,4 +1,4 @@
-import Page from './page';
+import AppPage from './app.page';
 import { DEFAULT_TIMEOUT } from '../../constants';
 
 const SELECTORS = {
@@ -8,7 +8,7 @@ const SELECTORS = {
   CENSUS_CAPTION: "//span[text()='Census']"
 };
 
-class CensusUploadPage extends Page {
+class CensusPage extends AppPage {
   waitForPageToLoad() {
     return $(SELECTORS.CENSUS_CAPTION).waitForDisplayed(DEFAULT_TIMEOUT);
   }
@@ -23,4 +23,4 @@ class CensusUploadPage extends Page {
   }
 }
 
-export default new CensusUploadPage();
+export default new CensusPage();

@@ -1,6 +1,6 @@
 import file from 'fs';
 import path from 'path';
-import CensusUploadPage from '../pageObjects/censusUploadPage';
+import CensusUploadPage from '../pageObjects/census.page';
 
 export function downloadEmployeeCensusTemplate() {
   CensusUploadPage.downloadEmployeeCensusTemplateLink().click();
