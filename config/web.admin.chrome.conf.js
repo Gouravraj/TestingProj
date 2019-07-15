@@ -1,7 +1,7 @@
 const path = require('path');
 const { config } = require('./web.shared.conf.js');
 
-config.specs = ['./tests/web-admin/specs/*.js'];
+config.specs = ['./tests/web-admin/specs/*.spec.js'];
 config.capabilities = [
   {
     maxInstances: 1,

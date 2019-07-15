@@ -10,9 +10,7 @@ describe('HR should,', () => {
     loginAs(hrCredentials);
     expect(isHrLoggedin()).toBeTruthy();
   });
-});
 
-describe('HR should be ,', () => {
   it('be able to download employee census template', () => {
     downloadEmployeeCensusTemplate();
     expect(isEmpCensusDownloaded()).toBeTruthy();
