@@ -37,3 +37,31 @@ describe('Employee should be', () => {
     driver.reset();
   });
 });
+
+describe('Employee pending claims should be', () => {
+  beforeEach(() => {
+    loginAs(validCredentials);
+    driver.pause(30000);
+    isNavigationBarVisible();
+    navigateToClaimsScreen();
+  });
+
+  it('able to verify the images loaded has a clock', () => {
+    expect(claims.loadedImage()).toBeTruthy();
+  });
+
+  it('able to verify the reimbursed amount is not displayed', () => {
+    claims.clickPendingClaims();
+    expect(claims.reimbursedAmount()).toBeFalsy();
+  });
+
+  it('able to verify the settlement date is not displayed', () => {
+    driver.pause(30000);
+    claims.clickPendingClaims();
+    expect(claims.getSettlementDate()).toBeFalsy();
+  });
+
+  afterEach(() => {
+    driver.reset();
+  });
+});

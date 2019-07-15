@@ -17,3 +17,20 @@ export const image = {
 };
 
 export const dependent = 'Karen Brown';
+
+export const isReimbursedAmountVisible = {
+  ios: '',
+  android: '//*[@text="Reimbursed amount"]'
+};
+
+export const gmpPendingClaim = {
+  ios: '',
+  android:
+    '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="General Medical Practitioner"][1]'
+};
+
+export const pendingClaimLoadedImage = {
+  ios: '',
+  android:
+    '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup/android.view.ViewGroup[3]//*[@text=""]'
+};

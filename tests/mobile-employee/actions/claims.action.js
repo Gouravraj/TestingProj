@@ -3,14 +3,21 @@ import {
   _claimDetails,
   _addDocuments,
   _reviewClaim,
-  _termsConditions
+  _termsConditions,
+  _clickPendingClaims,
+  _reimbursedAmount,
+  _checkLoadedImageOnPendingClaims,
+  _getSettlementDate
 } from './internal/_claims';
 import {
   details,
   detailsRefer,
   receiptAmount,
   image,
-  dependent
+  dependent,
+  isReimbursedAmountVisible,
+  gmpPendingClaim,
+  pendingClaimLoadedImage
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -61,4 +68,20 @@ export function makeClaimWithContact() {
   navi('Terms & Conditions', _termsConditions);
 
   return screen('Claim submitted');
+}
+
+export function clickPendingClaims() {
+  _clickPendingClaims(gmpPendingClaim);
+}
+
+export function reimbursedAmount() {
+  return _reimbursedAmount(isReimbursedAmountVisible);
+}
+
+export function getSettlementDate() {
+  return _getSettlementDate();
+}
+
+export function loadedImage() {
+  return _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage);
 }
