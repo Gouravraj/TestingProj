@@ -12,6 +12,7 @@ exports.config = {
       orientation: 'PORTRAIT',
       maxInstances: 1,
       app: join(process.cwd(), 'app', 'app-debug.apk'),
+      useNewWDA: true,
       newCommandTimeout: 240,
       autoGrantPermissions: true
     }

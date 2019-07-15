@@ -12,7 +12,7 @@ exports.config = {
       orientation: 'PORTRAIT',
       maxInstances: 1,
       app: join(process.cwd(), 'app', 'app-debug.app'),
-      // useNewWDA: true,
+      useNewWDA: true,
       waitForQuiescence: false,
       automationName: 'XCUITest'
     }
