@@ -1,4 +1,4 @@
-import Page from './page';
+import AppPage from './app.page';
 
 const SELECTORS = {
   EMAIL_ID: ".//input[@id='email']",
@@ -6,7 +6,7 @@ const SELECTORS = {
   LOGIN_BUTTON: ".//button[@id='login']"
 };
 
-class LoginPage extends Page {
+class LoginPage extends AppPage {
   open() {
     super.open('login');
     super.waitForPageToLoad(SELECTORS.EMAIL_ID);

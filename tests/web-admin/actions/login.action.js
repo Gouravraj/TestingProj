@@ -1,5 +1,6 @@
-import LoginPage from '../pageObjects/loginPage';
-import CensusUploadPage from '../pageObjects/censusUploadPage';
+import LoginPage from '../pageObjects/login.page';
+import CensusUploadPage from '../pageObjects/census.page';
+import EmployeeSearchPage from '../pageObjects/employeeSearch.page';
 
 export function loginAs(empDetail) {
   LoginPage.open();
@@ -12,4 +13,6 @@ export function isHrLoggedin() {
   return CensusUploadPage.waitForPageToLoad();
 }
 
-export function isCsLoggedin() {}
+export function isCsLoggedin() {
+  return EmployeeSearchPage.waitForPageToLoad();
+}
