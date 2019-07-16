@@ -41,7 +41,7 @@ describe('Employee should be', () => {
 describe('Employee pending claims should be', () => {
   beforeEach(() => {
     loginAs(validCredentials);
-    driver.pause(30000);
+    //driver.pause(30000);
     isNavigationBarVisible();
     navigateToClaimsScreen();
   });
@@ -56,7 +56,6 @@ describe('Employee pending claims should be', () => {
   });
 
   it('able to verify the settlement date is not displayed', () => {
-    driver.pause(30000);
     claims.clickPendingClaims();
     expect(claims.getSettlementDate()).toBeFalsy();
   });

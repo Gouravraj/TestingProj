@@ -109,10 +109,12 @@ export function _clickPendingClaims(gmpPendingClaim) {
   const platform = getPlatform();
 
   if (platform === 'ios') {
-    // Need to add condition
+    $(gmpPendingClaim.ios).waitForExist(60000);
+    var elements = driver.$$(gmpPendingClaim.ios);
+    $(elements[0].selector).click();
   } else if (platform === 'android') {
+    $(gmpPendingClaim.android).waitForExist(60000);
     $(gmpPendingClaim.android).click();
-    driver.pause(20000);
   }
 }
 
@@ -122,7 +124,7 @@ export function _reimbursedAmount(isReimbursedAmountVisible) {
 
   try {
     if (platform === 'ios') {
-      // Need to add condition
+      isVisible = $(isReimbursedAmountVisible.ios).waitForExist(5000);
     } else if (platform === 'android') {
       isVisible = $(isReimbursedAmountVisible.android).waitForExist(5000);
     }
@@ -138,7 +140,7 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
 
   try {
     if (platform === 'ios') {
-      // Need to add condition
+      isVisible = $(pendingClaimLoadedImage.ios).waitForExist(20000);
     } else if (platform === 'android') {
       isVisible = $(pendingClaimLoadedImage.android).waitForExist(20000);
     }

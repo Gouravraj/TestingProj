@@ -79,7 +79,7 @@ class ClaimsScreen extends AppScreen {
     return $(SELECTOR.PHOTO_ADD_DOCUMENT_FOR_REFERRAL_LETTER);
   }
 
-  settlementDate() {
+  get settlementDate() {
     console.log('In the settlementDate');
     return $(SELECTOR.SETTLEMENT_DATE);
   }

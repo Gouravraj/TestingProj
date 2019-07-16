@@ -19,18 +19,19 @@ export const image = {
 export const dependent = 'Karen Brown';
 
 export const isReimbursedAmountVisible = {
-  ios: '',
+  ios: '~Reimbursed amount',
   android: '//*[@text="Reimbursed amount"]'
 };
 
 export const gmpPendingClaim = {
-  ios: '',
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"General Medical Practitioner")])[2]',
   android:
     '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="General Medical Practitioner"][1]'
 };
 
 export const pendingClaimLoadedImage = {
-  ios: '',
+  ios: '(//XCUIElementTypeOther[starts-with(@name," ")])[2]',
   android:
     '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup/android.view.ViewGroup[3]//*[@text=""]'
 };
