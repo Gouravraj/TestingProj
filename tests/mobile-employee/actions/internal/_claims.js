@@ -10,6 +10,7 @@ import {
 import txt, { txtTo } from '../../helpers/text';
 import { CLAIMS as SELECTOR } from '../../selectors';
 import ClaimsScreen from '../../screenobjects/claims.screen';
+import wait from '../../helpers/api/wait';
 
 export function _patientDetails(dependent, isPN = false, isCN = false) {
   if (isPN) {
@@ -93,27 +94,44 @@ export function _addDocuments(image, isRefer = false) {
   $(SELECTOR.buttonReviewClaim).click();
 }
 
-export function _reviewClaim() {
+export function _reviewClaim(submitClaimButton) {
+  const platform = getPlatform();
   // NOTE: hack; to prevent previous event (click)
   tap(1, 1);
 
   checkIfDisplayedWithScrollDown($(SELECTOR.buttonSubmitClaim), 100, 0);
-  $(SELECTOR.buttonSubmitClaim).click();
+
+  if (platform === 'ios') {
+    $(submitClaimButton.ios).click();
+  } else if (platform === 'android') {
+    $(submitClaimButton.android).click();
+  }
 }
 
 export function _termsConditions() {
   $(SELECTOR.buttonAcceptTermsConditions).click();
 }
 
+export function _viewSubmittedClaims(viewSubmittedClaim) {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    wait(viewSubmittedClaim.ios);
+    $(viewSubmittedClaim.ios).click();
+  } else if (platform === 'android') {
+    wait(viewSubmittedClaim.android);
+    $(viewSubmittedClaim.android).click();
+  }
+}
 export function _clickPendingClaims(gmpPendingClaim) {
   const platform = getPlatform();
 
   if (platform === 'ios') {
-    $(gmpPendingClaim.ios).waitForExist(60000);
-    var elements = driver.$$(gmpPendingClaim.ios);
+    wait(gmpPendingClaim.ios);
+    const elements = driver.$$(gmpPendingClaim.ios);
     $(elements[0].selector).click();
   } else if (platform === 'android') {
-    $(gmpPendingClaim.android).waitForExist(60000);
+    wait(gmpPendingClaim.android);
     $(gmpPendingClaim.android).click();
   }
 }

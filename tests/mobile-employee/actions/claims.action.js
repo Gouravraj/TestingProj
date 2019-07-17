@@ -4,6 +4,7 @@ import {
   _addDocuments,
   _reviewClaim,
   _termsConditions,
+  _viewSubmittedClaims,
   _clickPendingClaims,
   _reimbursedAmount,
   _checkLoadedImageOnPendingClaims,
@@ -16,8 +17,10 @@ import {
   image,
   dependent,
   isReimbursedAmountVisible,
+  viewSubmittedClaim,
   gmpPendingClaim,
-  pendingClaimLoadedImage
+  pendingClaimLoadedImage,
+  submitClaimButton
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -28,7 +31,7 @@ export function makeClaim() {
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
   navi('Add Documents', () => _addDocuments(image));
-  navi('Review Claim', _reviewClaim);
+  navi('Review Claim', _reviewClaim(submitClaimButton));
   navi('Terms & Conditions', _termsConditions);
 
   return screen('Claim submitted');
@@ -69,7 +72,9 @@ export function makeClaimWithContact() {
 
   return screen('Claim submitted');
 }
-
+export function viewSubmittedClaims() {
+  _viewSubmittedClaims(viewSubmittedClaim);
+}
 export function clickPendingClaims() {
   _clickPendingClaims(gmpPendingClaim);
 }
