@@ -37,80 +37,6 @@ npm run pkg:ios
 npm run pkg:android
 ```
 
-## Configure
-
-`../config/scripts.config.js` for CI, extract packages
-
-```javascript
-module.exports = {
-  ci: {
-    ios: {
-      defaults: {
-        // device type
-        // xcrun simctl list --json devicetypes | jq -r '.[]'
-        devicetype: 'iPhone X',
-
-        // runtime (to install different iOS runtimes, use Xcode)
-        // xcrun simctl list --json runtimes | jq -r '.[]'
-        runtime: '12.2'
-      },
-
-      devices: {
-        // will create device if not exist
-        auto: true,
-
-        // currently only 1 device support
-        list: ['iPhone X']
-      }
-    },
-
-    android: {
-      defaults: {
-        // android API version (https://source.android.com/setup/start/build-numbers)
-        api: '28',
-
-        // 64 bits or 32 bits
-        alu: '64',
-
-        // https://developer.android.com/ndk/guides/abis
-        abi: 'google_apis/x86_64',
-
-        // base device
-        // avdmanager list device | grep "id:" | sed 's/[^"]*"\([^"]*\)".*/\1/'
-        device: 'Nexus 6P'
-      },
-
-      sdk: {
-        // preventing warning message
-        repos: `${homeDir}/.android/repositories.cfg`
-      },
-
-      // same as 'ios' config
-      devices: {
-        auto: true,
-
-        list: ['android_9']
-      }
-    }
-  },
-
-  // for `npm run pkg` - without args, will use this as defaults
-  pkg: {
-    ios: {
-      id: 'com.cxagroup.mobile.EmployeePortal',
-      to: ios.config.capabilities[0].app,
-      rename: 'app-debug.app'
-    },
-
-    android: {
-      id: 'com.employeefrontend',
-      to: android.config.capabilities[0].app,
-      rename: 'app-debug.apk'
-    }
-  }
-};
-```
-
 ## iOS Simulator
 
 ```bash
@@ -152,4 +78,14 @@ Extract package by those NPM commands. (arguments already set from `../scripts.c
 npm run pkg # extract both platforms
 npm run pkg:ios
 npm run pkg:android
+```
+
+## Path issues
+
+If you have Android SDK but installed by Android Studio. Probably, you've got some path issues with Android tools. These scripts will fix,
+
+```bash
+npm run path:emulator
+npm run path:sdkmanager
+npm run path:avdmanager
 ```
