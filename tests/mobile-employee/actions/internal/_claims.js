@@ -142,9 +142,9 @@ export function _reimbursedAmount(isReimbursedAmountVisible) {
 
   try {
     if (platform === 'ios') {
-      isVisible = $(isReimbursedAmountVisible.ios).waitForExist(5000);
+      isVisible = wait(isReimbursedAmountVisible.ios);
     } else if (platform === 'android') {
-      isVisible = $(isReimbursedAmountVisible.android).waitForExist(5000);
+      isVisible = wait(isReimbursedAmountVisible.android);
     }
   } catch (error) {
     isVisible = false;
@@ -158,9 +158,9 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
 
   try {
     if (platform === 'ios') {
-      isVisible = $(pendingClaimLoadedImage.ios).waitForExist(20000);
+      isVisible = wait(pendingClaimLoadedImage.ios);
     } else if (platform === 'android') {
-      isVisible = $(pendingClaimLoadedImage.android).waitForExist(20000);
+      isVisible = wait(pendingClaimLoadedImage.android);
     }
   } catch (error) {
     isVisible = false;
@@ -171,7 +171,7 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
 export function _getSettlementDate() {
   let isVisible;
   try {
-    isVisible = ClaimsScreen.settlementDate.waitForExist(20000);
+    isVisible = wait(ClaimsScreen.settlementDate);
   } catch (error) {
     isVisible = false;
   }

@@ -37,7 +37,7 @@ describe('Employee should be', () => {
   });
 });
 
-describe('Employee pending claims should be', () => {
+describe('General Medical Practitioner-Employee pending claims should be', () => {
   beforeEach(() => {
     loginAs(validCredentials);
     //driver.pause(30000);

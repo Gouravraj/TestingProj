@@ -84,7 +84,6 @@ export function reimbursedAmount() {
 }
 
 export function getSettlementDate() {
-  console.log('In the getSettlementDate');
   return _getSettlementDate();
 }
 

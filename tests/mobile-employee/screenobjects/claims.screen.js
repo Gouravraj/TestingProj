@@ -80,7 +80,6 @@ class ClaimsScreen extends AppScreen {
   }
 
   get settlementDate() {
-    console.log('In the settlementDate');
     return $(SELECTOR.SETTLEMENT_DATE);
   }
 }
