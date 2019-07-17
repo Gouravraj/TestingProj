@@ -1,32 +1,148 @@
 # dstribution-mobile-automation
 
-## Structure
-
-- `app` - App package files (e.g app-debug.apk) **create if no exist**
-- `config` - Config files
-- `scripts` - Implements of `NPM` scripts (package.json#scripts)
-- `tests` - UI test scripts
-
-## Install
+## Get Started
 
 ```bash
 npm install
 ```
 
-It will install dependencies only for repository. You should install another dependencies to run script as well. Important thing is Xcode and Android SDK. You can check from below.
+It will install dependencies only for repository.
+
+You should install another dependencies to run script as well. Important thing is Xcode and Android SDK. You can check from below.
+
+## Structure
+
+- `app` - App package files (e.g app-debug.apk)
+- `config` - Config files
+- `scripts` - `NPM` scripts (package.json#scripts)
+- `tests` - UI test scripts (mobile, web)
+
+## Homebrew
+
+You can install package manager for macOS, otherwise you should install in manually.
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew --version
+```
 
 ## Check dependencies
 
-Use Appium Doctor to check dependencies. If you install everything in `required` section, you are ready to run test scripts.
+Use Appium Doctor to check global dependencies.
 
 ```bash
 npm install appium-doctor -g
 appium-doctor
 ```
 
+If you will install everything from `required` section, you are ready to run test scripts.
+
+## Install JDK
+
+MacOS don't install JAVA anymore. So, you should install it. `brew` is your friend now.
+
+```bash
+brew tap AdoptOpenJDK/openjdk
+brew cask install adoptopenjdk8
+
+# build
+brew install ant
+brew install gradle
+# project management
+brew install maven
+```
+
+## Android SDK
+
+Most common way to install Android SDK, install Android Studio. Then, it will install automatically but you need to set path manually for some commands.
+
+Another way is, install `android-platform-tools android-sdk` by `brew`.
+
+```bash
+brew tap caskroom/cask
+brew cask install android-sdk
+brew cask install android-platform-tools
+```
+
+As I mentioned, if you installed Android Studio, you are not able to run some Android tools commands. This NPM scripts will help you fix those issues. If you didn't try `appium-doctor`, please do that before running this.
+
+```bash
+# only run these when path was wrong
+npm run path:emulator
+npm run path:sdkmanager
+npm run path:avdmanager
+
+# or save it to shell config file (~/.bashrc, ~/.zshrc)
+export PATH=$ANDROID_HOME/tools/bin:$PATH
+```
+
+## Path
+
+```bash
+# if you use bash (default mac shell for now, it will be changed)
+vi ~/.bashrc
+# or if you use zsh (it will be default shell of as they announced)
+vi ~/.zshrc
+
+# when editor opened, put this
+# press `i` is edit mode
+# press `esc` is finish edit mode
+# press `:` is put commands mode, then put `wq`(write and quit)
+
+export ANT_HOME=/usr/local/opt/ant
+export MAVEN_HOME=/usr/local/opt/maven
+export GRADLE_HOME=/usr/local/opt/gradle
+
+# if you've installed Android SDK by `brew`, then use this
+export ANDROID_HOME=/usr/local/share/android-sdk
+# but if you've installed by Android Studio
+# run Android Studio, press `configure`, press `SDK manager`
+# then you can see `Android SDK Location: `
+export ANDROID_HOME=[android_sdk_location_here]
+
+# if wrong, go `/Library/Java` first and find real path
+export JAVA_HOME=/Library/Java/JavaVirtualMachine/adoptopenjdk-8.jdk/Contents/Home
+
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$PATH
+export PATH=$GRADLE_HOME/bin:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+# once you finish to save and quit
+source ~/.bashrc
+# or
+source ~/.zshrc
+```
+
+## SSH
+
+If you clone Github repo to local, you need put password. But once they can recognize your local computer, you don't have to put password anymore. To do this, you can use SSH.
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "<your_email>"
+pbcopy < ~/.ssh/id_rsa.pub
+```
+
+After then, your ssh-key will saved on clipboard. Then, go to Github and click avatar and go setting. Go `SSH and GPG keys` and press `new SSH key` button and paste it. Once finished, you can clone without password.
+
+## Node.js
+
+```bash
+bew install node # it will install `npm` also
+```
+
+## Packages
+
+```bash
+rm -rf app/*
+mv ~/Downloads/app-release.apk ./app/app-debug.apk
+mv ~/Downloads/EmployeeFrontend.app ./app/app-debug.app
+```
+
 ## Run tests
 
-If you run CI script, it will launch (si|e)mulator automatically. Otherwise, you should run it manually. You can check [`here`](./scripts/README.md)
+If you run CI script, it will launch (si|e)mulator automatically. Otherwise, you should run it manually.
 
 ```bash
 # run test scripts
@@ -46,24 +162,6 @@ npm run ci:android -- --suite claims
 ## Scripts
 
 Document [`here`](./scripts/README.md)
-
-## Heap Snapshot
-
-Once you have finished running scripts, you can save `.heapsnapshot` and you can debug from Chrome. Run this command after finished,
-
-```bash
-ps -a
-```
-
-Then, you can find process of Appium scripts, and put process id(number),
-
-```bash
-kill -USR2 <pid>
-```
-
-Once you tried, it automatically generating `.heapsnapshot` on the repo. Now, open Chrome browser and open `inspector`. Go to `memory` tab then press `Load` button.
-
-Now, you can see memory information, which is useful when we faced memory leaks issue.
 
 ## Troubleshooting
 
@@ -101,3 +199,19 @@ cd ./node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
 ```
 
 Then, it will build again.
+
+## Heap Snapshot (Advanced)
+
+Once you have finished running scripts, you can save `.heapsnapshot` and you can debug from Chrome. Run this command after finished,
+
+```bash
+ps -a
+```
+
+Then, you can find process of Appium scripts, and put process id(number),
+
+```bash
+kill -USR2 <pid>
+```
+
+Once you tried, it automatically generating `.heapsnapshot` on the repo. Now, open Chrome browser and open `inspector`. Go to `memory` tab then press `Load` button. Now, you can see memory information, which is useful when we faced memory leaks issue.
