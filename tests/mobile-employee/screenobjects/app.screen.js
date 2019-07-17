@@ -1,4 +1,6 @@
 import { DEFAULT_TIMEOUT } from '../../constants';
+import { checkIfDisplayedWithScrollDown } from '../helpers/api';
+// import txt from '../helpers/text';
 
 export default class AppScreen {
   constructor(selector) {
@@ -13,5 +15,14 @@ export default class AppScreen {
    */
   waitForIsShown(isShown = true) {
     return $(this.selector).waitForDisplayed(DEFAULT_TIMEOUT, !isShown);
+  }
+
+  scrollDownToElement(element) {
+    checkIfDisplayedWithScrollDown(element, 100, 0);
+  }
+
+  isTextExisting(text) {
+    // return $(txt(text)).isExisting();
+    console.log(text);
   }
 }
