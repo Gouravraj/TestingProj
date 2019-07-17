@@ -19,6 +19,9 @@
     "pkg": "node ./scripts/bin/extract.js both",
     "pkg:ios": "node ./scripts/bin/extract.js ios",
     "pkg:android": "node ./scripts/bin/extract.js android",
+    "path:emulator": "./scripts/bin/doctor/emulator.sh",
+    "path:sdkmanager": "./scripts/bin/doctor/sdkmanager.sh",
+    "path:avdmanager": "./scripts/bin/doctor/avdmanager.sh",
     "lint": "eslint config tests",
     "web:emp": "wdio ./config/web.emp.chrome.conf.js",
     "web:admin": "wdio ./config/web.admin.chrome.conf.js"

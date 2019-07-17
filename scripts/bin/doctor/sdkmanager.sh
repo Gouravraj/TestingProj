@@ -18,9 +18,9 @@ if [[ "$init" == "y" ]] || [[ "$init" == "yes" ]]; then
     exit 1
   fi
 
-  if ! [ -x "$(command -v emulator)" ]; then
+  if ! [ -x "$(command -v sdkmanager)" ]; then
     printf "${RED}ERROR${NC}  "
-    echo "emulator is not in PATH"
+    echo "sdkmanager is not in PATH"
     printf "Do you want to fix it automatically? [y/n] : "
     read -r yn
 
@@ -28,7 +28,7 @@ if [[ "$init" == "y" ]] || [[ "$init" == "yes" ]]; then
       cd /usr/local/bin
       printf "${GREEN}LOG${NC}  "
       echo "Create symbolic link"
-      ln -s "${ANDROID_HOME}/tools/bin/emulator" .
+      ln -s "${ANDROID_HOME}/tools/bin/sdkmanager" .
 
       echo "Finished."
     else
