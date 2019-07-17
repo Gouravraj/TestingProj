@@ -14,7 +14,8 @@ const SELECTOR = {
   INPUT_CONTACT_NUMBER: '~Contact number',
   INPUT_RECEIPT_AMOUNT: '~Receipt amount',
   PHOTO_ADD_DOCUMENT_RECEIPTS: '~Add document for Receipts',
-  PHOTO_ADD_DOCUMENT_FOR_REFERRAL_LETTER: '~Add document for Referral letter'
+  PHOTO_ADD_DOCUMENT_FOR_REFERRAL_LETTER: '~Add document for Referral letter',
+  SETTLEMENT_DATE: '~Settlement date'
 };
 
 class ClaimsScreen extends AppScreen {
@@ -76,6 +77,10 @@ class ClaimsScreen extends AppScreen {
 
   get photoAddDocumentForReferralLetter() {
     return $(SELECTOR.PHOTO_ADD_DOCUMENT_FOR_REFERRAL_LETTER);
+  }
+
+  get settlementDate() {
+    return $(SELECTOR.SETTLEMENT_DATE);
   }
 }
 
