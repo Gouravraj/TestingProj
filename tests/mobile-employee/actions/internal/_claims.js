@@ -9,6 +9,8 @@ import {
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import { CLAIMS as SELECTOR } from '../../selectors';
+import ClaimsScreen from '../../screenobjects/claims.screen';
+import wait from '../../helpers/api/wait';
 
 export function _patientDetails(dependent, isPN = false, isCN = false) {
   if (isPN) {
@@ -92,14 +94,86 @@ export function _addDocuments(image, isRefer = false) {
   $(SELECTOR.buttonReviewClaim).click();
 }
 
-export function _reviewClaim() {
+export function _reviewClaim(submitClaimButton) {
+  const platform = getPlatform();
   // NOTE: hack; to prevent previous event (click)
   tap(1, 1);
 
   checkIfDisplayedWithScrollDown($(SELECTOR.buttonSubmitClaim), 100, 0);
-  $(SELECTOR.buttonSubmitClaim).click();
+
+  if (platform === 'ios') {
+    $(submitClaimButton.ios).click();
+  } else if (platform === 'android') {
+    $(submitClaimButton.android).click();
+  }
 }
 
 export function _termsConditions() {
   $(SELECTOR.buttonAcceptTermsConditions).click();
+}
+
+export function _viewSubmittedClaims(viewSubmittedClaim) {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    wait(viewSubmittedClaim.ios);
+    $(viewSubmittedClaim.ios).click();
+  } else if (platform === 'android') {
+    wait(viewSubmittedClaim.android);
+    $(viewSubmittedClaim.android).click();
+  }
+}
+export function _clickPendingClaims(gmpPendingClaim) {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    wait(gmpPendingClaim.ios);
+    const elements = driver.$$(gmpPendingClaim.ios);
+    $(elements[0].selector).click();
+  } else if (platform === 'android') {
+    wait(gmpPendingClaim.android);
+    $(gmpPendingClaim.android).click();
+  }
+}
+
+export function _reimbursedAmount(isReimbursedAmountVisible) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    if (platform === 'ios') {
+      isVisible = wait(isReimbursedAmountVisible.ios);
+    } else if (platform === 'android') {
+      isVisible = wait(isReimbursedAmountVisible.android);
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    if (platform === 'ios') {
+      isVisible = wait(pendingClaimLoadedImage.ios);
+    } else if (platform === 'android') {
+      isVisible = wait(pendingClaimLoadedImage.android);
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _getSettlementDate() {
+  let isVisible;
+  try {
+    isVisible = wait(ClaimsScreen.settlementDate);
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
 }

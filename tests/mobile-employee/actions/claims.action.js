@@ -3,14 +3,24 @@ import {
   _claimDetails,
   _addDocuments,
   _reviewClaim,
-  _termsConditions
+  _termsConditions,
+  _viewSubmittedClaims,
+  _clickPendingClaims,
+  _reimbursedAmount,
+  _checkLoadedImageOnPendingClaims,
+  _getSettlementDate
 } from './internal/_claims';
 import {
   details,
   detailsRefer,
   receiptAmount,
   image,
-  dependent
+  dependent,
+  isReimbursedAmountVisible,
+  viewSubmittedClaim,
+  gmpPendingClaim,
+  pendingClaimLoadedImage,
+  submitClaimButton
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -21,7 +31,7 @@ export function makeClaim() {
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
   navi('Add Documents', () => _addDocuments(image));
-  navi('Review Claim', _reviewClaim);
+  navi('Review Claim', _reviewClaim(submitClaimButton));
   navi('Terms & Conditions', _termsConditions);
 
   return screen('Claim submitted');
@@ -61,4 +71,22 @@ export function makeClaimWithContact() {
   navi('Terms & Conditions', _termsConditions);
 
   return screen('Claim submitted');
+}
+export function viewSubmittedClaims() {
+  _viewSubmittedClaims(viewSubmittedClaim);
+}
+export function clickPendingClaims() {
+  _clickPendingClaims(gmpPendingClaim);
+}
+
+export function reimbursedAmount() {
+  return _reimbursedAmount(isReimbursedAmountVisible);
+}
+
+export function getSettlementDate() {
+  return _getSettlementDate();
+}
+
+export function loadedImage() {
+  return _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage);
 }
