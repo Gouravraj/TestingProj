@@ -1,5 +1,3 @@
-// import health from '../actions/health.action';
-// import healthData from '../../data/health.data';
 import { loginAs } from '../actions/login.action';
 import { landingCredentials } from '../../data/login.data';
 

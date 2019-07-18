@@ -2,8 +2,6 @@ import HealthScreen from '../screenobjects/health.screen';
 import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 
-//import NavigationBar from '../screenobjects/navigationbar.screen';
-
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
   const isTrue = HealthLandingScreen.getAttributeOfElement(
