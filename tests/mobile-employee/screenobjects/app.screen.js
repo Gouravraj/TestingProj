@@ -1,6 +1,6 @@
 import { DEFAULT_TIMEOUT } from '../../constants';
 import { checkIfDisplayedWithScrollDown } from '../helpers/api';
-// import txt from '../helpers/text';
+import txt from '../helpers/text';
 
 export default class AppScreen {
   constructor(selector) {
@@ -21,8 +21,11 @@ export default class AppScreen {
     checkIfDisplayedWithScrollDown(element, 100, 0);
   }
 
+  getAttributeOfElement(element, attributeName) {
+    return element.getAttribute(attributeName);
+  }
+
   isTextExisting(text) {
-    // return $(txt(text)).isExisting();
-    console.log(text);
+    return $(txt(text)).isExisting();
   }
 }

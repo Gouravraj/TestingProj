@@ -4,9 +4,28 @@ import HealthUpdateScreen from '../screenobjects/health.update.screen';
 
 //import NavigationBar from '../screenobjects/navigationbar.screen';
 
+export function isLifeStyleTabSelected() {
+  HealthLandingScreen.waitForIsShown(true);
+  const isTrue = HealthLandingScreen.getAttributeOfElement(
+    HealthLandingScreen.healthNavigator(),
+    'selected'
+  );
+  return isTrue;
+}
+
 export function isLandingHealthPageDisplayed() {
   HealthLandingScreen.waitForIsShown(true);
   return HealthLandingScreen.landingPageText().isExisting();
+}
+
+export function isAddMyHealthDataButtonDisplayed() {
+  HealthLandingScreen.waitForIsShown(true);
+  return HealthLandingScreen.addMyHealthDataButton().isExisting();
+}
+
+export function isSearchForClinicButtonDisplayed() {
+  HealthLandingScreen.waitForIsShown(true);
+  return HealthLandingScreen.searchForClinicButton().isExisting();
 }
 
 export function clickAddMyHealthDataButton() {
@@ -65,6 +84,7 @@ export function updateHealthAs(updateHealthData) {
 }
 
 export function isBMIDisplayCorrectly(scope, status, statement) {
+  HealthScreen.waitForIsShown(true);
   return (
     HealthScreen.isTextExisting(scope) &&
     HealthScreen.isTextExisting(status) &&

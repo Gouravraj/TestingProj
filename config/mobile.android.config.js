@@ -4,6 +4,7 @@ const { config } = require('./mobile.shared.config');
 exports.config = {
   ...config,
   specs: ['./tests/mobile-employee/specs/**/*.spec.js'],
+  // specs: ['./tests/mobile-employee/specs/health.spec.js'],
   capabilities: [
     {
       automationName: 'UiAutomator2',
