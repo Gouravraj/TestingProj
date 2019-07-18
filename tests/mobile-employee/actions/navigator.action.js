@@ -1,25 +1,21 @@
 import NavigationBar from '../screenobjects/navigationbar.screen';
 
-function navigateToHealthScreen() {
+export function navigateToHealthScreen() {
   NavigationBar.healthNavigator().click();
 }
-function navigateToClaimsScreen() {
+
+export function navigateToClaimsScreen() {
   NavigationBar.claimsNavigator().click();
 }
-function navigateToShopScreen() {
+
+export function navigateToShopScreen() {
   NavigationBar.shopNavigator().click();
 }
-function navigateToProfileScreen() {
+
+export function navigateToProfileScreen() {
   NavigationBar.profileNavigator().click();
 }
-function isNavigationBarVisible() {
+
+export function isNavigationBarVisible() {
   return NavigationBar.waitForIsShown(true);
 }
-
-module.exports = {
-  navigateToHealthScreen,
-  navigateToClaimsScreen,
-  navigateToShopScreen,
-  navigateToProfileScreen,
-  isNavigationBarVisible
-};
