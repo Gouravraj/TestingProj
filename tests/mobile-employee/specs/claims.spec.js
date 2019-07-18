@@ -16,21 +16,21 @@ describe('Employee should be', () => {
     $(SELECTOR.buttonMakeAClaim).click();
   });
 
-  it('able to submit a claim for self', () => {
+  fit('able to submit a claim for self', () => {
     expect(claims.makeClaim()).toBeTruthy();
   });
 
-  // it('able to submit a claim for self with referral document', () => {
-  //   expect(claims.makeClaimWithRef()).toBeTruthy();
-  // });
-  //
-  // it('able to submit a claim for a dependent', () => {
-  //   expect(claims.makeClaimWithDep()).toBeTruthy();
-  // });
-  //
-  // it('able to submit a claim for self with updating contact number', () => {
-  //   expect(claims.makeClaimWithContact()).toBeTruthy();
-  // });
+  it('able to submit a claim for self with referral document', () => {
+    expect(claims.makeClaimWithRef()).toBeTruthy();
+  });
+
+  it('able to submit a claim for a dependent', () => {
+    expect(claims.makeClaimWithDep()).toBeTruthy();
+  });
+
+  it('able to submit a claim for self with updating contact number', () => {
+    expect(claims.makeClaimWithContact()).toBeTruthy();
+  });
 
   afterEach(() => {
     driver.reset();
@@ -52,7 +52,7 @@ describe('General Medical Practitioner-Employee pending claims should be', () =>
     expect(claims.loadedImage()).toBeTruthy();
   });
 
-  it('able to verify the reimbursed amount is not displayed', () => {
+  fit('able to verify the reimbursed amount is not displayed', () => {
     claims.viewSubmittedClaims();
     claims.clickPendingClaims();
     expect(claims.reimbursedAmount()).toBeFalsy();
