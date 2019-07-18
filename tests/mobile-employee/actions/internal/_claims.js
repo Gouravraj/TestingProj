@@ -125,7 +125,7 @@ export function _viewSubmittedClaims(viewSubmittedClaim) {
 }
 export function _clickPendingClaims(gmpPendingClaim) {
   const platform = getPlatform();
-
+  driver.pause(4000);
   if (platform === 'ios') {
     wait(gmpPendingClaim.ios);
     const elements = driver.$$(gmpPendingClaim.ios);
@@ -155,7 +155,7 @@ export function _reimbursedAmount(isReimbursedAmountVisible) {
 export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
   const platform = getPlatform();
   let isVisible;
-
+  driver.pause(4000);
   try {
     if (platform === 'ios') {
       isVisible = wait(pendingClaimLoadedImage.ios);
@@ -176,4 +176,57 @@ export function _getSettlementDate() {
     isVisible = false;
   }
   return isVisible;
+}
+
+export function _receiptImage(receiptImage) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    if (platform === 'ios') {
+      checkIfDisplayedWithScrollDown($(receiptImage.ios), 3, 0);
+      isVisible = wait(receiptImage.ios);
+    } else if (platform === 'android') {
+      checkIfDisplayedWithScrollDown($(receiptImage.android), 3, 0);
+      isVisible = wait(receiptImage.android);
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _referralLetter(receiptImage, referralLetter) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    if (platform === 'ios') {
+      checkIfDisplayedWithScrollDown($(receiptImage.ios), 3, 0);
+      isVisible = wait(referralLetter.ios);
+    } else if (platform === 'android') {
+      checkIfDisplayedWithScrollDown($(receiptImage.android), 3, 0);
+      isVisible = wait(referralLetter.android);
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _outpatientClaimLabel(outpatientClaimLabel) {
+  const platform = getPlatform();
+  var data;
+
+  try {
+    if (platform === 'ios') {
+      data = $(outpatientClaimLabel.ios).getText();
+    } else if (platform === 'android') {
+      wait(outpatientClaimLabel.android);
+      data = $(outpatientClaimLabel.android).getText();
+    }
+  } catch (error) {
+    data = 'Not Found';
+  }
+  return data;
 }
