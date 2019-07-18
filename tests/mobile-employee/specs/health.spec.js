@@ -1,5 +1,5 @@
 import { updateHealthAs, isHealthResult } from '../actions/health.action';
-import healthData from '../../data/health.data';
+import { updateHealthData } from '../../data/health.data';
 import { loginAs } from '../actions/login.action';
 import { validCredentials } from '../../data/login.data';
 
@@ -17,7 +17,7 @@ describe('Employee should,', () => {
   // });
 
   it('be able to update health data', () => {
-    updateHealthAs(healthData.updateHealthData);
+    updateHealthAs(updateHealthData);
     expect(isHealthResult()).toBeTruthy();
   });
 

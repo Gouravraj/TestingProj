@@ -1,32 +1,25 @@
 import ForgotPasswordSuccessPage from '../pageObjects/forgotPasswordSuccessPage';
 
-function getForgotPasswordSuccessPageLabel() {
+export function getForgotPasswordSuccessPageLabel() {
   ForgotPasswordSuccessPage.forgotPwdSuceesPageLabel().waitForExist(5000);
   const text = ForgotPasswordSuccessPage.forgotPwdSuceesPageLabel().getText();
   return text;
 }
 
-function getForgotPwdSuccessEmailMsg() {
+export function getForgotPwdSuccessEmailMsg() {
   ForgotPasswordSuccessPage.forgotPwdSuccessEmailMsg().waitForExist(5000);
   const text = ForgotPasswordSuccessPage.forgotPwdSuccessEmailMsg().getText();
   return text;
 }
 
-function clickForgotPwdSuccessLoginButton() {
+export function clickForgotPwdSuccessLoginButton() {
   ForgotPasswordSuccessPage.forgotPwdSuccessLoginButton().waitForExist(5000);
   ForgotPasswordSuccessPage.forgotPwdSuccessLoginButton().click();
 }
 
-function getForgotPasswordSuccessResendButton() {
+export function getForgotPasswordSuccessResendButton() {
   ForgotPasswordSuccessPage.forgotPasswordSuccessResendButton().waitForExist(
     5000
   );
   return ForgotPasswordSuccessPage.forgotPasswordSuccessResendButton().getText();
 }
-
-module.exports = {
-  getForgotPasswordSuccessPageLabel,
-  getForgotPwdSuccessEmailMsg,
-  clickForgotPwdSuccessLoginButton,
-  getForgotPasswordSuccessResendButton
-};
