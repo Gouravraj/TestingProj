@@ -28,7 +28,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  fit('Story: Displaying of BMI and Prediabetes results #22', () => {
+  it('Story: Displaying of BMI and Prediabetes results #22', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -99,5 +99,10 @@ describe('Employee should,', () => {
     expect(
       healthAction.isMentalDisplayCorrectly('Normal', 'Keep it up!')
     ).toBeTruthy();
+  });
+
+  it('be able to update health data', () => {
+    healthAction.updateHealthAs(updateHealthData);
+    expect(healthAction.isHealthResult()).toBeTruthy();
   });
 });
