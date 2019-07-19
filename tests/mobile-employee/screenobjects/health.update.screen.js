@@ -1,6 +1,7 @@
 import AppScreen from './app.screen';
 import { checkIfDisplayedWithScrollDown } from '../helpers/api';
 import txt from '../helpers/text';
+import '../helpers/format';
 
 const SELECTORS = {
   HEALTH_UPDATE_SCREEN: '~Height',
@@ -8,11 +9,14 @@ const SELECTORS = {
   HEIGHT_FIELD: '~Height',
   WEIGHT_FIELD: '~Weight',
   WAIST_FIELD: '~Waist circumference',
-  ETHNICITY_DROPDOWN: '',
-  EAST_ASIAN_ITEM: 'East Asian',
+  ETHNICITY_DROPDOWN: '',
   EXERCISE_20: '~I exercise more than 20 minutes each day',
   SUGARY_BEVERAGE: '~0 to 2 times per week',
-  NOT_AT_ALL: '~Not at all',
+  NOT_AT_ALL_INTERESTING:
+    '(//android.view.ViewGroup[@content-desc="Not at all"])[1]/android.view.ViewGroup/android.widget.TextView',
+  NOT_AT_ALL_DEPRESS:
+    '(//android.view.ViewGroup[@content-desc="Not at all"])[2]/android.view.ViewGroup/android.widget.TextView',
+
   NEXT: '~Next'
 };
 
@@ -21,19 +25,22 @@ class HealthUpdateScreen extends AppScreen {
     super(SELECTORS.HEALTH_UPDATE_SCREEN);
   }
   get ethnicityDropdown() {
-    return $(SELECTORS.ETHNICITY_DROPDOWN);
+    return $(txt(SELECTORS.ETHNICITY_DROPDOWN));
   }
-  get eastAsianItem() {
-    return $(SELECTORS.EAST_ASIAN_ITEM);
-  }
+
   get exercise20() {
     return $(SELECTORS.EXERCISE_20);
   }
+
   get sugaryBeverage() {
     return $(SELECTORS.SUGARY_BEVERAGE);
   }
-  get notAtAll() {
-    return $(SELECTORS.NOT_AT_ALL);
+  get notAtAllInteresting() {
+    return $(SELECTORS.NOT_AT_ALL_INTERESTING);
+  }
+
+  get notAtAllDepress() {
+    return $(SELECTORS.NOT_AT_ALL_DEPRESS);
   }
 
   get heightField() {

@@ -5,10 +5,8 @@ const SELECTORS = {
   HEALTH_NAVIGATOR: '~Lifestyle, tab, 1 of 4',
   BMI_BUTTON: '',
   UPDATE_HEALTH_DATA_BUTTON: '~Update Health Data',
-  //  UPDATE_HEALTH_DATA_BUTTON: '~BMI',
-  HEIGHT_FIELD: '~Height',
-  WEIGHT_FIELD: '~Weight',
-  WAIST_FIELD: '~Waist'
+  HEALTH_FIGURE:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView/android.view.ViewGroup'
 };
 
 class HealthScreen extends AppScreen {
@@ -18,6 +16,10 @@ class HealthScreen extends AppScreen {
 
   get updateHealthDataButton() {
     return $(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
+  }
+
+  get healthFigure() {
+    return $(SELECTORS.HEALTH_FIGURE);
   }
 
   bmiScore(score) {

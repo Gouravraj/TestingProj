@@ -1,14 +1,16 @@
 import HealthScreen from '../screenobjects/health.screen';
 import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
+import NavigationBar from '../screenobjects/navigationbar.screen';
+import txt from '../helpers/text';
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
-  const isTrue = HealthLandingScreen.getAttributeOfElement(
-    HealthLandingScreen.healthNavigator(),
+  const isSelected = NavigationBar.getAttributeOfElement(
+    NavigationBar.healthNavigator(),
     'selected'
   );
-  return isTrue;
+  return isSelected;
 }
 
 export function isLandingHealthPageDisplayed() {
@@ -54,31 +56,59 @@ export function updateHealthAs(updateHealthData) {
   HealthUpdateScreen.AboutMe.click();
 
   // Ethnicity
-  // HealthUpdateScreen.ethnicityDropdown.click();
-  // HealthUpdateScreen.eastAsianItem.click();
+  HealthUpdateScreen.ethnicityDropdown.click();
+  $(txt(updateHealthData.Ethnicity)).click();
 
   // My choices
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20);
-  HealthUpdateScreen.exercise20.click();
+  if (updateHealthData.ExerciseMoreThan20 === 'true') {
+    // TODO: if not selected
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20);
+    HealthUpdateScreen.exercise20.click();
+  }
 
   // Sugar beverages
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.sugaryBeverage);
-  HealthUpdateScreen.sugaryBeverage.click();
+  // HealthUpdateScreen.scrollDownToElement($('~' + updateHealthData.sugaryBeverage));
+  // ($('~' + updateHealthData.sugaryBeverage)).click();
+  HealthUpdateScreen.scrollDownToElement(
+    $(txt(updateHealthData.SugaryBeverage))
+  );
+  $(txt(updateHealthData.SugaryBeverage)).click();
 
   // My health (pending)
 
   // Doing interesting
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAll);
-  HealthUpdateScreen.notAtAll.click();
+  if (updateHealthData.Interest === 'Not at all') {
+    HealthUpdateScreen.scrollDownToElement(
+      HealthUpdateScreen.notAtAllInteresting
+    );
+    HealthUpdateScreen.notAtAllInteresting.click();
+  } else {
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Interest)));
+    $(txt(updateHealthData.Interest)).click();
+  }
 
-  // Feeling down
-  // HealthUpdateScreen.notAtAll.click();
+  // Depress
+  if (updateHealthData.Depress === 'Not at all') {
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAllDepress);
+    HealthUpdateScreen.notAtAllDepress.click();
+  } else {
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)));
+    $(txt(updateHealthData.Depress)).click();
+  }
 
   // Click Next
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
   HealthUpdateScreen.next.click();
 
   HealthScreen.waitForIsShown(true);
+}
+
+export function isExerciseDisplayActive() {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('EXERCISE'))
+  );
+  HealthScreen.isTextExisting('Active');
 }
 
 export function isBMIDisplayCorrectly(scope, status, statement) {
@@ -91,12 +121,20 @@ export function isBMIDisplayCorrectly(scope, status, statement) {
 }
 
 export function isDiabeteDisplayCorrectly(status, text) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('DIABETES'))
+  );
   return (
     HealthScreen.isTextExisting(status) && HealthScreen.isTextExisting(text)
   );
 }
 
 export function isAlcoholDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('ALCOHOL'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)
@@ -104,6 +142,10 @@ export function isAlcoholDisplayCorrectly(assessment, statement) {
 }
 
 export function isTobaccoDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('TOBACCO'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)
@@ -111,6 +153,10 @@ export function isTobaccoDisplayCorrectly(assessment, statement) {
 }
 
 export function isExerciseDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('EXERCISE'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)
@@ -118,6 +164,10 @@ export function isExerciseDisplayCorrectly(assessment, statement) {
 }
 
 export function isNutritionDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('NUTRITION'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)
@@ -125,6 +175,10 @@ export function isNutritionDisplayCorrectly(assessment, statement) {
 }
 
 export function isSleepDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('SLEEP'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)
@@ -132,6 +186,10 @@ export function isSleepDisplayCorrectly(assessment, statement) {
 }
 
 export function isMentalDisplayCorrectly(assessment, statement) {
+  HealthScreen.scrollRightOnElementToFindElement(
+    HealthScreen.healthFigure,
+    $(txt('MENTAL'))
+  );
   return (
     HealthScreen.isTextExisting(assessment) &&
     HealthScreen.isTextExisting(statement)

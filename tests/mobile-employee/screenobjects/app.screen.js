@@ -1,5 +1,8 @@
 import { DEFAULT_TIMEOUT } from '../../constants';
-import { checkIfDisplayedWithScrollDown } from '../helpers/api';
+import {
+  checkIfDisplayedWithScrollDown,
+  swipeLeftOnElementToFindElement
+} from '../helpers/api';
 import txt from '../helpers/text';
 
 export default class AppScreen {
@@ -17,8 +20,12 @@ export default class AppScreen {
     return $(this.selector).waitForDisplayed(DEFAULT_TIMEOUT, !isShown);
   }
 
+  scrollRightOnElementToFindElement(scrollOnElement, toFindElement) {
+    swipeLeftOnElementToFindElement(scrollOnElement, toFindElement, 50, 0);
+  }
+
   scrollDownToElement(element) {
-    checkIfDisplayedWithScrollDown(element, 100, 0);
+    checkIfDisplayedWithScrollDown(element, 50, 0);
   }
 
   getAttributeOfElement(element, attributeName) {

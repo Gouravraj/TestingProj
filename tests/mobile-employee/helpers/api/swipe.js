@@ -47,6 +47,22 @@ export default function swipe(options, cb) {
   }
 }
 
+export function swipeOnElementToLeft(element) {
+  const location = element.getLocation();
+  const { width } = driver.getWindowRect();
+  const options = {
+    from: {
+      x: width - location.x - 10,
+      y: location.y
+    },
+    to: {
+      x: (width - location.x) / 2,
+      y: location.y
+    }
+  };
+  _swipe(options);
+}
+
 export function swipeUp(percentage = 1) {
   _swipeOnPercentage(
     _calculateXY(SWIPE_DIRECTION.up.start, percentage),
