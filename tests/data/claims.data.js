@@ -87,3 +87,34 @@ export const outpatientClaimLabel = {
   android:
     '//*[@text="Pending"]/parent::android.view.ViewGroup/android.widget.TextView[contains(@text,"claim")]'
 };
+
+export const approvedClaim = {
+  ios:
+    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Dental Care")][1]',
+  android:
+    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Dental Care"][1]'
+};
+
+export const approvedClaimGMP = {
+  ios:
+    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"General Medical Practitioner")][1]',
+  android:
+    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="General Medical Practitioner"][1]'
+};
+
+export const verifyImageLoadedCheck = {
+  ios: '//*[contains(@name,"assets/src/images/claimApprovedClaim")]',
+  android: '//android.widget.ImageView'
+};
+
+export const approvedClaimLabel = {
+  ios:
+    '//XCUIElementTypeStaticText[@name="Approved"]/following-sibling::XCUIElementTypeOther',
+  android:
+    '//*[@text="Approved"]/parent::android.view.ViewGroup/android.widget.TextView[contains(@text,"claim")]'
+};
+
+export const settlementDate = {
+  ios: '//XCUIElementTypeStaticText[@name="Settlement date"]',
+  android: '//*[@text="Settlement date"]'
+};

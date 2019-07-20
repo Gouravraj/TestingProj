@@ -9,7 +9,6 @@ import {
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import { CLAIMS as SELECTOR } from '../../selectors';
-import ClaimsScreen from '../../screenobjects/claims.screen';
 import wait from '../../helpers/api/wait';
 
 export function _patientDetails(dependent, isPN = false, isCN = false) {
@@ -168,10 +167,15 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
   return isVisible;
 }
 
-export function _getSettlementDate() {
+export function _getSettlementDate(settlementDate) {
+  const platform = getPlatform();
   let isVisible;
   try {
-    isVisible = wait(ClaimsScreen.settlementDate);
+    if (platform === 'ios') {
+      isVisible = wait(settlementDate.ios);
+    } else if (platform === 'android') {
+      isVisible = wait(settlementDate.android);
+    }
   } catch (error) {
     isVisible = false;
   }
@@ -229,4 +233,44 @@ export function _outpatientClaimLabel(outpatientClaimLabel) {
     data = 'Not Found';
   }
   return data;
+}
+
+export function _approvedClaims(approvedClaim) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    if (platform === 'ios') {
+      checkIfDisplayedWithScrollDown($(approvedClaim.ios), 100, 0);
+      isVisible = wait(approvedClaim.ios);
+      if (isVisible) {
+        $(approvedClaim.ios).click();
+      }
+    } else if (platform === 'android') {
+      checkIfDisplayedWithScrollDown($(approvedClaim.android), 100, 0);
+      isVisible = wait(approvedClaim.android);
+      if (isVisible) {
+        $(approvedClaim.android).click();
+      }
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _checkLoadedImageOnApprovedClaims(verifyImageLoadedCheck) {
+  const platform = getPlatform();
+  let isVisible;
+  driver.pause(4000);
+  try {
+    if (platform === 'ios') {
+      isVisible = wait(verifyImageLoadedCheck.ios);
+    } else if (platform === 'android') {
+      isVisible = wait(verifyImageLoadedCheck.android);
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
 }

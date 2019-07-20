@@ -11,7 +11,9 @@ import {
   _getSettlementDate,
   _receiptImage,
   _referralLetter,
-  _outpatientClaimLabel
+  _outpatientClaimLabel,
+  _approvedClaims,
+  _checkLoadedImageOnApprovedClaims
 } from './internal/_claims';
 import {
   details,
@@ -30,7 +32,12 @@ import {
   detailsDentalCare,
   receiptImage,
   referralLetter,
-  outpatientClaimLabel
+  outpatientClaimLabel,
+  approvedClaim,
+  verifyImageLoadedCheck,
+  approvedClaimLabel,
+  settlementDate,
+  approvedClaimGMP
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -118,7 +125,7 @@ export function reimbursedAmount() {
 }
 
 export function getSettlementDate() {
-  return _getSettlementDate();
+  return _getSettlementDate(settlementDate);
 }
 
 export function loadedImage() {
@@ -143,4 +150,20 @@ export function referralLetters() {
 
 export function outpatientClaimLables() {
   return _outpatientClaimLabel(outpatientClaimLabel);
+}
+
+export function checkAndClickApprovedClaimsForDentalCare() {
+  return _approvedClaims(approvedClaim);
+}
+
+export function verifyLoadedImageCheck() {
+  return _checkLoadedImageOnApprovedClaims(verifyImageLoadedCheck);
+}
+
+export function approvedClaimLables() {
+  return _outpatientClaimLabel(approvedClaimLabel);
+}
+
+export function checkAndClickApprovedClaimsForGeneralMedicalPractitioner() {
+  return _approvedClaims(approvedClaimGMP);
 }
