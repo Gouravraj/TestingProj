@@ -240,18 +240,10 @@ export function _approvedClaims(approvedClaim) {
   let isVisible;
 
   try {
-    if (platform === 'ios') {
-      checkIfDisplayedWithScrollDown($(approvedClaim.ios), 100, 0);
-      isVisible = wait(approvedClaim.ios);
-      if (isVisible) {
-        $(approvedClaim.ios).click();
-      }
-    } else if (platform === 'android') {
-      checkIfDisplayedWithScrollDown($(approvedClaim.android), 100, 0);
-      isVisible = wait(approvedClaim.android);
-      if (isVisible) {
-        $(approvedClaim.android).click();
-      }
+    checkIfDisplayedWithScrollDown($(approvedClaim[platform]), 100, 0);
+    isVisible = wait(approvedClaim[platform]);
+    if (isVisible) {
+      $(approvedClaim[platform]).click();
     }
   } catch (error) {
     isVisible = false;

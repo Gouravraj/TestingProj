@@ -3,7 +3,7 @@ import {
   navigateToClaimsScreen
 } from '../actions/navigator.action';
 import * as claims from '../actions/claims.action';
-import { loginAsNimit, loginAs } from '../actions/login.action';
+import { loginAs } from '../actions/login.action';
 import { CLAIMS as SELECTOR } from '../selectors';
 import { validCredentials } from '../../data/login.data';
 import { validCredentials2 } from '../../data/login.data';
@@ -265,7 +265,7 @@ describe('Dental Care - Employee approved claims should be', () => {
 
 describe('General Medical Practitioner - Employee approved claims should be', () => {
   beforeEach(() => {
-    loginAsNimit();
+    loginAs(validCredentials2);
     // driver.pause(30000);
     isNavigationBarVisible();
     navigateToClaimsScreen();
@@ -296,9 +296,9 @@ describe('General Medical Practitioner - Employee approved claims should be', ()
     expect(claims.referralLetters()).toBeFalsy();
   });
 
-  it('Specific expectation: label displayed below the image is "wellness claim"', () => {
+  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     claims.checkAndClickApprovedClaimsForGeneralMedicalPractitioner();
-    expect(claims.approvedClaimLables()).toEqual('Wellness claim');
+    expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
   });
 
   afterEach(() => {
