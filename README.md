@@ -1,30 +1,26 @@
 # distribution-mobile-automation
 
+## Prerequisites
+
+You can run Android on Windows but to run iOS, you should use macOS. So, this guide only for macOS.
+
 ## Get Started
 
 ```bash
 npm install
 ```
 
-It will install dependencies only for repository.
+It will install dependencies only for this repository.
 
 You should install another dependencies to run script as well. Important thing is Xcode and Android SDK. You can check from below.
 
 ## Structure
 
+- `.github` - Only for Github
 - `app` - App package files (e.g app-debug.app, app-debug.apk)
 - `config` - Config files
 - `scripts` - `NPM` scripts (package.json#scripts)
 - `tests` - UI test scripts (mobile, web)
-
-## Homebrew
-
-You can install package manager for macOS, otherwise you should install in manually.
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew --version
-```
 
 ## Check dependencies
 
@@ -37,18 +33,26 @@ appium-doctor
 
 If you will install everything from `required` section, you are ready to run test scripts.
 
+## Homebrew
+
+You can install package manager for macOS, otherwise you should install in manually.
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew --version
+```
+
 ## Install JDK
 
-MacOS don't install JAVA anymore. So, you should install it. `brew` is your friend now.
+MacOS don't install JAVA anymore. So, you should install it manually. And Homebrew is your friend.
 
 ```bash
 brew tap AdoptOpenJDK/openjdk
 brew cask install adoptopenjdk8
 
-# build
+# build, project management
 brew install ant
 brew install gradle
-# project management
 brew install maven
 ```
 
@@ -56,7 +60,7 @@ brew install maven
 
 Most common way to install Android SDK, install Android Studio. Then, it will install automatically but you need to set path manually for some commands.
 
-Another way is, install `android-platform-tools android-sdk` by `brew`.
+Another way is, install `android-platform-tools android-sdk` by Homebrew.
 
 ```bash
 brew tap caskroom/cask

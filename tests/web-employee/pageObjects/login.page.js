@@ -1,4 +1,4 @@
-import Page from './page';
+import Page from './app.page';
 
 const SELECTORS = {
   USER_NAME: "//input[@data-testid='input-email']",

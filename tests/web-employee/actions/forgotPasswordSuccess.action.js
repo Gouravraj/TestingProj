@@ -1,4 +1,4 @@
-import ForgotPasswordSuccessPage from '../pageObjects/forgotPasswordSuccessPage';
+import ForgotPasswordSuccessPage from '../pageObjects/forgotPasswordSuccess.page';
 
 export function getForgotPasswordSuccessPageLabel() {
   ForgotPasswordSuccessPage.forgotPwdSuceesPageLabel().waitForExist(5000);
