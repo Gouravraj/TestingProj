@@ -11,11 +11,11 @@ export {
   swipeUp,
   swipeDown,
   swipeLeft,
-  swipeRight
+  swipeRight,
+  swipeLeftOnElementToFindElement
 } from './api/swipe';
 export {
   default as scroll,
-  checkIfDisplayedWithScrollDown,
-  swipeLeftOnElementToFindElement
+  checkIfDisplayedWithScrollDown
 } from './api/scroll';
 export { default as platform } from './api/platform';

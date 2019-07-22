@@ -90,3 +90,29 @@ export function swipeRight(percentage = 1) {
     _calculateXY(SWIPE_DIRECTION.right.end, percentage)
   );
 }
+
+// scroolOnElement: Element is scrolled on
+// DestinationElement: Scroll will be stopped if this element is found
+export function swipeLeftOnElementToFindElement(
+  scrollOnElement,
+  toFindElement,
+  maxScrolls,
+  amount = 0
+) {
+  if (
+    (!toFindElement.isExisting() || !toFindElement.isDisplayed()) &&
+    amount <= maxScrolls
+  ) {
+    swipeOnElementToLeft(scrollOnElement);
+    swipeLeftOnElementToFindElement(
+      scrollOnElement,
+      toFindElement,
+      maxScrolls,
+      amount + 1
+    );
+  } else if (amount > maxScrolls) {
+    throw new Error(
+      `The element '${toFindElement}' could not be found or is not visible.`
+    );
+  }
+}
