@@ -101,11 +101,7 @@ export function _reviewClaim(submitClaimButton) {
 
   checkIfDisplayedWithScrollDown($(SELECTOR.buttonSubmitClaim), 100, 0);
 
-  if (platform === 'ios') {
-    $(submitClaimButton.ios).click();
-  } else if (platform === 'android') {
-    $(submitClaimButton.android).click();
-  }
+  $(submitClaimButton[platform]).click();
 }
 
 export function _termsConditions() {
@@ -115,25 +111,15 @@ export function _termsConditions() {
 export function _viewSubmittedClaims(viewSubmittedClaim) {
   const platform = getPlatform();
 
-  if (platform === 'ios') {
-    wait(viewSubmittedClaim.ios);
-    $(viewSubmittedClaim.ios).click();
-  } else if (platform === 'android') {
-    wait(viewSubmittedClaim.android);
-    $(viewSubmittedClaim.android).click();
-  }
+  wait(viewSubmittedClaim[platform]);
+  $(viewSubmittedClaim[platform]).click();
 }
+
 export function _clickPendingClaims(gmpPendingClaim) {
   const platform = getPlatform();
   driver.pause(4000);
-  if (platform === 'ios') {
-    wait(gmpPendingClaim.ios);
-    const elements = driver.$$(gmpPendingClaim.ios);
-    $(elements[0].selector).click();
-  } else if (platform === 'android') {
-    wait(gmpPendingClaim.android);
-    $(gmpPendingClaim.android).click();
-  }
+  wait(gmpPendingClaim[platform]);
+  $(gmpPendingClaim[platform]).click();
 }
 
 export function _reimbursedAmount(isReimbursedAmountVisible) {
@@ -141,11 +127,7 @@ export function _reimbursedAmount(isReimbursedAmountVisible) {
   let isVisible;
 
   try {
-    if (platform === 'ios') {
-      isVisible = wait(isReimbursedAmountVisible.ios);
-    } else if (platform === 'android') {
-      isVisible = wait(isReimbursedAmountVisible.android);
-    }
+    isVisible = wait(isReimbursedAmountVisible[platform]);
   } catch (error) {
     isVisible = false;
   }
@@ -157,11 +139,7 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
   let isVisible;
   driver.pause(4000);
   try {
-    if (platform === 'ios') {
-      isVisible = wait(pendingClaimLoadedImage.ios);
-    } else if (platform === 'android') {
-      isVisible = wait(pendingClaimLoadedImage.android);
-    }
+    isVisible = wait(pendingClaimLoadedImage[platform]);
   } catch (error) {
     isVisible = false;
   }
@@ -183,13 +161,8 @@ export function _receiptImage(receiptImage) {
   let isVisible;
 
   try {
-    if (platform === 'ios') {
-      checkIfDisplayedWithScrollDown($(receiptImage.ios), 3, 0);
-      isVisible = wait(receiptImage.ios);
-    } else if (platform === 'android') {
-      checkIfDisplayedWithScrollDown($(receiptImage.android), 3, 0);
-      isVisible = wait(receiptImage.android);
-    }
+    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    isVisible = wait(receiptImage[platform]);
   } catch (error) {
     isVisible = false;
   }
@@ -201,13 +174,8 @@ export function _referralLetter(receiptImage, referralLetter) {
   let isVisible;
 
   try {
-    if (platform === 'ios') {
-      checkIfDisplayedWithScrollDown($(receiptImage.ios), 3, 0);
-      isVisible = wait(referralLetter.ios);
-    } else if (platform === 'android') {
-      checkIfDisplayedWithScrollDown($(receiptImage.android), 3, 0);
-      isVisible = wait(referralLetter.android);
-    }
+    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    isVisible = wait(referralLetter[platform]);
   } catch (error) {
     isVisible = false;
   }
@@ -219,12 +187,7 @@ export function _outpatientClaimLabel(outpatientClaimLabel) {
   var data;
 
   try {
-    if (platform === 'ios') {
-      data = $(outpatientClaimLabel.ios).getText();
-    } else if (platform === 'android') {
-      wait(outpatientClaimLabel.android);
-      data = $(outpatientClaimLabel.android).getText();
-    }
+    data = $(outpatientClaimLabel[platform]).getText();
   } catch (error) {
     data = 'Not Found';
   }
