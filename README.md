@@ -12,7 +12,7 @@ You should install another dependencies to run script as well. Important thing i
 
 ## Structure
 
-- `app` - App package files (e.g app-debug.ap[p|k])
+- `app` - App package files (e.g app-debug.app, app-debug.apk)
 - `config` - Config files
 - `scripts` - `NPM` scripts (package.json#scripts)
 - `tests` - UI test scripts (mobile, web)
@@ -93,24 +93,13 @@ vi ~/.bashrc
 vi ~/.zshrc
 ```
 
----
-
-*VI commands*
-
-- when editor opened
-- press `i` (edit mode)
-- press `esc` (finish edit mode)
-- press `:` (commands mode, then put `wq`)
-
----
-
-**Installed by `brew`**
+**If installed by `brew`**
 
 ```bash
 export ANDROID_HOME=/usr/local/share/android-sdk
 ```
 
-**Installed by Android Studio**
+**If installed by Android Studio**
 
 - run Android Studio, press `configure`, press `SDK manager`
 - then you can see `Android SDK Location: `
@@ -119,7 +108,7 @@ export ANDROID_HOME=/usr/local/share/android-sdk
 export ANDROID_HOME=[android_sdk_location_here]
 ```
 
-Add if also,
+Afterwards, add the following lines
 
 ```bash
 export ANT_HOME=/usr/local/opt/ant
@@ -129,10 +118,6 @@ export GRADLE_HOME=/usr/local/opt/gradle
 export JAVA_HOME=/Library/Java/JavaVirtualMachine/adoptopenjdk-8.jdk/Contents/Home
 ```
 
-**Set PATH**
-
-After `*_HOME` valuables is ready,
-
 ```bash
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$ANT_HOME/bin:$PATH
@@ -141,7 +126,18 @@ export PATH=$GRADLE_HOME/bin:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 ```
 
-After finish it, apply it
+---
+
+*Note: VI commands*
+
+- when editor opened
+- press `i` (edit mode)
+- press `esc` (finish edit mode)
+- press `:` (commands mode, then put `wq`)
+
+---
+
+After you finish adding the lines in bash, execute the following commands
 
 ```bash
 source ~/.bashrc # or ~/.zshrc
