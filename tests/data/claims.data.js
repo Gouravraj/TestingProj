@@ -23,8 +23,7 @@ export const receiptAmount = 500;
 export const image = {
   ios:
     '//XCUIElementTypeCell[contains(@name,"Photo, Portrait, August 09, 2012")]',
-  android:
-    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.view.ViewGroup'
+  android: '//android.view.ViewGroup[contains(@content-desc,"Photo taken on")]'
 };
 
 export const dependent = 'Karen Brown';
@@ -117,4 +116,11 @@ export const approvedClaimLabel = {
 export const settlementDate = {
   ios: '//XCUIElementTypeStaticText[@name="Settlement date"]',
   android: '//*[@text="Settlement date"]'
+};
+
+export const approvedClaimSC = {
+  ios:
+    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Specialist Consultation")][1]',
+  android:
+    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Specialist Consultation"][1]'
 };

@@ -5,8 +5,7 @@ import {
 import * as claims from '../actions/claims.action';
 import { loginAs } from '../actions/login.action';
 import { CLAIMS as SELECTOR } from '../selectors';
-import { validCredentials } from '../../data/login.data';
-import { validCredentials2 } from '../../data/login.data';
+import { validCredentials, validCredentials2 } from '../../data/login.data';
 
 describe('Employee should be', () => {
   beforeEach(() => {
@@ -31,38 +30,6 @@ describe('Employee should be', () => {
 
   it('able to submit a claim for self with updating contact number', () => {
     expect(claims.makeClaimWithContact()).toBeTruthy();
-  });
-
-  afterEach(() => {
-    driver.reset();
-  });
-});
-
-describe('General Medical Practitioner-Employee pending claims should be', () => {
-  beforeEach(() => {
-    loginAs(validCredentials);
-    //driver.pause(30000);
-    isNavigationBarVisible();
-    navigateToClaimsScreen();
-    $(SELECTOR.buttonMakeAClaim).click();
-    claims.makeClaim();
-  });
-
-  it('able to verify the images loaded has a clock', () => {
-    claims.viewSubmittedClaims();
-    expect(claims.loadedImage()).toBeTruthy();
-  });
-
-  fit('able to verify the reimbursed amount is not displayed', () => {
-    claims.viewSubmittedClaims();
-    claims.clickPendingClaims();
-    expect(claims.reimbursedAmount()).toBeFalsy();
-  });
-
-  it('able to verify the settlement date is not displayed', () => {
-    claims.viewSubmittedClaims();
-    claims.clickPendingClaims();
-    expect(claims.getSettlementDate()).toBeFalsy();
   });
 
   afterEach(() => {
@@ -298,6 +265,49 @@ describe('General Medical Practitioner - Employee approved claims should be', ()
 
   it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     claims.checkAndClickApprovedClaimsForGeneralMedicalPractitioner();
+    expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
+  });
+
+  afterEach(() => {
+    driver.reset();
+  });
+});
+
+describe('Specialist Consultation - Employee approved claims should be', () => {
+  beforeEach(() => {
+    loginAs(validCredentials2);
+    // driver.pause(30000);
+    isNavigationBarVisible();
+    navigateToClaimsScreen();
+  });
+
+  it('General Expectation: able to verify the images loaded has a clock', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
+    expect(claims.verifyLoadedImageCheck()).toBeTruthy();
+  });
+
+  it('General Expectation: able to verify the reimbursed amount is not displayed', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
+    expect(claims.reimbursedAmount()).toBeTruthy();
+  });
+
+  it('General Expectation: able to verify the settlement date is displayed', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
+    expect(claims.getSettlementDate()).toBeTruthy();
+  });
+
+  it('Specific expectation: only the receipt image is displayed', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
+    expect(claims.receiptImages()).toBeTruthy();
+  });
+
+  it('Specific expectation: no referral letter should be displayed', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
+    expect(claims.referralLetters()).toBeTruthy();
+  });
+
+  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
+    claims.checkAndClickApprovedClaimsForSpecialistConsultation();
     expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
   });
 

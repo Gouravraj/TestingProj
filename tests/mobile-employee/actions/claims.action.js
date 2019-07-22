@@ -37,7 +37,8 @@ import {
   verifyImageLoadedCheck,
   approvedClaimLabel,
   settlementDate,
-  approvedClaimGMP
+  approvedClaimGMP,
+  approvedClaimSC
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -166,4 +167,8 @@ export function approvedClaimLables() {
 
 export function checkAndClickApprovedClaimsForGeneralMedicalPractitioner() {
   return _approvedClaims(approvedClaimGMP);
+}
+
+export function checkAndClickApprovedClaimsForSpecialistConsultation() {
+  return _approvedClaims(approvedClaimSC);
 }
