@@ -1,8 +1,9 @@
 import { loginAs } from '../actions/login.action';
-import { landingCredentials } from '../../data/login.data';
-import { validCredentials } from '../../data/login.data';
-import { updateHealthData } from '../../data/health.data';
-import { expectResultHealthData } from '../../data/health.data';
+import { landingCredentials, validCredentials } from '../../data/login.data';
+import {
+  updateHealthData,
+  expectResultHealthData
+} from '../../data/health.data';
 
 import * as healthAction from '../actions/health.action';
 // import { SSL_OP_EPHEMERAL_RSA } from 'constants';
