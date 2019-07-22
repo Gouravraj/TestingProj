@@ -1,4 +1,4 @@
-import Page from './page';
+import Page from './app.page';
 
 const SELECTORS = {
   FORGOTPWD_SUCCESS_LABEL: "//span[contains(text(),'Check')]",

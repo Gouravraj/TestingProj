@@ -1,4 +1,4 @@
-import Page from './page';
+import Page from './app.page';
 
 const SELECTORS = {
   FORGOTPWD_EMAIL_INPUT: '//input[@data-testid="input-resetEmail"]',
