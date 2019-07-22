@@ -157,7 +157,7 @@ After then, your ssh-key will be saved on clipboard. Then, go to Github and clic
 ## Node.js
 
 ```bash
-bew install node # it will install `npm` also
+brew install node # it will install `npm` also
 ```
 
 ## Packages
