@@ -2,6 +2,7 @@ import { loginAs } from '../actions/login.action';
 import { landingCredentials } from '../../data/login.data';
 import { validCredentials } from '../../data/login.data';
 import { updateHealthData } from '../../data/health.data';
+import { expectResultHealthData } from '../../data/health.data';
 
 import * as healthAction from '../actions/health.action';
 // import { SSL_OP_EPHEMERAL_RSA } from 'constants';
@@ -28,7 +29,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  it('Story: Displaying of BMI and Prediabetes results #22', () => {
+  fit('Story: Displaying of BMI and Prediabetes results #22', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -44,60 +45,62 @@ describe('Employee should,', () => {
     // VP1. Verify BMI info is correctly
     expect(
       healthAction.isBMIDisplayCorrectly(
-        '19.5',
-        'Healthy',
-        'Your BMI looks great - keep it up! Eat well and exercise regularly to stay healthy.'
+        expectResultHealthData.BMI,
+        expectResultHealthData.BMIStatus,
+        expectResultHealthData.BMIStatement
       )
     ).toBeTruthy();
 
     // VP2. Verify Diabetes info is correctly
     expect(
       healthAction.isDiabeteDisplayCorrectly(
-        'Low risk',
-        'Awesome! Maintain a healthy lifestyle to keep your risk low.'
+        expectResultHealthData.DiabeteStatus,
+        expectResultHealthData.DiabeteStatement
       )
     ).toBeTruthy();
 
     // VP3. Verify Alcohol info is correctly
     expect(
-      healthAction.isAlcoholDisplayCorrectly('None', 'Good job!')
+      expectResultHealthData.AlcoholAssessment,
+      expectResultHealthData.AlcoholStatement
     ).toBeTruthy();
 
     // VP4. Verify Tobacco info is correctly
     expect(
       healthAction.isTobaccoDisplayCorrectly(
-        'Non-smoker',
-        'Good job! Be careful to avoid exposure to second-hand smoke.'
+        expectResultHealthData.TobaccoAssessment,
+        expectResultHealthData.TobaccoStatement
       )
     ).toBeTruthy();
 
     // VP5. Verify Exercise info is correctly
     expect(
       healthAction.isExerciseDisplayCorrectly(
-        'Active',
-        'Well done, keep it up!'
+        expectResultHealthData.ExerciseAssessment,
+        expectResultHealthData.ExerciseStatement
       )
     ).toBeTruthy();
 
     // VP6. Verify Nutrition info is correctly
     expect(
       healthAction.isNutritionDisplayCorrectly(
-        'Normal',
-        'Good! Choose water instead of sweetened drinks whenever possible.'
+        expectResultHealthData.NutritionAssessment,
+        expectResultHealthData.NutritionStatement
       )
     ).toBeTruthy();
 
     // VP7. Verify Sleep info is correctly
     expect(
       healthAction.isSleepDisplayCorrectly(
-        'Well rested',
-        'Nice! Try to get at least 7-9 hours sleep each night to stay focused and avoid sleep-related health problems.'
+        expectResultHealthData.SleepAssessment,
+        expectResultHealthData.SleepStatement
       )
     ).toBeTruthy();
 
     // VP8. Verify Mental info is correctly
     expect(
-      healthAction.isMentalDisplayCorrectly('Normal', 'Keep it up!')
+      expectResultHealthData.MentalAssessment,
+      expectResultHealthData.MentalStatement
     ).toBeTruthy();
   });
 
