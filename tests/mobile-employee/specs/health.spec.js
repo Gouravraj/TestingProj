@@ -34,14 +34,11 @@ describe('Employee should,', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
-    // Pre-con. Set up data'
-    const submitHealthData = updateHealthData;
-
     // Step 1. Click update my health data button
     healthAction.clickUpdateHealthDataButton();
 
     // Step 2. Input data and click next
-    healthAction.updateHealthAs(submitHealthData);
+    healthAction.updateHealthAs(updateHealthData);
 
     // VP1. Verify BMI info is correctly
     expect(
