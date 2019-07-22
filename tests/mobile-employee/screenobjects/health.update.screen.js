@@ -1,7 +1,6 @@
 import AppScreen from './app.screen';
 import { checkIfDisplayedWithScrollDown } from '../helpers/api';
 import txt from '../helpers/text';
-import '../helpers/format';
 
 const SELECTORS = {
   HEALTH_UPDATE_SCREEN: '~Height',
