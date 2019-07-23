@@ -171,6 +171,7 @@ rm -rf app/*
 mv ~/Downloads/app-release.apk ./app/app-debug.apk
 mv ~/Downloads/EmployeeFrontend.app ./app/app-debug.app
 ```
+Note: You need to download the app and apk files in GoCD (https://ci.cxapalawandev.com)
 
 ## Run tests
 
