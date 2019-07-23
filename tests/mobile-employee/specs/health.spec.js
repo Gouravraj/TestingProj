@@ -15,7 +15,7 @@ describe('Employee should,', () => {
     driver.reset();
   });
 
-  it('Story: Displaying of the health landing page #4', () => {
+  it('Story #4: Displaying of the health landing page', () => {
     // Pre-con. Log in as landing credentials account
     loginAs(landingCredentials);
 
@@ -30,7 +30,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  it('Story: Displaying of BMI and Prediabetes results #22', () => {
+  it('Story #22: Displaying of BMI and Prediabetes results', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -91,6 +91,20 @@ describe('Employee should,', () => {
       expectResultHealthData.MentalAssessment,
       expectResultHealthData.MentalStatement
     ).toBeTruthy();
+  });
+
+  fit('Story #30: Take photo via camera on mobile for face aging', () => {
+    // Pre-con. Log in as landing credentials account
+    loginAs(validCredentials);
+
+    // Step 1. Click update my health data button
+    healthAction.clickUpdateHealthDataButton();
+
+    // Step 2. Remove photo (if have)
+    healthAction.removePhoto();
+
+    // Step 3. Take photo (if have)
+    healthAction.takePhoto();
   });
 
   it('be able to update health data', () => {
