@@ -10,7 +10,7 @@ import txt, { $txt } from '../text';
  */
 export default function photo(action, options) {
   options = {
-    permit: false,
+    permit: true,
     ...options
   };
 
@@ -55,6 +55,14 @@ export default function photo(action, options) {
 
       $('~Shutter').click();
       $('~Done').click();
+    }
+  } else if (action === 'remove') {
+    if (platform === 'ios') {
+      // todo
+    } else if (platform == 'android') {
+      // todo
+      $txt('', 'android.widget.TextView').click();
+      $txt('DELETE', 'android.widget.Button').click();
     }
   }
 
