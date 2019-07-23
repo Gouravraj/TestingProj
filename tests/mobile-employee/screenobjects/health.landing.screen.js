@@ -14,6 +14,7 @@ class HealthLandingScreen extends AppScreen {
   searchForClinicButton() {
     return $(SELECTORS.SEARCH_FOR_CLINICS_BUTTON);
   }
+
   addMyHealthDataButton() {
     return $(SELECTORS.ADD_MY_HEALTH_DATA_BUTTON);
   }

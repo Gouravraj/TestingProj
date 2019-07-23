@@ -30,7 +30,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  fit('Story: Displaying of BMI and Prediabetes results #22', () => {
+  it('Story: Displaying of BMI and Prediabetes results #22', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -39,15 +39,6 @@ describe('Employee should,', () => {
 
     // Step 2. Input data and click next
     healthAction.updateHealthAs(updateHealthData);
-
-    // VP1. Verify BMI info is correctly
-    expect(
-      healthAction.isBMIDisplayCorrectly(
-        expectResultHealthData.BMI,
-        expectResultHealthData.BMIStatus,
-        expectResultHealthData.BMIStatement
-      )
-    ).toBeTruthy();
 
     // VP2. Verify Diabetes info is correctly
     expect(

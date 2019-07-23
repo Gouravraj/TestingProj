@@ -50,6 +50,7 @@ export function updateHealthAs(updateHealthData) {
   HealthUpdateScreen.weightField.setValue(updateHealthData.Weight);
   HealthUpdateScreen.AboutMe.click();
 
+  /* //Pending temporary these action, just focust on entering values in Height and Weight
   // Waist
   HealthUpdateScreen.waistField.click();
   HealthUpdateScreen.waistField.setValue(updateHealthData.Waist);
@@ -95,6 +96,7 @@ export function updateHealthAs(updateHealthData) {
     HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)));
     $(txt(updateHealthData.Depress)).click();
   }
+  */
 
   // Click Next
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
