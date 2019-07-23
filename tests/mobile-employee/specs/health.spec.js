@@ -94,17 +94,26 @@ describe('Employee should,', () => {
   });
 
   fit('Story #30: Take photo via camera on mobile for face aging', () => {
-    // Pre-con. Log in as landing credentials account
+    // Pre-con 1. Log in as landing credentials account
     loginAs(validCredentials);
 
-    // Step 1. Click update my health data button
+    // Pre-con 2. Click update my health data button
     healthAction.clickUpdateHealthDataButton();
 
-    // Step 2. Remove photo (if have)
+    // Pre-con 3. Remove photo (if have)
     healthAction.removePhoto();
 
     // Step 3. Take photo (if have)
     healthAction.takePhoto();
+
+    // VP1. Verify taken photo displays on Update page
+    expect(healthAction.isPhotoExistingOnUpdatePage()).toBeTruthy();
+
+    // Step 4. Click Next
+    healthAction.clickNextButton();
+
+    //VP2. Verify taken photo displays on Health page
+    // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
 
   it('be able to update health data', () => {

@@ -14,6 +14,22 @@ export function isLifeStyleTabSelected() {
   return isSelected;
 }
 
+export function clickNextButton() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.next.click();
+}
+
+export function isPhotoExistingOnUpdatePage() {
+  return HealthUpdateScreen.myPhoto.isExisting();
+}
+
+export function isPhotoExistingOnLifestylePage() {
+  return (
+    HealthScreen.healthyLifeStylePicture.isExisting() &&
+    HealthScreen.currentLifeStylePicture.isExisting()
+  );
+}
+
 export function takePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
   HealthUpdateScreen.addPhoto.click();
@@ -22,7 +38,7 @@ export function takePhoto() {
 
 export function removePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
-  if (HealthUpdateScreen.myPhoto.isExisting()) {
+  if (isPhotoExistingOnUpdatePage()) {
     HealthUpdateScreen.myPhoto.click();
     photo('remove');
   }

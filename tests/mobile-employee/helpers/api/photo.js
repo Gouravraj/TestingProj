@@ -10,7 +10,7 @@ import txt, { $txt } from '../text';
  */
 export default function photo(action, options) {
   options = {
-    permit: true,
+    permit: false,
     ...options
   };
 
