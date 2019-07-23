@@ -3,6 +3,7 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
+import { photo } from '../helpers/api';
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
@@ -11,6 +12,20 @@ export function isLifeStyleTabSelected() {
     'selected'
   );
   return isSelected;
+}
+
+export function takePhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.addPhoto.click();
+  photo('take');
+}
+
+export function removePhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  if (HealthUpdateScreen.myPhoto.isExisting()) {
+    HealthUpdateScreen.myPhoto.click();
+    photo('remove');
+  }
 }
 
 export function isLandingHealthPageDisplayed() {

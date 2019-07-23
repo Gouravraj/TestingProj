@@ -19,7 +19,10 @@ const SELECTORS = {
   NOT_AT_ALL_DEPRESS_IOS: '(//XCUIElementTypeOther[@name="Not at all"])[2]',
   NOT_AT_ALL_DEPRESS_ANDROID:
     '(//android.view.ViewGroup[@content-desc="Not at all"])[2]/android.view.ViewGroup/android.widget.TextView',
-  NEXT: '~Next'
+  NEXT: '~Next',
+  ADD_PHOTO: '~Add photo for Future me',
+  MY_PHOTO:
+    '//android.view.ViewGroup[@content-desc="View photo of Future me"]/android.view.ViewGroup/android.widget.ImageView'
 };
 
 class HealthUpdateScreen extends AppScreen {
@@ -79,6 +82,14 @@ class HealthUpdateScreen extends AppScreen {
 
   get next() {
     return $(SELECTORS.NEXT);
+  }
+
+  get addPhoto() {
+    return $(SELECTORS.ADD_PHOTO);
+  }
+
+  get myPhoto() {
+    return $(SELECTORS.MY_PHOTO);
   }
 }
 export default new HealthUpdateScreen();
