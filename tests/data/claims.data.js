@@ -89,16 +89,16 @@ export const outpatientClaimLabel = {
 
 export const approvedClaim = {
   ios:
-    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Dental Care")][1]',
+    '(//XCUIElementTypeOther[contains(@name,"Approved") and contains(@name,"Dental Care")])[16]',
   android:
-    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Dental Care"][1]'
+    '((//android.view.ViewGroup[@content-desc="Approved"])/following-sibling::android.widget.TextView[@text="Dental Care"])[1]'
 };
 
 export const approvedClaimGMP = {
   ios:
-    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"General Medical Practitioner")][1]',
+    '(//XCUIElementTypeOther[contains(@name,"Approved") and contains(@name,"General Medical")])[16]',
   android:
-    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="General Medical Practitioner"][1]'
+    '((//android.view.ViewGroup[@content-desc="Approved"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"])[1]'
 };
 
 export const verifyImageLoadedCheck = {
@@ -120,7 +120,7 @@ export const settlementDate = {
 
 export const approvedClaimSC = {
   ios:
-    '(//XCUIElementTypeOther[@name="Approved & Rejected"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Specialist Consultation")][1]',
+    '(//XCUIElementTypeOther[contains(@name,"Approved") and contains(@name,"Specialist Consultation")])[16]',
   android:
-    '//*[@text="Approved & Rejected"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Specialist Consultation"][1]'
+    '((//android.view.ViewGroup[@content-desc="Approved"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"])[1]'
 };

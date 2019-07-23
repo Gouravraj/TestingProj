@@ -165,8 +165,8 @@ describe('Dental Care - Employee pending claims should be', () => {
 
 describe('Dental Care - Employee approved claims should be', () => {
   beforeEach(() => {
-    loginAs(validCredentials2);
-    // driver.pause(30000);
+    //loginAs(validCredentials2);
+    driver.pause(30000);
     isNavigationBarVisible();
     navigateToClaimsScreen();
   });
