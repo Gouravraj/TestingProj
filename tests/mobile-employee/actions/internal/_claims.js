@@ -117,7 +117,7 @@ export function _viewSubmittedClaims(viewSubmittedClaim) {
 export function _clickPendingClaims(gmpPendingClaim) {
   const platform = getPlatform();
   driver.pause(4000);
-  wait(gmpPendingClaim[platform]);
+  checkIfDisplayedWithScrollDown($(gmpPendingClaim[platform]), 100, 0);
   $(gmpPendingClaim[platform]).click();
 }
 
