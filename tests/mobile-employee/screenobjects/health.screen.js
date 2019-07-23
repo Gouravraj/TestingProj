@@ -13,7 +13,7 @@ const SELECTORS = {
 
 class HealthScreen extends AppScreen {
   constructor() {
-    super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON_ANDROID);
+    super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
   }
 
   get updateHealthDataButton() {
