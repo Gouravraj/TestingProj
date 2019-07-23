@@ -35,13 +35,13 @@ export const isReimbursedAmountVisible = {
 
 export const gmpPendingClaim = {
   ios:
-    '(//XCUIElementTypeOther[@name="Pending"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"General Medical Practitioner")][1]',
+    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"General Medical Practitioner")])[1]',
   android:
-    '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="General Medical Practitioner"][1]'
+    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"])[1]'
 };
 
 export const pendingClaimLoadedImage = {
-  ios: '(//XCUIElementTypeOther[starts-with(@name," ")])[2]',
+  ios: '(//XCUIElementTypeOther[starts-with(@name,"Pending")])[2]',
   android:
     '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup/android.view.ViewGroup[3]//*[@text=""]'
 };
@@ -58,16 +58,16 @@ export const viewSubmittedClaim = {
 
 export const specialistConsultationPendingClaim = {
   ios:
-    '(//XCUIElementTypeOther[@name="Pending"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Specialist Consultation")][1]',
+    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"Specialist Consultation")])[1]',
   android:
-    '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Specialist Consultation"][1]'
+    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"])[1]'
 };
 
 export const dentalCarePendingClaim = {
   ios:
-    '(//XCUIElementTypeOther[@name="Pending"])[1]/following-sibling::XCUIElementTypeOther[contains(@name,"Dental Care")][1]',
+    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"Dental Care")])[1]',
   android:
-    '//*[@text="Pending"]/parent::android.view.ViewGroup/parent::android.view.ViewGroup/parent::android.view.ViewGroup//*[@text="Dental Care"][1]'
+    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Dental Care"])[1]'
 };
 
 export const receiptImage = {
