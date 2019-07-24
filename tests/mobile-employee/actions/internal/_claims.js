@@ -161,7 +161,7 @@ export function _receiptImage(receiptImage) {
   let isVisible;
 
   try {
-    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 7, 0);
     isVisible = wait(receiptImage[platform]);
   } catch (error) {
     isVisible = false;
@@ -174,7 +174,7 @@ export function _referralLetter(receiptImage, referralLetter) {
   let isVisible;
 
   try {
-    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 7, 0);
     isVisible = wait(referralLetter[platform]);
   } catch (error) {
     isVisible = false;
@@ -192,4 +192,15 @@ export function _outpatientClaimLabel(outpatientClaimLabel) {
     data = 'Not Found';
   }
   return data;
+}
+
+export function _backButton(backButton) {
+  const platform = getPlatform();
+
+  try {
+    wait(backButton[platform]);
+    $(backButton[platform]).click();
+  } catch (error) {
+    console.log('Error is ', error);
+  }
 }

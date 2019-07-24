@@ -11,7 +11,8 @@ import {
   _getSettlementDate,
   _receiptImage,
   _referralLetter,
-  _outpatientClaimLabel
+  _outpatientClaimLabel,
+  _backButton
 } from './internal/_claims';
 import {
   details,
@@ -30,7 +31,8 @@ import {
   detailsDentalCare,
   receiptImage,
   referralLetter,
-  outpatientClaimLabel
+  outpatientClaimLabel,
+  backButton
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -143,4 +145,8 @@ export function referralLetters() {
 
 export function outpatientClaimLables() {
   return _outpatientClaimLabel(outpatientClaimLabel);
+}
+
+export function clickBackButton() {
+  return _backButton(backButton);
 }

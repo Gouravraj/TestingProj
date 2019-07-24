@@ -86,3 +86,8 @@ export const outpatientClaimLabel = {
   android:
     '//*[@text="Pending"]/parent::android.view.ViewGroup/android.widget.TextView[contains(@text,"claim")]'
 };
+
+export const backButton = {
+  ios: '~header-back',
+  android: '//android.widget.Button[@content-desc="Go back"]'
+};
