@@ -10,7 +10,7 @@ import txt, { $txt } from '../text';
  */
 export default function photo(action, options) {
   options = {
-    permit: false,
+    permit: true,
     ...options
   };
 
@@ -32,8 +32,11 @@ export default function photo(action, options) {
       $txt('Choose from Library').click();
 
       if (options.permit) {
-        $txt('ALLOW', 'android.widget.Button').click();
-        $txt('ALLOW', 'android.widget.Button').click();
+        if ($txt('ALLOW', 'android.widget.Button').isExisting());
+        {
+          $txt('ALLOW', 'android.widget.Button').click();
+          $txt('ALLOW', 'android.widget.Button').click();
+        }
       }
 
       wait(txt('Pictures'));
@@ -49,8 +52,11 @@ export default function photo(action, options) {
       $txt('Take a Photo').click();
 
       if (options.permit) {
-        $txt('ALLOW', 'android.widget.Button').click();
-        $txt('ALLOW', 'android.widget.Button').click();
+        if ($txt('ALLOW', 'android.widget.Button').isExisting());
+        {
+          $txt('ALLOW', 'android.widget.Button').click();
+          $txt('ALLOW', 'android.widget.Button').click();
+        }
       }
 
       $('~Shutter').click();
