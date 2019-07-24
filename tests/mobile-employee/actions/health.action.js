@@ -25,7 +25,8 @@ export function isPhotoExistingOnUpdatePage() {
 
 export function isPhotoExistingOnLifestylePage() {
   HealthScreen.waitForIsShown(true);
-  HealthScreen.scrollDownToElement(HealthScreen.healthyLifeStylePicture, 5);
+  HealthScreen.scrollDownToElement(HealthScreen.searchForClinicButton, 5);
+  HealthScreen.waitForElementIsShown(HealthScreen.healthyLifeStylePicture);
   return (
     HealthScreen.healthyLifeStylePicture.isExisting() &&
     HealthScreen.currentLifeStylePicture.isExisting()

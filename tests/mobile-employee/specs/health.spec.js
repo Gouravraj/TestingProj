@@ -93,6 +93,7 @@ describe('Employee should,', () => {
     ).toBeTruthy();
   });
 
+  /*
   it('Story #30: Take photo via camera on mobile for face aging', () => {
     // Pre-con 1. Log in as landing credentials account
     loginAs(validCredentials);
@@ -116,8 +117,9 @@ describe('Employee should,', () => {
     //Pending because the photo taken by simulator cannot be displayed on Health page
     // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
+  */
 
-  it('Story #31: Story: Upload photo from mobile gallery for face aging', () => {
+  it('Story #31: Upload photo from mobile gallery for face aging', () => {
     // Pre-con 1. Log in as landing credentials account
     loginAs(validCredentials);
 
@@ -137,7 +139,6 @@ describe('Employee should,', () => {
     healthAction.clickNextButton();
 
     //VP2. Verify taken photo displays on Health page
-    //Pending because the photo taken by simulator cannot be displayed on Health page
-    // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
+    expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
 });

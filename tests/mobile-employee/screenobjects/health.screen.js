@@ -9,8 +9,18 @@ const SELECTORS = {
     '(//XCUIElementTypeOther[starts-with(@name,"BMI")])[1]/XCUIElementTypeScrollView',
   HEALTH_FIGURE_ANDROID:
     '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView/android.view.ViewGroup',
-  HEALTHY_LIFESTYLE: '~Healthy lifestyle',
-  CURRENT_LIFESTYLE: '~Current lifestyle'
+  LOADING_ICON_ANDROID:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]',
+  LOADING_ICON_IOS: '', //todo
+  HEALTHY_LIFESTYLE_ANDROID:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView[1]',
+  HEALTHY_LIFESTYLE_IOS:
+    '(//XCUIElementTypeOther[@name="Healthy lifestyle"])[2]/XCUIElementTypeImage',
+  CURRENT_LIFESTYLE_ANDROID:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView[2]',
+  CURRENT_LIFESTYLE_IOS:
+    '(//XCUIElementTypeOther[@name="Current lifestyle"])[2]/XCUIElementTypeImage',
+  SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics'
 };
 
 class HealthScreen extends AppScreen {
@@ -18,12 +28,35 @@ class HealthScreen extends AppScreen {
     super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
   }
 
+  get searchForClinicButton() {
+    return $(SELECTORS.SEARCH_FOR_CLINICS_BUTTON);
+  }
+
+  get loadingIcon() {
+    const platform = getPlatform();
+    if (platform === 'ios') {
+      return $(SELECTORS.LOADING_ICON_IOS);
+    } else {
+      return $(SELECTORS.LOADING_ICON_ANDROID);
+    }
+  }
+
   get healthyLifeStylePicture() {
-    return $(SELECTORS.HEALTHY_LIFESTYLE);
+    const platform = getPlatform();
+    if (platform === 'ios') {
+      return $(SELECTORS.HEALTHY_LIFESTYLE_IOS);
+    } else {
+      return $(SELECTORS.HEALTHY_LIFESTYLE_ANDROID);
+    }
   }
 
   get currentLifeStylePicture() {
-    return $(SELECTORS.CURRENT_LIFESTYLE);
+    const platform = getPlatform();
+    if (platform === 'ios') {
+      return $(SELECTORS.CURRENT_LIFESTYLE_IOS);
+    } else {
+      return $(SELECTORS.CURRENT_LIFESTYLE_ANDROID);
+    }
   }
   get updateHealthDataButton() {
     return $(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
