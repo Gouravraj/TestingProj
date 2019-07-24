@@ -9,10 +9,8 @@ const SELECTORS = {
     '(//XCUIElementTypeOther[starts-with(@name,"BMI")])[1]/XCUIElementTypeScrollView',
   HEALTH_FIGURE_ANDROID:
     '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView/android.view.ViewGroup',
-  HEALTHY_LIFESTYLE:
-    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView[1]',
-  CURRENTLY_LIFESTYLE:
-    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView[2]'
+  HEALTHY_LIFESTYLE: '~Healthy lifestyle',
+  CURRENT_LIFESTYLE: '~Current lifestyle'
 };
 
 class HealthScreen extends AppScreen {
@@ -25,7 +23,7 @@ class HealthScreen extends AppScreen {
   }
 
   get currentLifeStylePicture() {
-    return $(SELECTORS.CURRENTLY_LIFESTYLE);
+    return $(SELECTORS.CURRENT_LIFESTYLE);
   }
   get updateHealthDataButton() {
     return $(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);

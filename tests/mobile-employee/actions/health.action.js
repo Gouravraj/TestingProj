@@ -32,6 +32,12 @@ export function isPhotoExistingOnLifestylePage() {
   );
 }
 
+export function selectPhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
+  HealthUpdateScreen.addPhoto.click();
+  photo('select');
+}
+
 export function takePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();

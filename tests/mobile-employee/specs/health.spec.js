@@ -93,7 +93,7 @@ describe('Employee should,', () => {
     ).toBeTruthy();
   });
 
-  fit('Story #30: Take photo via camera on mobile for face aging', () => {
+  it('Story #30: Take photo via camera on mobile for face aging', () => {
     // Pre-con 1. Log in as landing credentials account
     loginAs(validCredentials);
 
@@ -113,11 +113,31 @@ describe('Employee should,', () => {
     healthAction.clickNextButton();
 
     //VP2. Verify taken photo displays on Health page
+    //Pending because the photo taken by simulator cannot be displayed on Health page
     // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
 
-  it('be able to update health data', () => {
-    healthAction.updateHealthAs(updateHealthData);
-    expect(healthAction.isHealthResult()).toBeTruthy();
+  it('Story #31: Story: Upload photo from mobile gallery for face aging', () => {
+    // Pre-con 1. Log in as landing credentials account
+    loginAs(validCredentials);
+
+    // Pre-con 2. Click update my health data button
+    healthAction.clickUpdateHealthDataButton();
+
+    // Pre-con 3. Remove photo (if have)
+    healthAction.removePhoto();
+
+    // Step 3. Select photo (if have)
+    healthAction.selectPhoto();
+
+    // VP1. Verify taken photo displays on Update page
+    expect(healthAction.isPhotoExistingOnUpdatePage()).toBeTruthy();
+
+    // Step 4. Click Next
+    healthAction.clickNextButton();
+
+    //VP2. Verify taken photo displays on Health page
+    //Pending because the photo taken by simulator cannot be displayed on Health page
+    // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
 });

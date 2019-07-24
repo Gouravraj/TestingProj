@@ -21,8 +21,7 @@ const SELECTORS = {
     '(//android.view.ViewGroup[@content-desc="Not at all"])[2]/android.view.ViewGroup/android.widget.TextView',
   NEXT: '~Next',
   ADD_PHOTO: '~Add photo for Future me',
-  MY_PHOTO:
-    '//android.view.ViewGroup[@content-desc="View photo of Future me"]/android.view.ViewGroup/android.widget.ImageView'
+  MY_PHOTO: '~View photo of Future me' // (//XCUIElementTypeOther[@name="View photo of Future me"])[3]
 };
 
 class HealthUpdateScreen extends AppScreen {
