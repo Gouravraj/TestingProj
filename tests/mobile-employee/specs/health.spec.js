@@ -40,6 +40,17 @@ describe('Employee should,', () => {
     // Step 2. Input data and click next
     healthAction.updateHealthAs(updateHealthData);
 
+    // VP1. Verify BMI info is correctly
+    expect(
+      healthAction.isBMIDisplayCorrectly(
+        expectResultHealthData.BMI,
+        expectResultHealthData.BMIStatus,
+        expectResultHealthData.BMIStatement
+      )
+    ).toBeTruthy();
+
+    // Pending: Because currently, we only care about height and weight so I pending verify these
+    /*
     // VP2. Verify Diabetes info is correctly
     expect(
       healthAction.isDiabeteDisplayCorrectly(
@@ -91,10 +102,6 @@ describe('Employee should,', () => {
       expectResultHealthData.MentalAssessment,
       expectResultHealthData.MentalStatement
     ).toBeTruthy();
-  });
-
-  it('be able to update health data', () => {
-    healthAction.updateHealthAs(updateHealthData);
-    expect(healthAction.isHealthResult()).toBeTruthy();
+    */
   });
 });
