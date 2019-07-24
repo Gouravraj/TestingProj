@@ -24,8 +24,8 @@ export default class AppScreen {
     swipeLeftOnElementToFindElement(scrollOnElement, toFindElement, 50, 0);
   }
 
-  scrollDownToElement(element) {
-    checkIfDisplayedWithScrollDown(element, 50, 0);
+  scrollDownToElement(element, maxScrolls) {
+    checkIfDisplayedWithScrollDown(element, maxScrolls, 0);
   }
 
   getAttributeOfElement(element, attributeName) {

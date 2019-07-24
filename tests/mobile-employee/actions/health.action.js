@@ -15,7 +15,7 @@ export function isLifeStyleTabSelected() {
 }
 
 export function clickNextButton() {
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.next.click();
 }
 
@@ -24,6 +24,8 @@ export function isPhotoExistingOnUpdatePage() {
 }
 
 export function isPhotoExistingOnLifestylePage() {
+  HealthScreen.waitForIsShown(true);
+  HealthScreen.scrollDownToElement(HealthScreen.healthyLifeStylePicture, 5);
   return (
     HealthScreen.healthyLifeStylePicture.isExisting() &&
     HealthScreen.currentLifeStylePicture.isExisting()
@@ -31,13 +33,13 @@ export function isPhotoExistingOnLifestylePage() {
 }
 
 export function takePhoto() {
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
   photo('take');
 }
 
 export function removePhoto() {
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   if (isPhotoExistingOnUpdatePage()) {
     HealthUpdateScreen.myPhoto.click();
     photo('remove');
@@ -94,15 +96,15 @@ export function updateHealthAs(updateHealthData) {
   // My choices
   if (updateHealthData.ExerciseMoreThan20 === 'true') {
     // TODO: if not selected
-    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20);
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20, 50);
     HealthUpdateScreen.exercise20.click();
   }
 
   // Sugar beverages
-  // HealthUpdateScreen.scrollDownToElement($('~' + updateHealthData.sugaryBeverage));
+  // HealthUpdateScreen.scrollDownToElement($('~' + updateHealthData.sugaryBeverage), 50);
   // ($('~' + updateHealthData.sugaryBeverage)).click();
   HealthUpdateScreen.scrollDownToElement(
-    $(txt(updateHealthData.SugaryBeverage))
+    $(txt(updateHealthData.SugaryBeverage), 50)
   );
   $(txt(updateHealthData.SugaryBeverage)).click();
 
@@ -111,26 +113,26 @@ export function updateHealthAs(updateHealthData) {
   // Doing interesting
   if (updateHealthData.Interest === 'Not at all') {
     HealthUpdateScreen.scrollDownToElement(
-      HealthUpdateScreen.notAtAllInteresting
+      HealthUpdateScreen.notAtAllInteresting, 50
     );
     HealthUpdateScreen.notAtAllInteresting.click();
   } else {
-    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Interest)));
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Interest)), 50);
     $(txt(updateHealthData.Interest)).click();
   }
 
   // Depress
   if (updateHealthData.Depress === 'Not at all') {
-    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAllDepress);
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAllDepress, 50);
     HealthUpdateScreen.notAtAllDepress.click();
   } else {
-    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)));
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)), 50);
     $(txt(updateHealthData.Depress)).click();
   }
   */
 
   // Click Next
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.next.click();
 
   HealthScreen.waitForIsShown(true);
