@@ -169,12 +169,12 @@ export function _receiptImage(receiptImage) {
   return isVisible;
 }
 
-export function _referralLetter(receiptImage, referralLetter) {
+export function _referralLetter(referralLetter) {
   const platform = getPlatform();
   let isVisible;
 
   try {
-    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 7, 0);
+    checkIfDisplayedWithScrollDown($(referralLetter[platform]), 7, 0);
     isVisible = wait(referralLetter[platform]);
   } catch (error) {
     isVisible = false;
