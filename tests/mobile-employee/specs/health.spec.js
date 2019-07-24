@@ -1,31 +1,107 @@
-import { updateHealthAs, isHealthResult } from '../actions/health.action';
-import { updateHealthData } from '../../data/health.data';
 import { loginAs } from '../actions/login.action';
-import { validCredentials } from '../../data/login.data';
+import { landingCredentials, validCredentials } from '../../data/login.data';
+import {
+  updateHealthData,
+  expectResultHealthData
+} from '../../data/health.data';
+
+import * as healthAction from '../actions/health.action';
+// import { SSL_OP_EPHEMERAL_RSA } from 'constants';
 
 describe('Employee should,', () => {
-  beforeAll(() => {
-    loginAs(validCredentials);
-  });
+  beforeAll(() => {});
 
-  afterAll(() => {
+  afterEach(() => {
     driver.reset();
   });
 
-  // it('be able to submit health data', () => {
-  //   // expect(health.isHealthResult()).toBeTruthy();
-  // });
+  it('Story: Displaying of the health landing page #4', () => {
+    // Pre-con. Log in as landing credentials account
+    loginAs(landingCredentials);
 
-  it('be able to update health data', () => {
-    updateHealthAs(updateHealthData);
-    expect(isHealthResult()).toBeTruthy();
+    // VP1. Health tab is automatically selected
+    expect(healthAction.isLifeStyleTabSelected()).toBeTruthy();
+
+    // VP2. Health landing page is displayed
+    expect(healthAction.isLandingHealthPageDisplayed()).toBeTruthy();
+
+    // VP3. "Enter Health Data" and "Search for clinics" button is displayed
+    expect(healthAction.isAddMyHealthDataButtonDisplayed()).toBeTruthy();
+    expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  // it('be able to submit health data with Image', () => {
-  //   //ToDo :
-  // });
-  //
-  // it('be able to view Face aging details', () => {
-  //   //ToDo :
-  // });
+  it('Story: Displaying of BMI and Prediabetes results #22', () => {
+    // Pre-con. Log in
+    loginAs(validCredentials);
+
+    // Step 1. Click update my health data button
+    healthAction.clickUpdateHealthDataButton();
+
+    // Step 2. Input data and click next
+    healthAction.updateHealthAs(updateHealthData);
+
+    // VP1. Verify BMI info is correctly
+    expect(
+      healthAction.isBMIDisplayCorrectly(
+        expectResultHealthData.BMI,
+        expectResultHealthData.BMIStatus,
+        expectResultHealthData.BMIStatement
+      )
+    ).toBeTruthy();
+
+    // Pending: Because currently, we only care about height and weight so I pending verify these
+    /*
+    // VP2. Verify Diabetes info is correctly
+    expect(
+      healthAction.isDiabeteDisplayCorrectly(
+        expectResultHealthData.DiabeteStatus,
+        expectResultHealthData.DiabeteStatement
+      )
+    ).toBeTruthy();
+
+    // VP3. Verify Alcohol info is correctly
+    expect(
+      expectResultHealthData.AlcoholAssessment,
+      expectResultHealthData.AlcoholStatement
+    ).toBeTruthy();
+
+    // VP4. Verify Tobacco info is correctly
+    expect(
+      healthAction.isTobaccoDisplayCorrectly(
+        expectResultHealthData.TobaccoAssessment,
+        expectResultHealthData.TobaccoStatement
+      )
+    ).toBeTruthy();
+
+    // VP5. Verify Exercise info is correctly
+    expect(
+      healthAction.isExerciseDisplayCorrectly(
+        expectResultHealthData.ExerciseAssessment,
+        expectResultHealthData.ExerciseStatement
+      )
+    ).toBeTruthy();
+
+    // VP6. Verify Nutrition info is correctly
+    expect(
+      healthAction.isNutritionDisplayCorrectly(
+        expectResultHealthData.NutritionAssessment,
+        expectResultHealthData.NutritionStatement
+      )
+    ).toBeTruthy();
+
+    // VP7. Verify Sleep info is correctly
+    expect(
+      healthAction.isSleepDisplayCorrectly(
+        expectResultHealthData.SleepAssessment,
+        expectResultHealthData.SleepStatement
+      )
+    ).toBeTruthy();
+
+    // VP8. Verify Mental info is correctly
+    expect(
+      expectResultHealthData.MentalAssessment,
+      expectResultHealthData.MentalStatement
+    ).toBeTruthy();
+    */
+  });
 });

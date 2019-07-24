@@ -7,10 +7,12 @@ export { default as kbd } from './api/kbd';
 export { default as date } from './api/date';
 export {
   default as swipe,
+  swipeOnElementToLeft,
   swipeUp,
   swipeDown,
   swipeLeft,
-  swipeRight
+  swipeRight,
+  swipeLeftOnElementToFindElement
 } from './api/swipe';
 export {
   default as scroll,

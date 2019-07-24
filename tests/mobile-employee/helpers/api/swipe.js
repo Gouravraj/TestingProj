@@ -47,6 +47,22 @@ export default function swipe(options, cb) {
   }
 }
 
+export function swipeOnElementToLeft(element) {
+  const location = element.getLocation();
+  const { width } = driver.getWindowRect();
+  const options = {
+    from: {
+      x: width - location.x - 10,
+      y: location.y
+    },
+    to: {
+      x: (width - location.x) / 2,
+      y: location.y
+    }
+  };
+  _swipe(options);
+}
+
 export function swipeUp(percentage = 1) {
   _swipeOnPercentage(
     _calculateXY(SWIPE_DIRECTION.up.start, percentage),
@@ -73,4 +89,30 @@ export function swipeRight(percentage = 1) {
     _calculateXY(SWIPE_DIRECTION.right.start, percentage),
     _calculateXY(SWIPE_DIRECTION.right.end, percentage)
   );
+}
+
+// scroolOnElement: Element is scrolled on
+// DestinationElement: Scroll will be stopped if this element is found
+export function swipeLeftOnElementToFindElement(
+  scrollOnElement,
+  toFindElement,
+  maxScrolls,
+  amount = 0
+) {
+  if (
+    (!toFindElement.isExisting() || !toFindElement.isDisplayed()) &&
+    amount <= maxScrolls
+  ) {
+    swipeOnElementToLeft(scrollOnElement);
+    swipeLeftOnElementToFindElement(
+      scrollOnElement,
+      toFindElement,
+      maxScrolls,
+      amount + 1
+    );
+  } else if (amount > maxScrolls) {
+    throw new Error(
+      `The element '${toFindElement}' could not be found or is not visible.`
+    );
+  }
 }
