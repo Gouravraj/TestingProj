@@ -34,5 +34,8 @@ describe('Employee should,', function() {
     navigateToProfilePage();
 
     browser.pause(3000);
+
+    //TODO:: added assertion in each navigation 
   });
 });
+ 
