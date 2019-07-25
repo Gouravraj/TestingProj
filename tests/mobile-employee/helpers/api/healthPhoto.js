@@ -38,10 +38,11 @@ export default function healthPhoto(action, options) {
         }
       }
 
-      wait(txt('Download'));
-      // $txt('Pictures').click();
-      $txt('Download').click();
-      $('~Photo taken on Jul 24, 2019 2:30:36 PM').click(); //todo: change photo later
+      wait(txt('Pictures'));
+      $txt('Pictures').click();
+      const selector =
+        'new UiSelector().className("android.view.ViewGroup").index(1).packageName("com.google.android.apps.photos")';
+      $(`android=${selector}`).click();
     }
 
     // $(options.photo).click();

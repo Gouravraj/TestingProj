@@ -20,12 +20,19 @@ const SELECTORS = {
     '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView[2]',
   CURRENT_LIFESTYLE_IOS:
     '(//XCUIElementTypeOther[@name="Current lifestyle"])[2]/XCUIElementTypeImage',
-  SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics'
+  SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics',
+  HISTORY_GRAPH_ANDROID:
+    '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]'
 };
 
 class HealthScreen extends AppScreen {
   constructor() {
     super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
+    this.platform = getPlatform().toUpperCase();
+  }
+
+  get historyGraph() {
+    return $(SELECTORS[`HISTORY_GRAPH_${this.platform}`]);
   }
 
   get searchForClinicButton() {
@@ -33,42 +40,23 @@ class HealthScreen extends AppScreen {
   }
 
   get loadingIcon() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.LOADING_ICON_IOS);
-    } else {
-      return $(SELECTORS.LOADING_ICON_ANDROID);
-    }
+    return $(SELECTORS[`LOADING_ICON_${this.platform}`]);
   }
 
   get healthyLifeStylePicture() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.HEALTHY_LIFESTYLE_IOS);
-    } else {
-      return $(SELECTORS.HEALTHY_LIFESTYLE_ANDROID);
-    }
+    return $(SELECTORS[`HEALTHY_LIFESTYLE_${this.platform}`]);
   }
 
   get currentLifeStylePicture() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.CURRENT_LIFESTYLE_IOS);
-    } else {
-      return $(SELECTORS.CURRENT_LIFESTYLE_ANDROID);
-    }
+    return $(SELECTORS[`CURRENT_LIFESTYLE_${this.platform}`]);
   }
+
   get updateHealthDataButton() {
     return $(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
   }
 
   get healthFigure() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.HEALTH_FIGURE_IOS);
-    } else {
-      return $(SELECTORS.HEALTH_FIGURE_ANDROID);
-    }
+    return $(SELECTORS[`HEALTH_FIGURE_${this.platform}`]);
   }
 
   bmiScore(score) {

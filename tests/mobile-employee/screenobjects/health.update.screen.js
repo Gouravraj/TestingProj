@@ -27,15 +27,11 @@ const SELECTORS = {
 class HealthUpdateScreen extends AppScreen {
   constructor() {
     super(SELECTORS.HEALTH_UPDATE_SCREEN);
+    this.platform = getPlatform().toUpperCase();
   }
 
   get ethnicityDropdown() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.ETHNICITY_DROPDOWN_IOS);
-    } else {
-      return $(txt(SELECTORS.ETHNICITY_DROPDOWN_ANDROID));
-    }
+    return $(SELECTORS[`ETHNICITY_DROPDOWN_${this.platform}`]);
   }
 
   get exercise20() {
@@ -46,21 +42,11 @@ class HealthUpdateScreen extends AppScreen {
     return $(SELECTORS.SUGARY_BEVERAGE);
   }
   get notAtAllInteresting() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.NOT_AT_ALL_INTERESTING_IOS);
-    } else {
-      return $(SELECTORS.NOT_AT_ALL_INTERESTING_ANDROID);
-    }
+    return $(SELECTORS[`NOT_AT_ALL_INTERESTING_${this.platform}`]);
   }
 
   get notAtAllDepress() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.NOT_AT_ALL_DEPRESS_IOS);
-    } else {
-      return $(SELECTORS.NOT_AT_ALL_DEPRESS_ANDROID);
-    }
+    return $(SELECTORS[`NOT_AT_ALL_DEPRESS_${this.platform}`]);
   }
 
   get heightField() {
