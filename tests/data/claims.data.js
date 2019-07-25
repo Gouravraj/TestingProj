@@ -124,3 +124,13 @@ export const approvedClaimSC = {
   android:
     '((//android.view.ViewGroup[@content-desc="Approved"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"])[1]'
 };
+
+export const backButton = {
+  ios: '~header-back',
+  android: '//android.widget.Button[@content-desc="Go back"]'
+};
+
+export const startInitialPendingText = {
+  ios: '//XCUIElementTypeOther[@name="Pending"]',
+  android: '//android.view.ViewGroup[@content-desc="Pending"]'
+};

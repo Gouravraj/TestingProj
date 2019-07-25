@@ -1,4 +1,4 @@
-import { swipeUp } from './swipe';
+import { swipeUp, swipeDown } from './swipe';
 import getPlatform from './platform';
 
 function noop() {}
@@ -34,6 +34,20 @@ export function checkIfDisplayedWithScrollDown(
   ) {
     swipeUp(0.65);
     checkIfDisplayedWithScrollDown(element, maxScrolls, amount + 1);
+  } else if (amount > maxScrolls) {
+    throw new Error(
+      `The element '${element}' could not be found or is not visible.`
+    );
+  }
+}
+
+export function checkIfDisplayedWithScrollUp(element, maxScrolls, amount = 0) {
+  if (
+    (!element.isExisting() || !element.isDisplayed()) &&
+    amount <= maxScrolls
+  ) {
+    swipeDown(1.1);
+    checkIfDisplayedWithScrollUp(element, maxScrolls, amount + 1);
   } else if (amount > maxScrolls) {
     throw new Error(
       `The element '${element}' could not be found or is not visible.`

@@ -5,7 +5,8 @@ import {
   photo,
   tap,
   platform as getPlatform,
-  checkIfDisplayedWithScrollDown
+  checkIfDisplayedWithScrollDown,
+  checkIfDisplayedWithScrollUp
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import { CLAIMS as SELECTOR } from '../../selectors';
@@ -165,7 +166,7 @@ export function _receiptImage(receiptImage) {
   let isVisible;
 
   try {
-    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 7, 0);
     isVisible = wait(receiptImage[platform]);
   } catch (error) {
     isVisible = false;
@@ -173,12 +174,12 @@ export function _receiptImage(receiptImage) {
   return isVisible;
 }
 
-export function _referralLetter(receiptImage, referralLetter) {
+export function _referralLetter(referralLetter) {
   const platform = getPlatform();
   let isVisible;
 
   try {
-    checkIfDisplayedWithScrollDown($(receiptImage[platform]), 3, 0);
+    checkIfDisplayedWithScrollDown($(referralLetter[platform]), 7, 0);
     isVisible = wait(referralLetter[platform]);
   } catch (error) {
     isVisible = false;
@@ -224,4 +225,26 @@ export function _checkLoadedImageOnApprovedClaims(verifyImageLoadedCheck) {
     isVisible = false;
   }
   return isVisible;
+}
+
+export function _backButton(backButton) {
+  const platform = getPlatform();
+
+  try {
+    wait(backButton[platform]);
+    $(backButton[platform]).click();
+  } catch (error) {
+    console.log('Error is ', error);
+  }
+}
+
+export function _startFromIntial(startInitialPendingText) {
+  const platform = getPlatform();
+
+  try {
+    checkIfDisplayedWithScrollUp($(startInitialPendingText[platform]), 100, 0);
+    wait(startInitialPendingText[platform]);
+  } catch (error) {
+    console.log('Error is ', error);
+  }
 }

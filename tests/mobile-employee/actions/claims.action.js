@@ -13,7 +13,9 @@ import {
   _referralLetter,
   _outpatientClaimLabel,
   _approvedClaims,
-  _checkLoadedImageOnApprovedClaims
+  _checkLoadedImageOnApprovedClaims,
+  _backButton,
+  _startFromIntial
 } from './internal/_claims';
 import {
   details,
@@ -38,7 +40,9 @@ import {
   approvedClaimLabel,
   settlementDate,
   approvedClaimGMP,
-  approvedClaimSC
+  approvedClaimSC,
+  backButton,
+  startInitialPendingText
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -171,4 +175,12 @@ export function checkAndClickApprovedClaimsForGeneralMedicalPractitioner() {
 
 export function checkAndClickApprovedClaimsForSpecialistConsultation() {
   return _approvedClaims(approvedClaimSC);
+}
+
+export function clickBackButton() {
+  return _backButton(backButton);
+}
+
+export function startFromIntial() {
+  return _startFromIntial(startInitialPendingText);
 }

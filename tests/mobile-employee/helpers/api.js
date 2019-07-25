@@ -14,6 +14,7 @@ export {
 } from './api/swipe';
 export {
   default as scroll,
-  checkIfDisplayedWithScrollDown
+  checkIfDisplayedWithScrollDown,
+  checkIfDisplayedWithScrollUp
 } from './api/scroll';
 export { default as platform } from './api/platform';
