@@ -3,7 +3,9 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
-import { photo } from '../helpers/api';
+import { healthPhoto } from '../helpers/api';
+const { join } = require('path');
+const cmd = require('node-cmd');
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
@@ -14,6 +16,12 @@ export function isLifeStyleTabSelected() {
   return isSelected;
 }
 
+export function copyImageToiOS() {
+  cmd.run(
+    'xcrun simctl addmedia booted ' +
+      join(process.cwd(), 'tests/data', 'face-image.jpg')
+  );
+}
 export function clickNextButton() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.next.click();
@@ -36,20 +44,20 @@ export function isPhotoExistingOnLifestylePage() {
 export function selectPhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  photo('select');
+  healthPhoto('select');
 }
 
 export function takePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  photo('take');
+  healthPhoto('take');
 }
 
 export function removePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   if (isPhotoExistingOnUpdatePage()) {
     HealthUpdateScreen.myPhoto.click();
-    photo('remove');
+    healthPhoto('remove');
   }
 }
 

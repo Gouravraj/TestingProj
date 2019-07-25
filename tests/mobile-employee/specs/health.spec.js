@@ -131,7 +131,10 @@ describe('Employee should,', () => {
   });
   */
 
-  it('Story #31: Upload photo from mobile gallery for face aging', () => {
+  fit('Story #31: Upload photo from mobile gallery for face aging', () => {
+    // Pre-con 0. Copy image to iOS
+    healthAction.copyImageToiOS();
+
     // Pre-con 1. Log in as landing credentials account
     loginAs(validCredentials);
 

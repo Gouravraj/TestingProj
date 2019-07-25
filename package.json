@@ -52,6 +52,7 @@
     "@wdio/sync": "^5.10.8",
     "appium": "^1.13.0",
     "heapdump": "^0.3.14",
+    "node-cmd": "^3.0.0",
     "selenium-standalone": "^6.16.0",
     "wdio-docker-service": "^2.1.1",
     "webdriverio": "^5.10.9"
