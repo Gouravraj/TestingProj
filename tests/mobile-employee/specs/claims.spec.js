@@ -7,7 +7,7 @@ import { loginAs } from '../actions/login.action';
 import { CLAIMS as SELECTOR } from '../selectors';
 import { validCredentials } from '../../data/login.data';
 
-describe('Employee should be', () => {
+fdescribe('Employee should be', () => {
   beforeEach(() => {
     loginAs(validCredentials);
     isNavigationBarVisible();
@@ -16,7 +16,7 @@ describe('Employee should be', () => {
     $(SELECTOR.buttonMakeAClaim).click();
   });
 
-  it('able to submit a claim for self', () => {
+  fit('able to submit a claim for self', () => {
     expect(claims.makeClaim()).toBeTruthy();
   });
 
@@ -65,7 +65,7 @@ describe('General Medical Practitioner-Employee pending claims should be', () =>
   it('Specific expectation: only the receipt image is displayed', () => {
     expect(claims.receiptImages()).toBeTruthy();
   });
-  
+
   it('Specific expectation: no referral letter should be displayed', () => {
     expect(claims.referralLetters()).toBeFalsy();
   });
@@ -97,7 +97,7 @@ describe('Specialist Consultation-Employee pending claims should be', () => {
   it('Specific expectation: only the receipt image is displayed', () => {
     expect(claims.receiptImages()).toBeTruthy();
   });
-  
+
   it('Specific expectation: referral letter should be displayed', () => {
     expect(claims.referralLetters()).toBeTruthy();
   });
@@ -117,7 +117,7 @@ describe('Dental Care - Employee pending claims should be', () => {
     expect(claims.reimbursedAmount()).toBeFalsy();
   });
   /** commented out until intermittent issue is identified
-  it('Specific expectation: label displayed below the image is "wellness claim"', () => {   
+  it('Specific expectation: label displayed below the image is "wellness claim"', () => {
     expect(claims.outpatientClaimLables()).toEqual('Wellness claim');
   });*/
 
