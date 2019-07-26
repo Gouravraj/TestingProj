@@ -10,6 +10,7 @@ export { default as date } from './api/date';
 export {
   default as swipe,
   swipeOnElementToLeft,
+  swipeSlider,
   swipeUp,
   swipeDown,
   swipeLeft,

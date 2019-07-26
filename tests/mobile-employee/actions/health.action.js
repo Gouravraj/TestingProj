@@ -4,8 +4,10 @@ import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
 import { healthPhoto } from '../helpers/api';
+import { swipeSlider } from '../helpers/api';
 const { join } = require('path');
 const cmd = require('node-cmd');
+import { platform as getPlatform } from '../helpers/api';
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
@@ -16,11 +18,33 @@ export function isLifeStyleTabSelected() {
   return isSelected;
 }
 
-export function copyImageToiOS() {
-  cmd.run(
-    'xcrun simctl addmedia booted ' +
-      join(process.cwd(), 'tests/data', 'face-image.jpg')
-  );
+export function slideFaceAging(from, to) {
+  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
+  swipeSlider(HealthScreen.agingSlider, from, to);
+  driver.pause(3000);
+
+  //agingSlider
+}
+
+export function isFutureYouAtTheAgeOf(age) {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    return $('~' + age).isExisting();
+  } else {
+    return HealthScreen.isTextExisting(age);
+  }
+}
+
+export function copyImageToLibrary() {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    cmd.run(
+      'xcrun simctl addmedia booted ' +
+        join(process.cwd(), 'tests/data', 'face-image.jpg')
+    );
+  }
 }
 export function clickNextButton() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);

@@ -22,13 +22,22 @@ const SELECTORS = {
     '(//XCUIElementTypeOther[@name="Current lifestyle"])[2]/XCUIElementTypeImage',
   SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics',
   HISTORY_GRAPH_ANDROID:
-    '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]'
+    '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]',
+  HISTORY_GRAPH_IOS: '~Health Score History Graph showing last 6 records.',
+  AGING_SLIDER_IOS:
+    '(//XCUIElementTypeOther[starts-with(@name,"Future you at the age")])[1]/XCUIElementTypeSlider',
+  AGING_SLIDER_ANDROID:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.SeekBar'
 };
 
 class HealthScreen extends AppScreen {
   constructor() {
     super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
     this.platform = getPlatform().toUpperCase();
+  }
+
+  get agingSlider() {
+    return $(SELECTORS[`AGING_SLIDER_${this.platform}`]);
   }
 
   get historyGraph() {

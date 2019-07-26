@@ -32,7 +32,7 @@ export function checkIfDisplayedWithScrollDown(
     (!element.isExisting() || !element.isDisplayed()) &&
     amount <= maxScrolls
   ) {
-    swipeUp(0.4);
+    swipeUp(0.6);
     checkIfDisplayedWithScrollDown(element, maxScrolls, amount + 1);
   } else if (amount > maxScrolls) {
     throw new Error(
