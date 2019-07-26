@@ -19,21 +19,19 @@ const SELECTORS = {
   NOT_AT_ALL_DEPRESS_IOS: '(//XCUIElementTypeOther[@name="Not at all"])[2]',
   NOT_AT_ALL_DEPRESS_ANDROID:
     '(//android.view.ViewGroup[@content-desc="Not at all"])[2]/android.view.ViewGroup/android.widget.TextView',
-  NEXT: '~Next'
+  NEXT: '~Next',
+  ADD_PHOTO: '~Add photo for Future me',
+  MY_PHOTO: '~View photo of Future me' // (//XCUIElementTypeOther[@name="View photo of Future me"])[3]
 };
 
 class HealthUpdateScreen extends AppScreen {
   constructor() {
     super(SELECTORS.HEALTH_UPDATE_SCREEN);
+    this.platform = getPlatform().toUpperCase();
   }
 
   get ethnicityDropdown() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.ETHNICITY_DROPDOWN_IOS);
-    } else {
-      return $(txt(SELECTORS.ETHNICITY_DROPDOWN_ANDROID));
-    }
+    return $(SELECTORS[`ETHNICITY_DROPDOWN_${this.platform}`]);
   }
 
   get exercise20() {
@@ -44,21 +42,11 @@ class HealthUpdateScreen extends AppScreen {
     return $(SELECTORS.SUGARY_BEVERAGE);
   }
   get notAtAllInteresting() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.NOT_AT_ALL_INTERESTING_IOS);
-    } else {
-      return $(SELECTORS.NOT_AT_ALL_INTERESTING_ANDROID);
-    }
+    return $(SELECTORS[`NOT_AT_ALL_INTERESTING_${this.platform}`]);
   }
 
   get notAtAllDepress() {
-    const platform = getPlatform();
-    if (platform === 'ios') {
-      return $(SELECTORS.NOT_AT_ALL_DEPRESS_IOS);
-    } else {
-      return $(SELECTORS.NOT_AT_ALL_DEPRESS_ANDROID);
-    }
+    return $(SELECTORS[`NOT_AT_ALL_DEPRESS_${this.platform}`]);
   }
 
   get heightField() {
@@ -79,6 +67,14 @@ class HealthUpdateScreen extends AppScreen {
 
   get next() {
     return $(SELECTORS.NEXT);
+  }
+
+  get addPhoto() {
+    return $(SELECTORS.ADD_PHOTO);
+  }
+
+  get myPhoto() {
+    return $(SELECTORS.MY_PHOTO);
   }
 }
 export default new HealthUpdateScreen();

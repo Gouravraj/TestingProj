@@ -16,6 +16,10 @@ export default class AppScreen {
    * @param  {boolean} isShown
    * @return {boolean}
    */
+  waitForElementIsShown(element, isShown = true) {
+    return element.waitForDisplayed(DEFAULT_TIMEOUT, !isShown);
+  }
+
   waitForIsShown(isShown = true) {
     return $(this.selector).waitForDisplayed(DEFAULT_TIMEOUT, !isShown);
   }
@@ -24,8 +28,8 @@ export default class AppScreen {
     swipeLeftOnElementToFindElement(scrollOnElement, toFindElement, 50, 0);
   }
 
-  scrollDownToElement(element) {
-    checkIfDisplayedWithScrollDown(element, 50, 0);
+  scrollDownToElement(element, maxScrolls) {
+    checkIfDisplayedWithScrollDown(element, maxScrolls, 0);
   }
 
   getAttributeOfElement(element, attributeName) {

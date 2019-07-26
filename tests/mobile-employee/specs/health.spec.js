@@ -15,7 +15,7 @@ describe('Employee should,', () => {
     driver.reset();
   });
 
-  it('Story: Displaying of the health landing page #4', () => {
+  it('Story #4: Displaying of the health landing page', () => {
     // Pre-con. Log in as landing credentials account
     loginAs(landingCredentials);
 
@@ -30,7 +30,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  it('Story: Displaying of BMI and Prediabetes results #22', () => {
+  it('Story #22: Displaying of BMI and Prediabetes results', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -103,5 +103,57 @@ describe('Employee should,', () => {
       expectResultHealthData.MentalStatement
     ).toBeTruthy();
     */
+  });
+
+  /*
+  it('Story #30: Take photo via camera on mobile for face aging', () => {
+    // Pre-con 1. Log in as landing credentials account
+    loginAs(validCredentials);
+
+    // Pre-con 2. Click update my health data button
+    healthAction.clickUpdateHealthDataButton();
+
+    // Pre-con 3. Remove photo (if have)
+    healthAction.removePhoto();
+
+    // Step 3. Take photo (if have)
+    healthAction.takePhoto();
+
+    // VP1. Verify taken photo displays on Update page
+    expect(healthAction.isPhotoExistingOnUpdatePage()).toBeTruthy();
+
+    // Step 4. Click Next
+    healthAction.clickNextButton();
+
+    //VP2. Verify taken photo displays on Health page
+    //Pending because the photo taken by simulator cannot be displayed on Health page
+    // expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
+  });
+  */
+
+  fit('Story #31: Upload photo from mobile gallery for face aging', () => {
+    // Pre-con 0. Copy image to iOS
+    healthAction.copyImageToiOS();
+
+    // Pre-con 1. Log in as landing credentials account
+    loginAs(validCredentials);
+
+    // Pre-con 2. Click update my health data button
+    healthAction.clickUpdateHealthDataButton();
+
+    // Pre-con 3. Remove photo (if have)
+    healthAction.removePhoto();
+
+    // Step 3. Select photo (if have)
+    healthAction.selectPhoto();
+
+    // VP1. Verify taken photo displays on Update page
+    expect(healthAction.isPhotoExistingOnUpdatePage()).toBeTruthy();
+
+    // Step 4. Click Next
+    healthAction.clickNextButton();
+
+    //VP2. Verify taken photo displays on Health page
+    expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
   });
 });

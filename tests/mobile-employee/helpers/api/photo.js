@@ -57,6 +57,5 @@ export default function photo(action, options) {
       $('~Done').click();
     }
   }
-
   driver.pause(3000);
 }

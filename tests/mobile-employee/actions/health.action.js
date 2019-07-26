@@ -3,6 +3,9 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
+import { healthPhoto } from '../helpers/api';
+const { join } = require('path');
+const cmd = require('node-cmd');
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
@@ -11,6 +14,51 @@ export function isLifeStyleTabSelected() {
     'selected'
   );
   return isSelected;
+}
+
+export function copyImageToiOS() {
+  cmd.run(
+    'xcrun simctl addmedia booted ' +
+      join(process.cwd(), 'tests/data', 'face-image.jpg')
+  );
+}
+export function clickNextButton() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
+  HealthUpdateScreen.next.click();
+}
+
+export function isPhotoExistingOnUpdatePage() {
+  return HealthUpdateScreen.myPhoto.isExisting();
+}
+
+export function isPhotoExistingOnLifestylePage() {
+  HealthScreen.waitForIsShown(true);
+  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
+  HealthScreen.waitForElementIsShown(HealthScreen.healthyLifeStylePicture);
+  return (
+    HealthScreen.healthyLifeStylePicture.isExisting() &&
+    HealthScreen.currentLifeStylePicture.isExisting()
+  );
+}
+
+export function selectPhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
+  HealthUpdateScreen.addPhoto.click();
+  healthPhoto('select');
+}
+
+export function takePhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
+  HealthUpdateScreen.addPhoto.click();
+  healthPhoto('take');
+}
+
+export function removePhoto() {
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
+  if (isPhotoExistingOnUpdatePage()) {
+    HealthUpdateScreen.myPhoto.click();
+    healthPhoto('remove');
+  }
 }
 
 export function isLandingHealthPageDisplayed() {
@@ -63,15 +111,15 @@ export function updateHealthAs(updateHealthData) {
   // My choices
   if (updateHealthData.ExerciseMoreThan20 === 'true') {
     // TODO: if not selected
-    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20);
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.exercise20, 50);
     HealthUpdateScreen.exercise20.click();
   }
 
   // Sugar beverages
-  // HealthUpdateScreen.scrollDownToElement($('~' + updateHealthData.sugaryBeverage));
+  // HealthUpdateScreen.scrollDownToElement($('~' + updateHealthData.sugaryBeverage), 50);
   // ($('~' + updateHealthData.sugaryBeverage)).click();
   HealthUpdateScreen.scrollDownToElement(
-    $(txt(updateHealthData.SugaryBeverage))
+    $(txt(updateHealthData.SugaryBeverage), 50)
   );
   $(txt(updateHealthData.SugaryBeverage)).click();
 
@@ -80,26 +128,26 @@ export function updateHealthAs(updateHealthData) {
   // Doing interesting
   if (updateHealthData.Interest === 'Not at all') {
     HealthUpdateScreen.scrollDownToElement(
-      HealthUpdateScreen.notAtAllInteresting
+      HealthUpdateScreen.notAtAllInteresting, 50
     );
     HealthUpdateScreen.notAtAllInteresting.click();
   } else {
-    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Interest)));
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Interest)), 50);
     $(txt(updateHealthData.Interest)).click();
   }
 
   // Depress
   if (updateHealthData.Depress === 'Not at all') {
-    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAllDepress);
+    HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.notAtAllDepress, 50);
     HealthUpdateScreen.notAtAllDepress.click();
   } else {
-    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)));
+    HealthUpdateScreen.scrollDownToElement($(txt(updateHealthData.Depress)), 50);
     $(txt(updateHealthData.Depress)).click();
   }
   */
 
   // Click Next
-  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next);
+  HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.next.click();
 
   HealthScreen.waitForIsShown(true);
