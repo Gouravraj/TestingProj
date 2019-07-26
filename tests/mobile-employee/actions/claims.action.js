@@ -8,7 +8,11 @@ import {
   _clickPendingClaims,
   _reimbursedAmount,
   _checkLoadedImageOnPendingClaims,
-  _getSettlementDate
+  _getSettlementDate,
+  _receiptImage,
+  _referralLetter,
+  _outpatientClaimLabel,
+  _backButton
 } from './internal/_claims';
 import {
   details,
@@ -20,13 +24,45 @@ import {
   viewSubmittedClaim,
   gmpPendingClaim,
   pendingClaimLoadedImage,
-  submitClaimButton
+  submitClaimButton,
+  detailsSpecialistConsultation,
+  specialistConsultationPendingClaim,
+  dentalCarePendingClaim,
+  detailsDentalCare,
+  receiptImage,
+  referralLetter,
+  outpatientClaimLabel,
+  backButton
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
 
 export function makeClaim() {
   const { type, diagnosis } = details;
+
+  navi('Patient Details', () => _patientDetails(dependent));
+  navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
+  navi('Add Documents', () => _addDocuments(image));
+  navi('Review Claim', _reviewClaim(submitClaimButton));
+  navi('Terms & Conditions', _termsConditions);
+
+  return screen('Claim submitted');
+}
+
+export function makeClaimSpecialistConsultation() {
+  const { type, diagnosis } = detailsSpecialistConsultation;
+
+  navi('Patient Details', () => _patientDetails(dependent));
+  navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
+  navi('Add Documents', () => _addDocuments(image, true));
+  navi('Review Claim', _reviewClaim(submitClaimButton));
+  navi('Terms & Conditions', _termsConditions);
+
+  return screen('Claim submitted');
+}
+
+export function makeClaimDentalCare() {
+  const { type, diagnosis } = detailsDentalCare;
 
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
@@ -89,4 +125,28 @@ export function getSettlementDate() {
 
 export function loadedImage() {
   return _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage);
+}
+
+export function clickSpecialistConsultationPendingClaims() {
+  _clickPendingClaims(specialistConsultationPendingClaim);
+}
+
+export function clickDentalCarePendingClaims() {
+  _clickPendingClaims(dentalCarePendingClaim);
+}
+
+export function receiptImages() {
+  return _receiptImage(receiptImage);
+}
+
+export function referralLetters() {
+  return _referralLetter(receiptImage, referralLetter);
+}
+
+export function outpatientClaimLables() {
+  return _outpatientClaimLabel(outpatientClaimLabel);
+}
+
+export function clickBackButton() {
+  return _backButton(backButton);
 }
