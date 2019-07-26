@@ -22,7 +22,8 @@ const SELECTORS = {
     '(//XCUIElementTypeOther[@name="Current lifestyle"])[2]/XCUIElementTypeImage',
   SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics',
   HISTORY_GRAPH_ANDROID:
-    '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]'
+    '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]',
+  HISTORY_GRAPH_IOS: '~Health Score History Graph showing last 6 records.'
 };
 
 class HealthScreen extends AppScreen {
