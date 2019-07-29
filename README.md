@@ -1,4 +1,8 @@
-# dstribution-mobile-automation
+# distribution-mobile-automation
+
+## Prerequisites
+
+You can run Android on Windows but to run iOS, you should use macOS. So, this guide only for macOS.
 
 ## Get Started
 
@@ -6,25 +10,17 @@
 npm install
 ```
 
-It will install dependencies only for repository.
+It will install dependencies only for this repository.
 
 You should install another dependencies to run script as well. Important thing is Xcode and Android SDK. You can check from below.
 
 ## Structure
 
-- `app` - App package files (e.g app-debug.apk)
+- `.github` - Only for Github
+- `app` - App package files (e.g app-debug.app, app-debug.apk)
 - `config` - Config files
 - `scripts` - `NPM` scripts (package.json#scripts)
 - `tests` - UI test scripts (mobile, web)
-
-## Homebrew
-
-You can install package manager for macOS, otherwise you should install in manually.
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew --version
-```
 
 ## Check dependencies
 
@@ -37,18 +33,26 @@ appium-doctor
 
 If you will install everything from `required` section, you are ready to run test scripts.
 
+## Homebrew
+
+You can install package manager for macOS, otherwise you should install in manually.
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew --version
+```
+
 ## Install JDK
 
-MacOS don't install JAVA anymore. So, you should install it. `brew` is your friend now.
+MacOS don't install JAVA anymore. So, you should install it manually. And Homebrew is your friend.
 
 ```bash
 brew tap AdoptOpenJDK/openjdk
 brew cask install adoptopenjdk8
 
-# build
+# build, project management
 brew install ant
 brew install gradle
-# project management
 brew install maven
 ```
 
@@ -56,7 +60,7 @@ brew install maven
 
 Most common way to install Android SDK, install Android Studio. Then, it will install automatically but you need to set path manually for some commands.
 
-Another way is, install `android-platform-tools android-sdk` by `brew`.
+Another way is, install `android-platform-tools android-sdk` by Homebrew.
 
 ```bash
 brew tap caskroom/cask
@@ -64,7 +68,7 @@ brew cask install android-sdk
 brew cask install android-platform-tools
 ```
 
-As I mentioned, if you installed Android Studio, you are not able to run some Android tools commands. This NPM scripts will help you fix those issues. If you didn't try `appium-doctor`, please do that before running this.
+As I mentioned, if you've installed Android Studio, you are not able to run some Android tools commands. This NPM scripts will help you fix those issues. If you didn't try `appium-doctor`, please do that before running this.
 
 ```bash
 # only run these when path was wrong
@@ -78,41 +82,69 @@ export PATH=$ANDROID_HOME/tools/bin:$PATH
 
 ## Path
 
+**Shell**
+
 ```bash
-# if you use bash (default mac shell for now, it will be changed)
+# check shell
+echo $SHELL
+
+# if you use bash
+# default mac shell for now, but it will be changed
 vi ~/.bashrc
-# or if you use zsh (it will be default shell of as they announced)
+
+# or if you use zsh
+# it will be default shell for mac as they announced
 vi ~/.zshrc
+```
 
-# when editor opened, put this
-# press `i` is edit mode
-# press `esc` is finish edit mode
-# press `:` is put commands mode, then put `wq`(write and quit)
+**If installed by `brew`**
 
+```bash
+export ANDROID_HOME=/usr/local/share/android-sdk
+```
+
+**If installed by Android Studio**
+
+- run Android Studio, press `configure`, press `SDK manager`
+- then you can see `Android SDK Location: `
+
+```bash
+export ANDROID_HOME=[android_sdk_location_here]
+```
+
+Afterwards, add the following lines
+
+```bash
 export ANT_HOME=/usr/local/opt/ant
 export MAVEN_HOME=/usr/local/opt/maven
 export GRADLE_HOME=/usr/local/opt/gradle
-
-# if you've installed Android SDK by `brew`, then use this
-export ANDROID_HOME=/usr/local/share/android-sdk
-# but if you've installed by Android Studio
-# run Android Studio, press `configure`, press `SDK manager`
-# then you can see `Android SDK Location: `
-export ANDROID_HOME=[android_sdk_location_here]
-
-# if wrong, go `/Library/Java` first and find real path
+# before set JAVA_HOME, please check exact path
 export JAVA_HOME=/Library/Java/JavaVirtualMachine/adoptopenjdk-8.jdk/Contents/Home
+```
 
+```bash
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$ANT_HOME/bin:$PATH
 export PATH=$MAVEN_HOME/bin:$PATH
 export PATH=$GRADLE_HOME/bin:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
+```
 
-# once you finish to save and quit
-source ~/.bashrc
-# or
-source ~/.zshrc
+---
+
+*Note: VI commands*
+
+- when editor opened
+- press `i` (edit mode)
+- press `esc` (finish edit mode)
+- press `:` (commands mode, then put `wq`)
+
+---
+
+After you finish adding the lines in bash, execute the following commands
+
+```bash
+source ~/.bashrc # or ~/.zshrc
 ```
 
 ## SSH
@@ -124,12 +156,12 @@ ssh-keygen -t rsa -b 4096 -C "<your_email>"
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
-After then, your ssh-key will saved on clipboard. Then, go to Github and click avatar and go setting. Go `SSH and GPG keys` and press `new SSH key` button and paste it. Once finished, you can clone without password.
+After then, your ssh-key will be saved on clipboard. Then, go to Github and click avatar and go setting. Go `SSH and GPG keys` and press `new SSH key` button and paste it. Once finished, you can clone without password.
 
 ## Node.js
 
 ```bash
-bew install node # it will install `npm` also
+brew install node # it will install `npm` also
 ```
 
 ## Packages
@@ -139,6 +171,7 @@ rm -rf app/*
 mv ~/Downloads/app-release.apk ./app/app-debug.apk
 mv ~/Downloads/EmployeeFrontend.app ./app/app-debug.app
 ```
+Note: You need to download the app and apk files in GoCD (https://ci.cxapalawandev.com)
 
 ## Run tests
 
@@ -154,7 +187,7 @@ npm run ci:android
 npm run ci:ios
 
 # run suite only
-# you shoud set `claims` script in config file (`config/wdio.shared.conf.js`)
+# you should set `claims` script in config file (`config/wdio.shared.conf.js`)
 npm run ios -- --suite claims
 npm run ci:android -- --suite claims
 ```

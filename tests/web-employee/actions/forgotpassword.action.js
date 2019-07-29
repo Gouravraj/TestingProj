@@ -1,4 +1,4 @@
-import ForgotPasswordPage from '../pageObjects/forgotPasswordPage';
+import ForgotPasswordPage from '../pageObjects/forgotPassword.page';
 
 export function getForgotPageLabel() {
   ForgotPasswordPage.open();

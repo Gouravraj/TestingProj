@@ -1,4 +1,4 @@
-import LoginPage from '../pageObjects/loginPage';
+import LoginPage from '../pageObjects/login.page';
 
 export function loginAs(empDetail) {
   LoginPage.open();
