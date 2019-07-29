@@ -8,14 +8,14 @@ import {
 import * as healthAction from '../actions/health.action';
 // import { SSL_OP_EPHEMERAL_RSA } from 'constants';
 
-describe('Employee should,', () => {
+fdescribe('Employee should,', () => {
   beforeAll(() => {});
 
   afterEach(() => {
     driver.reset();
   });
 
-  it('Story #4: Displaying of the health landing page', () => {
+  fit('Story #4: Displaying of the health landing page', () => {
     // Pre-con. Log in as landing credentials account
     loginAs(landingCredentials);
 
@@ -30,7 +30,7 @@ describe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  it('Story #22: Displaying of BMI and Prediabetes results', () => {
+  fit('Story #22: Displaying of BMI and Prediabetes results', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 

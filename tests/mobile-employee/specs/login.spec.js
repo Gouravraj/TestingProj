@@ -9,7 +9,6 @@ describe('Employee should,', () => {
 
   it('not be able to login to application with invalid credentials', () => {
     loginAs(invalidCredentials);
-
     //expect(login.isLoginErrorMessageVisible()).toBeTruthy();
   });
 

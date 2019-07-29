@@ -6,7 +6,6 @@ export { default as healthPhoto } from './api/healthPhoto';
 export { default as tap } from './api/tap';
 export { default as kbd } from './api/kbd';
 export { default as date } from './api/date';
-
 export {
   default as swipe,
   swipeOnElementToLeft,
@@ -22,3 +21,4 @@ export {
   checkIfDisplayedWithScrollDown
 } from './api/scroll';
 export { default as platform } from './api/platform';
+export { default as back } from './api/back';
