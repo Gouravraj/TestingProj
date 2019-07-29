@@ -8,18 +8,15 @@ const SELECTOR = {
 
 /**
  * Back button
- * @param  {string?}   selector
  * @param  {boolean?}  [willWait=false]
  * @return {undefined}
  */
-export default function back(selector, willWait = false) {
+export default function back(willWait = false) {
   const platform = getPlatform();
 
-  selector = selector || SELECTOR[platform];
-
   if (willWait) {
-    wait(selector);
+    wait(SELECTOR[platform]);
   }
 
-  $(selector).click();
+  $(SELECTOR[platform]).click();
 }
