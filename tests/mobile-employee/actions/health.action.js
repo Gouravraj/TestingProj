@@ -3,11 +3,7 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
-import {
-  healthPhoto,
-  swipeSlider,
-  platform as getPlatform
-} from '../helpers/api';
+import { photo, swipeSlider, platform as getPlatform } from '../helpers/api';
 const { join } = require('path');
 const cmd = require('node-cmd');
 
@@ -70,20 +66,35 @@ export function isPhotoExistingOnLifestylePage() {
 export function selectPhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  healthPhoto('select');
+
+  const options = {
+    ios: {
+      permit: true,
+      photo: '//XCUIElementTypeCell[contains(@name,"Photo, Landscape")][last()]'
+    },
+    android: {
+      permit: true,
+      photo: `android=${'new UiSelector().className("android.view.ViewGroup").index(1).packageName("com.google.android.apps.photos")'}`
+    }
+  };
+
+  if (getPlatform() === 'ios') {
+    photo('select', options.ios);
+  } else {
+    photo('select', options.android);
+  }
 }
 
 export function takePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  healthPhoto('take');
 }
 
 export function removePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   if (isPhotoExistingOnUpdatePage()) {
     HealthUpdateScreen.myPhoto.click();
-    healthPhoto('remove');
+    photo('remove');
   }
 }
 

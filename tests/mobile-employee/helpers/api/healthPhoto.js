@@ -26,7 +26,6 @@ export default function healthPhoto(action, options) {
       }
       wait('~Recently Added');
       $('~Recently Added').click();
-      $('//XCUIElementTypeCell[contains(@name,"Photo, Landscape")][1]').click();
     } else if (platform === 'android') {
       wait(txt('Choose from Library'));
       $txt('Choose from Library').click();
@@ -40,9 +39,6 @@ export default function healthPhoto(action, options) {
 
       wait(txt('Pictures'));
       $txt('Pictures').click();
-      const selector =
-        'new UiSelector().className("android.view.ViewGroup").index(1).packageName("com.google.android.apps.photos")';
-      $(`android=${selector}`).click();
     }
 
     // $(options.photo).click();
@@ -65,8 +61,8 @@ export default function healthPhoto(action, options) {
       $('~Done').click();
     }
   } else if (action === 'remove') {
+    //add to photo
     if (platform === 'ios') {
-      //todo
       $('~').click();
       driver.execute('mobile:alert', { action: 'accept' });
     } else if (platform == 'android') {

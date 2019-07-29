@@ -56,6 +56,14 @@ export default function photo(action, options) {
       $('~Shutter').click();
       $('~Done').click();
     }
+  } else if (action === 'remove') {
+    if (platform === 'ios') {
+      $('~').click();
+      driver.execute('mobile:alert', { action: 'accept' });
+    } else if (platform == 'android') {
+      $txt('', 'android.widget.TextView').click();
+      $txt('DELETE', 'android.widget.Button').click();
+    }
   }
   driver.pause(3000);
 }
