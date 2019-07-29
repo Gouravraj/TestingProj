@@ -3,11 +3,13 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
-import { healthPhoto } from '../helpers/api';
-import { swipeSlider } from '../helpers/api';
+import {
+  healthPhoto,
+  swipeSlider,
+  platform as getPlatform
+} from '../helpers/api';
 const { join } = require('path');
 const cmd = require('node-cmd');
-import { platform as getPlatform } from '../helpers/api';
 
 export function isLifeStyleTabSelected() {
   HealthLandingScreen.waitForIsShown(true);
