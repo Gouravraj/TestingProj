@@ -21,9 +21,18 @@ const SELECTORS = {
   CURRENT_LIFESTYLE_IOS:
     '(//XCUIElementTypeOther[@name="Current lifestyle"])[2]/XCUIElementTypeImage',
   SEARCH_FOR_CLINICS_BUTTON: '~Search for clinics',
+  GRAPHIC_RISK_NUMBER_IOS:
+    '//XCUIElementTypeOther[contains(@name,"OUT OF 100")]//XCUIElementTypeStaticText',
+  GRAPHIC_RISK_NUMBER_ANDROID:
+    '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]',
+
   HISTORY_GRAPH_ANDROID:
     '//android.view.ViewGroup[@content-desc="Health Score History Graph showing last 6 records."]',
   HISTORY_GRAPH_IOS: '~Health Score History Graph showing last 6 records.',
+  HISTORY_GRAPH_TO_GET_HEIGHT_IOS:
+    '(//XCUIElementTypeOther[@name="Health Score History Graph showing last 6 records."])[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]',
+  LAST_BAR_HISTORY_GRAPH_IOS:
+    '(//XCUIElementTypeOther[@name="Health Score History Graph showing last 6 records."])[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[4]',
   AGING_SLIDER_IOS:
     '(//XCUIElementTypeOther[starts-with(@name,"Future you at the age")])[1]/XCUIElementTypeSlider',
   AGING_SLIDER_ANDROID:
@@ -34,6 +43,18 @@ class HealthScreen extends AppScreen {
   constructor() {
     super(SELECTORS.UPDATE_HEALTH_DATA_BUTTON);
     this.platform = getPlatform().toUpperCase();
+  }
+
+  get graphicRiskNumber() {
+    return $(SELECTORS[`GRAPHIC_RISK_NUMBER_${this.platform}`]);
+  }
+
+  get historyGraphToGetHeight() {
+    return $(SELECTORS[`HISTORY_GRAPH_TO_GET_HEIGHT_${this.platform}`]);
+  }
+
+  get lastBarHistoryGraph() {
+    return $(SELECTORS[`LAST_BAR_HISTORY_GRAPH_${this.platform}`]);
   }
 
   get agingSlider() {

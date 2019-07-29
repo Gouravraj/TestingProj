@@ -1,5 +1,9 @@
 import { loginAs } from '../actions/login.action';
-import { landingCredentials, validCredentials } from '../../data/login.data';
+import {
+  landingCredentials,
+  validCredentials,
+  cxatest4Credentials
+} from '../../data/login.data';
 import {
   updateHealthData,
   expectResultHealthData
@@ -15,7 +19,7 @@ fdescribe('Employee should,', () => {
     driver.reset();
   });
 
-  fit('Story #4: Displaying of the health landing page', () => {
+  it('Story #4: Displaying of the health landing page', () => {
     // Pre-con. Log in as landing credentials account
     loginAs(landingCredentials);
 
@@ -30,7 +34,7 @@ fdescribe('Employee should,', () => {
     expect(healthAction.isSearchForClinicButtonDisplayed()).toBeTruthy();
   });
 
-  fit('Story #22: Displaying of BMI and Prediabetes results', () => {
+  it('Story #22: Displaying of BMI and Prediabetes results', () => {
     // Pre-con. Log in
     loginAs(validCredentials);
 
@@ -205,5 +209,24 @@ fdescribe('Employee should,', () => {
 
     // VP6. Verify future you at the age display of 75
     expect(healthAction.isFutureYouAtTheAgeOf('75')).toBeTruthy();
+  });
+
+  it('Story #37: View graphical risk score', () => {
+    // Pre-con 1. Log in as landing credentials account
+    loginAs(cxatest4Credentials);
+
+    // VP1. Verify graphical risk score displays
+    expect(healthAction.isGraphicHistoryScoreDisplay()).toBeTruthy();
+
+    // Unable to verify this point on Android
+    // VP2. Verify graphical risk score equals to bar graph score selected
+    const graphicRishNumber = healthAction.getGraphicRiskNumber();
+    const heightOfLastBar = healthAction.getHeighOfLastBarOfGraphicRiskScore();
+    const heightOfGraphicRiskScore = healthAction.getHeightOfGraphicAssessmentScore();
+
+    const actualHealthScoreBar = Math.round(
+      (heightOfLastBar / heightOfGraphicRiskScore) * 100
+    );
+    expect(actualHealthScoreBar).toBe(graphicRishNumber);
   });
 });

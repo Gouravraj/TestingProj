@@ -26,6 +26,13 @@ export const invalidCredentials = {
   password: 'P@ssw0rd'
 };
 
+// cxatest4 credentials
+export const cxatest4Credentials = {
+  companyName: 'twclient3',
+  emailAddress: 'cxatest4@test.com',
+  password: 'P@ssw0rd'
+};
+
 export const forgotPwdEmail = {
   emailAddress: 'kumar@thoughtworks.com'
 };
