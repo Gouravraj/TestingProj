@@ -32,7 +32,7 @@ export function isFutureYouAtTheAgeOf(age) {
   const platform = getPlatform();
 
   if (platform === 'ios') {
-    return $('~' + age).isExisting();
+    return $(`~${age}`).isExisting();
   } else {
     return HealthScreen.isTextExisting(age);
   }
