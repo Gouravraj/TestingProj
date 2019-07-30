@@ -120,7 +120,7 @@ export const settlementDate = {
 
 export const approvedClaimSC = {
   ios:
-    '(//XCUIElementTypeOther[contains(@name,"Approved") and contains(@name,"Specialist Consultation")])[16]',
+    '(//XCUIElementTypeOther[contains(@name,"Approved") and contains(@name,"Specialist Consultation HK$")])[16]',
   android:
     '(//android.view.ViewGroup[@content-desc="Approved"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
 };
@@ -133,4 +133,37 @@ export const backButton = {
 export const startInitialPendingText = {
   ios: '//XCUIElementTypeOther[@name="Pending"]',
   android: '//android.view.ViewGroup[@content-desc="Pending"]'
+};
+
+export const rejectedClaimForDentalCare = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Rejected") and contains(@name,"Dental Care HK$")])[16]',
+  android:
+    '(//android.view.ViewGroup[@content-desc="Rejected"])/following-sibling::android.widget.TextView[@text="Dental Care"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
+};
+
+export const rejectedClaimSC = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Rejected") and contains(@name,"Specialist Consultation HK$")])[16]',
+  android:
+    '(//android.view.ViewGroup[@content-desc="Rejected"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
+};
+
+export const rejectedClaimLabel = {
+  ios:
+    '//XCUIElementTypeStaticText[@name="Rejected"]/following-sibling::XCUIElementTypeOther',
+  android:
+    '//*[@text="Rejected"]/parent::android.view.ViewGroup/android.widget.TextView[contains(@text,"claim")]'
+};
+
+export const verifyRejectedImageLoadedCheck = {
+  ios: '//*[contains(@name,"assets/src/images/claimRejectedClaim")]',
+  android: '//android.widget.ImageView'
+};
+
+export const rejectedClaimGMP = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Rejected") and contains(@name,"General Medical Practitioner HK$")])[16]',
+  android:
+    '(//android.view.ViewGroup[@content-desc="Rejected"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
 };

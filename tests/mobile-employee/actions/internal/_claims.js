@@ -248,3 +248,19 @@ export function _startFromIntial(startInitialPendingText) {
     console.log('Error is ', error);
   }
 }
+
+export function _rejectedClaims(rejectedClaim) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    checkIfDisplayedWithScrollDown($(rejectedClaim[platform]), 100, 0);
+    isVisible = wait(rejectedClaim[platform]);
+    if (isVisible) {
+      $(rejectedClaim[platform]).click();
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}

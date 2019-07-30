@@ -15,7 +15,8 @@ import {
   _approvedClaims,
   _checkLoadedImageOnApprovedClaims,
   _backButton,
-  _startFromIntial
+  _startFromIntial,
+  _rejectedClaims
 } from './internal/_claims';
 import {
   details,
@@ -42,7 +43,12 @@ import {
   approvedClaimGMP,
   approvedClaimSC,
   backButton,
-  startInitialPendingText
+  startInitialPendingText,
+  rejectedClaimForDentalCare,
+  rejectedClaimSC,
+  rejectedClaimLabel,
+  verifyRejectedImageLoadedCheck,
+  rejectedClaimGMP
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -183,4 +189,24 @@ export function clickBackButton() {
 
 export function startFromIntial() {
   return _startFromIntial(startInitialPendingText);
+}
+
+export function checkAndClickRejectedClaimsForDentalCare() {
+  return _rejectedClaims(rejectedClaimForDentalCare);
+}
+
+export function checkAndClickRejectedClaimsForSpecialistConsultation() {
+  return _rejectedClaims(rejectedClaimSC);
+}
+
+export function rejectedClaimLables() {
+  return _outpatientClaimLabel(rejectedClaimLabel);
+}
+
+export function verifyRejectedLoadedImageCheck() {
+  return _checkLoadedImageOnApprovedClaims(verifyRejectedImageLoadedCheck);
+}
+
+export function checkAndClickRejectedClaimsForGeneralMedicalPractitioner() {
+  return _rejectedClaims(rejectedClaimGMP);
 }
