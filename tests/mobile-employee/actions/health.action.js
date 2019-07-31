@@ -19,9 +19,7 @@ export function isLifeStyleTabSelected() {
 export function slideFaceAging(from, to) {
   HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
   swipeSlider(HealthScreen.agingSlider, from, to);
-  driver.pause(3000);
-
-  //agingSlider
+  driver.pause(1000);
 }
 
 export function isFutureYouAtTheAgeOf(age) {
