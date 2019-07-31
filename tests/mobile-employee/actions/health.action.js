@@ -31,6 +31,13 @@ export function getHeighOfLastBarOfGraphicRiskScore() {
   return HealthScreen.lastBarHistoryGraph.getSize('height');
 }
 
+export function getScoreOfLastBarOfGraphicRiskScore() {
+  const heightOfLastBar = getHeighOfLastBarOfGraphicRiskScore();
+  const heightOfGraphicRiskScore = getHeightOfGraphicAssessmentScore();
+
+  return Math.round((heightOfLastBar / heightOfGraphicRiskScore) * 100);
+}
+
 export function getHeightOfGraphicAssessmentScore() {
   return HealthScreen.historyGraphToGetHeight.getSize('height');
 }

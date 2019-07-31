@@ -221,12 +221,8 @@ fdescribe('Employee should,', () => {
     // Unable to verify this point on Android
     // VP2. Verify graphical risk score equals to bar graph score selected
     const graphicRiskNumber = healthAction.getGraphicRiskNumber();
-    const heightOfLastBar = healthAction.getHeighOfLastBarOfGraphicRiskScore();
-    const heightOfGraphicRiskScore = healthAction.getHeightOfGraphicAssessmentScore();
+    const actualHealthScoreBar = healthAction.getScoreOfLastBarOfGraphicRiskScore();
 
-    const actualHealthScoreBar = Math.round(
-      (heightOfLastBar / heightOfGraphicRiskScore) * 100
-    );
     expect(actualHealthScoreBar).toBe(graphicRiskNumber);
   });
 });
