@@ -23,6 +23,8 @@ export function slideFaceAging(from, to) {
 }
 
 export function isFutureYouAtTheAgeOf(age) {
+  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
+
   const platform = getPlatform();
 
   if (platform === 'ios') {

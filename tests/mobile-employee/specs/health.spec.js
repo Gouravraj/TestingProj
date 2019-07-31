@@ -191,19 +191,19 @@ fdescribe('Employee should,', () => {
     // VP4. Verify future you at the age display of 45
     expect(healthAction.isFutureYouAtTheAgeOf('45')).toBeTruthy();
 
-    // Step 6. Slide face aging to 25%
+    // Step 6. Slide face aging to 50%
     healthAction.slideFaceAging(0.25, 0.5);
 
     // VP5. Verify future you at the age display of 55
     expect(healthAction.isFutureYouAtTheAgeOf('55')).toBeTruthy();
 
-    // Step 7. Slide face aging to 25%
+    // Step 7. Slide face aging to 75%
     healthAction.slideFaceAging(0.5, 0.75);
 
     // VP6. Verify future you at the age display of 67
     expect(healthAction.isFutureYouAtTheAgeOf('67')).toBeTruthy();
 
-    // Step 8. Slide face aging to 25%
+    // Step 8. Slide face aging to 100%
     healthAction.slideFaceAging(0.75, 1);
 
     // VP7. Verify future you at the age display of 75
