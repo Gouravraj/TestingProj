@@ -7,7 +7,7 @@ import { loginAs } from '../actions/login.action';
 import { CLAIMS as SELECTOR } from '../selectors';
 import { validCredentials } from '../../data/login.data';
 
-fdescribe('Employee should be', () => {
+describe('Employee should be', () => {
   beforeEach(() => {
     loginAs(validCredentials);
     isNavigationBarVisible();
@@ -16,7 +16,7 @@ fdescribe('Employee should be', () => {
     $(SELECTOR.buttonMakeAClaim).click();
   });
 
-  fit('able to submit a claim for self', () => {
+  it('able to submit a claim for self', () => {
     expect(claims.makeClaim()).toBeTruthy();
   });
 
