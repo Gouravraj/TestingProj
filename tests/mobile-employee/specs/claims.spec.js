@@ -16,9 +16,9 @@ fdescribe('Employee should be', () => {
     $(SELECTOR.buttonMakeAClaim).click();
   });
 
-  fit('able to submit a claim for self', () => {
-    expect(claims.makeClaim()).toBeTruthy();
-  });
+  // fit('able to submit a claim for self', () => {
+  //   expect(claims.makeClaim()).toBeTruthy();
+  // });
 
   it('able to submit a claim for self with referral document', () => {
     expect(claims.makeClaimWithRef()).toBeTruthy();
