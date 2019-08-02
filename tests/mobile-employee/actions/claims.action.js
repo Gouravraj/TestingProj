@@ -12,7 +12,11 @@ import {
   _receiptImage,
   _referralLetter,
   _outpatientClaimLabel,
-  _backButton
+  _approvedClaims,
+  _checkLoadedImageOnApprovedClaims,
+  _backButton,
+  _startFromIntial,
+  _rejectedClaims
 } from './internal/_claims';
 import {
   details,
@@ -32,7 +36,19 @@ import {
   receiptImage,
   referralLetter,
   outpatientClaimLabel,
-  backButton
+  approvedClaim,
+  verifyImageLoadedCheck,
+  approvedClaimLabel,
+  settlementDate,
+  approvedClaimGMP,
+  approvedClaimSC,
+  backButton,
+  startInitialPendingText,
+  rejectedClaimForDentalCare,
+  rejectedClaimSC,
+  rejectedClaimLabel,
+  verifyRejectedImageLoadedCheck,
+  rejectedClaimGMP
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -120,7 +136,7 @@ export function reimbursedAmount() {
 }
 
 export function getSettlementDate() {
-  return _getSettlementDate();
+  return _getSettlementDate(settlementDate);
 }
 
 export function loadedImage() {
@@ -147,6 +163,50 @@ export function outpatientClaimLables() {
   return _outpatientClaimLabel(outpatientClaimLabel);
 }
 
+export function checkAndClickApprovedClaimsForDentalCare() {
+  return _approvedClaims(approvedClaim);
+}
+
+export function verifyLoadedImageCheck() {
+  return _checkLoadedImageOnApprovedClaims(verifyImageLoadedCheck);
+}
+
+export function approvedClaimLables() {
+  return _outpatientClaimLabel(approvedClaimLabel);
+}
+
+export function checkAndClickApprovedClaimsForGeneralMedicalPractitioner() {
+  return _approvedClaims(approvedClaimGMP);
+}
+
+export function checkAndClickApprovedClaimsForSpecialistConsultation() {
+  return _approvedClaims(approvedClaimSC);
+}
+
 export function clickBackButton() {
   return _backButton(backButton);
+}
+
+export function startFromIntial() {
+  return _startFromIntial(startInitialPendingText);
+}
+
+export function checkAndClickRejectedClaimsForDentalCare() {
+  return _rejectedClaims(rejectedClaimForDentalCare);
+}
+
+export function checkAndClickRejectedClaimsForSpecialistConsultation() {
+  return _rejectedClaims(rejectedClaimSC);
+}
+
+export function rejectedClaimLables() {
+  return _outpatientClaimLabel(rejectedClaimLabel);
+}
+
+export function verifyRejectedLoadedImageCheck() {
+  return _checkLoadedImageOnApprovedClaims(verifyRejectedImageLoadedCheck);
+}
+
+export function checkAndClickRejectedClaimsForGeneralMedicalPractitioner() {
+  return _rejectedClaims(rejectedClaimGMP);
 }
