@@ -63,7 +63,7 @@ module.exports = function configure(homeDir) {
       },
 
       android: {
-        id: 'com.employeefrontend',
+        id: 'com.employeefrontend.dev',
         to: androidCaps[0].app,
         rename: 'app-debug.apk'
       }
