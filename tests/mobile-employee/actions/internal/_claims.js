@@ -5,11 +5,11 @@ import {
   photo,
   tap,
   platform as getPlatform,
-  checkIfDisplayedWithScrollDown
+  checkIfDisplayedWithScrollDown,
+  checkIfDisplayedWithScrollUp
 } from '../../helpers/api';
 import txt, { txtTo } from '../../helpers/text';
 import { CLAIMS as SELECTOR } from '../../selectors';
-import ClaimsScreen from '../../screenobjects/claims.screen';
 import wait from '../../helpers/api/wait';
 
 export function _patientDetails(dependent, isPN = false, isCN = false) {
@@ -146,10 +146,15 @@ export function _checkLoadedImageOnPendingClaims(pendingClaimLoadedImage) {
   return isVisible;
 }
 
-export function _getSettlementDate() {
+export function _getSettlementDate(settlementDate) {
+  const platform = getPlatform();
   let isVisible;
   try {
-    isVisible = wait(ClaimsScreen.settlementDate);
+    if (platform === 'ios') {
+      isVisible = wait(settlementDate.ios);
+    } else if (platform === 'android') {
+      isVisible = wait(settlementDate.android);
+    }
   } catch (error) {
     isVisible = false;
   }
@@ -194,6 +199,34 @@ export function _outpatientClaimLabel(outpatientClaimLabel) {
   return data;
 }
 
+export function _approvedClaims(approvedClaim) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    checkIfDisplayedWithScrollDown($(approvedClaim[platform]), 100, 0);
+    isVisible = wait(approvedClaim[platform]);
+    if (isVisible) {
+      $(approvedClaim[platform]).click();
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _checkLoadedImageOnApprovedClaims(verifyImageLoadedCheck) {
+  const platform = getPlatform();
+  let isVisible;
+  driver.pause(4000);
+  try {
+    isVisible = wait(verifyImageLoadedCheck[platform]);
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
 export function _backButton(backButton) {
   const platform = getPlatform();
 
@@ -203,4 +236,31 @@ export function _backButton(backButton) {
   } catch (error) {
     console.log('Error is ', error);
   }
+}
+
+export function _startFromIntial(startInitialPendingText) {
+  const platform = getPlatform();
+
+  try {
+    checkIfDisplayedWithScrollUp($(startInitialPendingText[platform]), 100, 0);
+    wait(startInitialPendingText[platform]);
+  } catch (error) {
+    console.log('Error is ', error);
+  }
+}
+
+export function _rejectedClaims(rejectedClaim) {
+  const platform = getPlatform();
+  let isVisible;
+
+  try {
+    checkIfDisplayedWithScrollDown($(rejectedClaim[platform]), 100, 0);
+    isVisible = wait(rejectedClaim[platform]);
+    if (isVisible) {
+      $(rejectedClaim[platform]).click();
+    }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
 }
