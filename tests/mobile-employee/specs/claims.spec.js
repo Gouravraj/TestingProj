@@ -15,7 +15,7 @@ describe('Employee should be', () => {
 
     $(SELECTOR.buttonMakeAClaim).click();
   });
-
+  
   it('able to submit a claim for self', () => {
     expect(claims.makeClaim()).toBeTruthy();
   });
