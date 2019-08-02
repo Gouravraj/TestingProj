@@ -63,6 +63,24 @@ export function swipeOnElementToLeft(element) {
   _swipe(options);
 }
 
+export function swipeSlider(element, from, to) {
+  const location = element.getLocation();
+  const width = element.getSize('width');
+  const height = element.getSize('height');
+
+  const options = {
+    from: {
+      x: location.x + width * from,
+      y: location.y + height / 2
+    },
+    to: {
+      x: location.x + width * to,
+      y: location.y + height / 2
+    }
+  };
+  _swipe(options);
+}
+
 export function swipeUp(percentage = 1) {
   _swipeOnPercentage(
     _calculateXY(SWIPE_DIRECTION.up.start, percentage),

@@ -3,7 +3,7 @@ import HealthLandingScreen from '../screenobjects/health.landing.screen';
 import HealthUpdateScreen from '../screenobjects/health.update.screen';
 import NavigationBar from '../screenobjects/navigationbar.screen';
 import txt from '../helpers/text';
-import { healthPhoto } from '../helpers/api';
+import { photo, swipeSlider, platform as getPlatform } from '../helpers/api';
 const { join } = require('path');
 const cmd = require('node-cmd');
 
@@ -16,11 +16,33 @@ export function isLifeStyleTabSelected() {
   return isSelected;
 }
 
-export function copyImageToiOS() {
-  cmd.run(
-    'xcrun simctl addmedia booted ' +
-      join(process.cwd(), 'tests/data', 'face-image.jpg')
-  );
+export function slideFaceAging(from, to) {
+  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
+  swipeSlider(HealthScreen.agingSlider, from, to);
+  driver.pause(1000);
+}
+
+export function isFutureYouAtTheAgeOf(age) {
+  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
+
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    return $(`~${age}`).isExisting();
+  } else {
+    return HealthScreen.isTextExisting(age);
+  }
+}
+
+export function copyImageToLibrary() {
+  const platform = getPlatform();
+
+  if (platform === 'ios') {
+    cmd.run(
+      'xcrun simctl addmedia booted ' +
+        join(process.cwd(), 'tests/data', 'face-image.jpg')
+    );
+  }
 }
 export function clickNextButton() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
@@ -44,20 +66,35 @@ export function isPhotoExistingOnLifestylePage() {
 export function selectPhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  healthPhoto('select');
+
+  const options = {
+    ios: {
+      permit: true,
+      photo: '//XCUIElementTypeCell[contains(@name,"Photo, Landscape")][last()]'
+    },
+    android: {
+      permit: true,
+      photo: `android=${'new UiSelector().className("android.view.ViewGroup").index(1).packageName("com.google.android.apps.photos")'}`
+    }
+  };
+
+  if (getPlatform() === 'ios') {
+    photo('select', options.ios);
+  } else {
+    photo('select', options.android);
+  }
 }
 
 export function takePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.addPhoto.click();
-  healthPhoto('take');
 }
 
 export function removePhoto() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   if (isPhotoExistingOnUpdatePage()) {
     HealthUpdateScreen.myPhoto.click();
-    healthPhoto('remove');
+    photo('remove');
   }
 }
 

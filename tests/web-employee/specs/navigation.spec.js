@@ -35,7 +35,6 @@ describe('Employee should,', function() {
 
     browser.pause(3000);
 
-    //TODO:: added assertion in each navigation 
+    //TODO:: added assertion in each navigation
   });
 });
- 
