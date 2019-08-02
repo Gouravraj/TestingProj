@@ -35,9 +35,9 @@ export const isReimbursedAmountVisible = {
 
 export const gmpPendingClaim = {
   ios:
-    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"General Medical Practitioner")])[1]',
+    '(//XCUIElementTypeOther[contains(@name,"Pending") and contains(@name,"General Medical Practitioner HK$")])[16]',
   android:
-    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"])[1]'
+    '(//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
 };
 
 export const pendingClaimLoadedImage = {
@@ -58,16 +58,16 @@ export const viewSubmittedClaim = {
 
 export const specialistConsultationPendingClaim = {
   ios:
-    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"Specialist Consultation")])[1]',
+    '(//XCUIElementTypeOther[contains(@name,"Pending") and contains(@name,"Specialist Consultation HK$")])[16]',
   android:
-    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"])[1]'
+    '(//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Specialist Consultation"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
 };
 
 export const dentalCarePendingClaim = {
   ios:
-    '((//XCUIElementTypeOther[@name="Pending"])/following-sibling::XCUIElementTypeOther[contains(@name,"Dental Care")])[1]',
+    '(//XCUIElementTypeOther[contains(@name,"Pending") and contains(@name,"Dental Care HK$")])[16]',
   android:
-    '((//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Dental Care"])[1]'
+    '(//android.view.ViewGroup[@content-desc="Pending"])/following-sibling::android.widget.TextView[@text="Dental Care"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
 };
 
 export const receiptImage = {
