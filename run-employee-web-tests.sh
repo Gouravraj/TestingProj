@@ -3,7 +3,8 @@
 suiteType=$1
 
 echo "---------npm installation-----------"
-
+echo $PATH
+export PATH=/usr/local/opt/node@10/bin:$PATH
 echo $PATH
 echo "------------------------------------"
 npm install
