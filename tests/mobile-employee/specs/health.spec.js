@@ -2,7 +2,7 @@ import { loginAs } from '../actions/login.action';
 import {
   landingCredentials,
   validCredentials,
-  cxatest4Credentials
+  sixGraph
 } from '../../data/login.data';
 import {
   updateHealthData,
@@ -213,7 +213,7 @@ fdescribe('Employee should,', () => {
 
   it('Story #37: View graphical risk score', () => {
     // Pre-con 1. Log in as landing credentials account
-    loginAs(cxatest4Credentials);
+    loginAs(sixGraph);
 
     // VP1. Verify graphical risk score displays
     expect(healthAction.isGraphicHistoryScoreDisplay()).toBeTruthy();
