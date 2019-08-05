@@ -3,6 +3,9 @@
 suiteType=$1
 
 echo "---------npm installation-----------"
+
+echo $PATH
+echo "------------------------------------"
 npm install
 
 if [ $suiteType == "smoke" ]
