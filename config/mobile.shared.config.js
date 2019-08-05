@@ -2,7 +2,7 @@ exports.config = {
   runner: 'local',
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 150000
+    defaultTimeoutInterval: 600000
   },
   sync: true,
   logLevel: 'debug',

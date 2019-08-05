@@ -186,28 +186,31 @@ fdescribe('Employee should,', () => {
     // VP2. Verify selected photo displays on Health page
     expect(healthAction.isPhotoExistingOnLifestylePage()).toBeTruthy();
 
+    // VP3. Verify future you at the age display of 35
+    expect(healthAction.isFutureYouAtTheAgeOf('35')).toBeTruthy();
+
     // Step 5. Slide face aging to 25%
     healthAction.slideFaceAging(0, 0.25);
 
-    // VP3. Verify future you at the age display of 45
+    // VP4. Verify future you at the age display of 45
     expect(healthAction.isFutureYouAtTheAgeOf('45')).toBeTruthy();
 
-    // Step 6. Slide face aging to 25%
+    // Step 6. Slide face aging to 50%
     healthAction.slideFaceAging(0.25, 0.5);
 
-    // VP4. Verify future you at the age display of 55
+    // VP5. Verify future you at the age display of 55
     expect(healthAction.isFutureYouAtTheAgeOf('55')).toBeTruthy();
 
-    // Step 7. Slide face aging to 25%
+    // Step 7. Slide face aging to 75%
     healthAction.slideFaceAging(0.5, 0.75);
 
-    // VP5. Verify future you at the age display of 67
+    // VP6. Verify future you at the age display of 67
     expect(healthAction.isFutureYouAtTheAgeOf('67')).toBeTruthy();
 
-    // Step 8. Slide face aging to 25%
+    // Step 8. Slide face aging to 100%
     healthAction.slideFaceAging(0.75, 1);
 
-    // VP6. Verify future you at the age display of 75
+    // VP7. Verify future you at the age display of 75
     expect(healthAction.isFutureYouAtTheAgeOf('75')).toBeTruthy();
   });
 
