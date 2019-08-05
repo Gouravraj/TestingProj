@@ -3,6 +3,8 @@
 suiteType=$1
 
 echo "---------npm installation-----------"
+
+export PATH=/usr/local/opt/node@10/bin:$PATH
 npm install
 
 if [ $suiteType == "smoke" ]
