@@ -2,6 +2,8 @@
 
 set -eu
 
-echo "INFO Removing container and image"
+echo "running cleanup"
 
-docker rmi --force "selenium/standalone-chrome-debug"
+# echo "INFO Removing container and image"
+
+# docker rmi --force "selenium/standalone-chrome-debug"
