@@ -52,13 +52,13 @@ export const forgotPwdEmail = {
 };
 
 export const hrCredentials = {
-  emailAddress: 'testuser1@gmail.com',
-  password: 'P@$$w0rd'
+  emailAddress: 'hradmin@test.com',
+  password: 'P@ssw0rd'
 };
 
 export const csCredentials = {
-  emailAddress: 'testuser2@gmail.com',
-  password: 'P@$$w0rd'
+  emailAddress: 'csadmin@test.com',
+  password: 'P@ssw0rd'
 };
 
 /*

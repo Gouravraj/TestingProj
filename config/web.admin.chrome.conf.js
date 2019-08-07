@@ -14,6 +14,6 @@ config.capabilities = [
   }
 ];
 
-config.baseUrl = 'https://distribution-admin-portal.cxapalawandev.com/';
+config.baseUrl = 'https://benefits-admin.cxapalawan.com/';
 
 exports.config = { ...config };
