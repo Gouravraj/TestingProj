@@ -1,5 +1,9 @@
 import { loginAs } from '../actions/login.action';
-import { landingCredentials, validCredentials } from '../../data/login.data';
+import {
+  landingCredentials,
+  validCredentials,
+  sixGraph
+} from '../../data/login.data';
 import {
   updateHealthData,
   expectResultHealthData
@@ -208,5 +212,20 @@ fdescribe('Employee should,', () => {
 
     // VP7. Verify future you at the age display of 75
     expect(healthAction.isFutureYouAtTheAgeOf('75')).toBeTruthy();
+  });
+
+  it('Story #37: View graphical risk score', () => {
+    // Pre-con 1. Log in as landing credentials account
+    loginAs(sixGraph);
+
+    // VP1. Verify graphical risk score displays
+    expect(healthAction.isGraphicHistoryScoreDisplay()).toBeTruthy();
+
+    // Unable to verify this point on Android
+    // VP2. Verify graphical risk score equals to bar graph score selected
+    const graphicRiskNumber = healthAction.getGraphicRiskNumber();
+    const actualHealthScoreBar = healthAction.getScoreOfLastBarOfGraphicRiskScore();
+
+    expect(actualHealthScoreBar).toBe(graphicRiskNumber);
   });
 });
