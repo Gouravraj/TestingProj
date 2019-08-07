@@ -45,22 +45,25 @@ describe('General Medical Practitioner-Employee pending claims should be', () =>
     navigateToClaimsScreen();
   });
 
-  it('able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     expect(claims.loadedImage()).toBeTruthy();
-  });
-
-  it('able to verify the reimbursed amount is not displayed', () => {
     claims.clickPendingClaims();
     expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeFalsy();
   });
+
+  // it('able to verify the reimbursed amount is not displayed', () => {
+  //   claims.clickPendingClaims();
+  //   expect(claims.reimbursedAmount()).toBeFalsy();
+  // });
   /** commented out until intermittent issue is identified
   it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.outpatientClaimLables()).toEqual('Outpatient claim');
   });
 */
-  it('able to verify the settlement date is not displayed', () => {
-    expect(claims.getSettlementDate()).toBeFalsy();
-  });
+  // it('able to verify the settlement date is not displayed', () => {
+  //    expect(claims.getSettlementDate()).toBeFalsy();
+  //  });
   /** commented out until intermittent issue is identified
   it('Specific expectation: only the receipt image is displayed', () => {
     expect(claims.receiptImages()).toBeTruthy();
@@ -76,22 +79,25 @@ describe('General Medical Practitioner-Employee pending claims should be', () =>
 });
 
 describe('Specialist Consultation-Employee pending claims should be', () => {
-  it('able to verify the images loaded has a clock', () => {
+  it('able to verify all cases', () => {
     expect(claims.loadedImage()).toBeTruthy();
-  });
-
-  it('able to verify the reimbursed amount is not displayed', () => {
     claims.clickSpecialistConsultationPendingClaims();
     expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeFalsy();
   });
+
+  //  it('able to verify the reimbursed amount is not displayed', () => {
+  //    claims.clickSpecialistConsultationPendingClaims();
+  //   expect(claims.reimbursedAmount()).toBeFalsy();
+  // });
   /** commented out until intermittent issue is identified
   it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.outpatientClaimLables()).toEqual('Outpatient claim');
   });
 */
-  it('able to verify the settlement date is not displayed', () => {
-    expect(claims.getSettlementDate()).toBeFalsy();
-  });
+  //  it('able to verify the settlement date is not displayed', () => {
+  //    expect(claims.getSettlementDate()).toBeFalsy();
+  //  });
 
   /** commented out until intermittent issue is identified
   it('Specific expectation: only the receipt image is displayed', () => {
@@ -108,22 +114,25 @@ describe('Specialist Consultation-Employee pending claims should be', () => {
 });
 
 describe('Dental Care - Employee pending claims should be', () => {
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     expect(claims.loadedImage()).toBeTruthy();
-  });
-
-  it('General Expectation: able to verify the reimbursed amount is not displayed', () => {
     claims.clickDentalCarePendingClaims();
     expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeFalsy();
   });
+
+  // it('General Expectation: able to verify the reimbursed amount is not displayed', () => {
+  //   claims.clickDentalCarePendingClaims();
+  //   expect(claims.reimbursedAmount()).toBeFalsy();
+  // });
   /** commented out until intermittent issue is identified
   it('Specific expectation: label displayed below the image is "wellness claim"', () => {
     expect(claims.outpatientClaimLables()).toEqual('Wellness claim');
   });*/
 
-  it('General Expectation: able to verify the settlement date is not displayed', () => {
-    expect(claims.getSettlementDate()).toBeFalsy();
-  });
+  // it('General Expectation: able to verify the settlement date is not displayed', () => {
+  //   expect(claims.getSettlementDate()).toBeFalsy();
+  // });
   /** commented out until intermittent issue is identified
   it('Specific expectation: only the receipt image is displayed', () => {
     expect(claims.receiptImages()).toBeTruthy();
@@ -147,12 +156,16 @@ describe('Wellness claim without referral letter - Employee approved claims shou
     navigateToClaimsScreen();
   });
 
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickApprovedClaimsForDentalCare();
     expect(claims.verifyLoadedImageCheck()).toBeTruthy();
+    expect(claims.approvedClaimLables()).toEqual('Wellness claim');
+    expect(claims.reimbursedAmount()).toBeTruthy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
 
-  it('Specific expectation: label displayed below the image is "wellness claim"', () => {
+  /**  it('Specific expectation: label displayed below the image is "wellness claim"', () => {
     expect(claims.approvedClaimLables()).toEqual('Wellness claim');
   });
 
@@ -179,12 +192,16 @@ describe('Wellness claim without referral letter - Employee approved claims shou
 });
 
 describe('Outpatient claim without referral letter - Employee approved claims should be', () => {
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickApprovedClaimsForGeneralMedicalPractitioner();
     expect(claims.verifyLoadedImageCheck()).toBeTruthy();
+    expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
+    expect(claims.reimbursedAmount()).toBeTruthy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
 
-  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
+  /**  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
   });
 
@@ -211,12 +228,16 @@ describe('Outpatient claim without referral letter - Employee approved claims sh
 });
 
 describe('Outpatient claim with referral letter - Employee approved claims should be', () => {
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickApprovedClaimsForSpecialistConsultation();
     expect(claims.verifyLoadedImageCheck()).toBeTruthy();
+    expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
+    expect(claims.reimbursedAmount()).toBeTruthy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
 
-  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
+  /**  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.approvedClaimLables()).toEqual('Outpatient claim');
   });
 
@@ -251,11 +272,15 @@ describe('Outpatient claim with referral letter - Employee rejected claims shoul
     navigateToClaimsScreen();
   });
 
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickRejectedClaimsForSpecialistConsultation();
     expect(claims.verifyRejectedLoadedImageCheck()).toBeTruthy();
+    expect(claims.rejectedClaimLables()).toEqual('Outpatient claim');
+    expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
-
+  /** 
   it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.rejectedClaimLables()).toEqual('Outpatient claim');
   });
@@ -283,12 +308,16 @@ describe('Outpatient claim with referral letter - Employee rejected claims shoul
 });
 
 describe('Outpatient claim without referral letter - Employee rejected claims should be', () => {
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickRejectedClaimsForGeneralMedicalPractitioner();
     expect(claims.verifyRejectedLoadedImageCheck()).toBeTruthy();
+    expect(claims.rejectedClaimLables()).toEqual('Outpatient claim');
+    expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
 
-  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
+  /**  it('Specific expectation: label displayed below the image is "Outpatient claim"', () => {
     expect(claims.rejectedClaimLables()).toEqual('Outpatient claim');
   });
 
@@ -315,11 +344,15 @@ describe('Outpatient claim without referral letter - Employee rejected claims sh
 });
 
 describe('Wellness claim without referral letter - Employee rejected claims should be', () => {
-  it('General Expectation: able to verify the images loaded has a clock', () => {
+  it('able to verify all test cases', () => {
     claims.checkAndClickRejectedClaimsForDentalCare();
     expect(claims.verifyRejectedLoadedImageCheck()).toBeTruthy();
+    expect(claims.rejectedClaimLables()).toEqual('Wellness claim');
+    expect(claims.reimbursedAmount()).toBeFalsy();
+    expect(claims.getSettlementDate()).toBeTruthy();
+    expect(claims.receiptImages()).toBeTruthy();
   });
-
+  /** 
   it('Specific expectation: label displayed below the image is "wellness claim"', () => {
     expect(claims.rejectedClaimLables()).toEqual('Wellness claim');
   });
