@@ -5,7 +5,11 @@ import {
 import * as claims from '../actions/claims.action';
 import { loginAs } from '../actions/login.action';
 import { CLAIMS as SELECTOR } from '../selectors';
-import { validCredentials, validCredentials2 } from '../../data/login.data';
+import {
+  validCredentials,
+  validCredentials2,
+  wellnessValidCredentials
+} from '../../data/login.data';
 
 describe('Employee should be', () => {
   beforeEach(() => {
@@ -376,5 +380,28 @@ describe('Wellness claim without referral letter - Employee rejected claims shou
   afterAll(() => {
     claims.clickBackButton();
     claims.startFromIntial();
+  });
+});
+
+describe('Employee should be', () => {
+  beforeAll(() => {
+    loginAs(wellnessValidCredentials);
+    isNavigationBarVisible();
+    navigateToClaimsScreen();
+
+    $(SELECTOR.buttonMakeAClaim).click();
+  });
+
+  it('able to submit a wellness claim for employee', () => {
+    expect(claims.makeWellnessClaim()).toBeTruthy();
+  });
+
+  it('able to submitted wellness claim and get unique claims number', () => {
+    expect(claims.claimSubmittedIsDisplay()).toBeTruthy();
+    expect(claims.uniqueClaimNumberIsDisplay()).toBeTruthy();
+  });
+
+  afterAll(() => {
+    driver.reset();
   });
 });

@@ -37,6 +37,32 @@ export function _patientDetails(dependent, isPN = false, isCN = false) {
   $(SELECTOR.buttonAddClaimDetails).click();
 }
 
+export function _patientDetailsWellness(
+  selectPName,
+  patientName,
+  isCN = false
+) {
+  const platform = getPlatform();
+
+  $(selectPName[platform]).click();
+  checkIfDisplayedWithScrollDown($(patientName[platform]), 7, 0);
+  $(patientName[platform]).click();
+
+  if (isCN) {
+    $(SELECTOR.inputContactNumber).click();
+
+    // TODO: implement for ios
+    // $('~Contact number').clearValue();
+
+    $(SELECTOR.inputContactNumber).setValue(87654321);
+    kbd('hide');
+  }
+
+  driver.pause(1000);
+
+  $(SELECTOR.buttonAddClaimDetails).click();
+}
+
 export function _claimDetails(type, diagnosis, amount) {
   const selectCType = select(
     SELECTOR.selectConsultationType,
@@ -51,6 +77,32 @@ export function _claimDetails(type, diagnosis, amount) {
 
   $(SELECTOR.inputReceiptAmount).click();
   $(SELECTOR.inputReceiptAmount).setValue(amount);
+  kbd('hide');
+
+  $(SELECTOR.buttonAddDocuments).click();
+}
+export function _wellnessClaimDetails(
+  type,
+  diagnosis,
+  amount,
+  consultationType,
+  selectCType,
+  diagnosisText,
+  selectDText
+) {
+  const platform = getPlatform();
+  $(consultationType[platform]).click();
+  checkIfDisplayedWithScrollDown($(selectCType[platform]), 7, 0);
+  $(selectCType[platform]).click();
+
+  $(diagnosisText[platform]).click();
+  checkIfDisplayedWithScrollDown($(selectDText[platform]), 7, 0);
+  $(selectDText[platform]).click();
+
+  date('toggle', SELECTOR.dateConsultationDate);
+
+  $(SELECTOR.claimsAmount).click();
+  $(SELECTOR.claimsAmount).setValue(amount);
   kbd('hide');
 
   $(SELECTOR.buttonAddDocuments).click();
@@ -259,6 +311,29 @@ export function _rejectedClaims(rejectedClaim) {
     if (isVisible) {
       $(rejectedClaim[platform]).click();
     }
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+
+export function _uniqueClaimNumberIsDisplay(uniqueClaimNumber) {
+  const platform = getPlatform();
+  let isVisible;
+  driver.pause(4000);
+  try {
+    isVisible = wait(uniqueClaimNumber[platform]);
+  } catch (error) {
+    isVisible = false;
+  }
+  return isVisible;
+}
+export function _claimSubmittedIsDisplay(submittedClaim) {
+  const platform = getPlatform();
+  let isVisible;
+  driver.pause(4000);
+  try {
+    isVisible = wait(submittedClaim[platform]);
   } catch (error) {
     isVisible = false;
   }

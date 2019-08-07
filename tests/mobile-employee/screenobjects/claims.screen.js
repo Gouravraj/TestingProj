@@ -13,6 +13,7 @@ const SELECTOR = {
   DATE_CONSULTATION_DATE: '~Consultation date, current selection is empty',
   INPUT_CONTACT_NUMBER: '~Contact number',
   INPUT_RECEIPT_AMOUNT: '~Receipt amount',
+  CLAIM_AMOUNT: '~Claim amount',
   PHOTO_ADD_DOCUMENT_RECEIPTS: '~Add document for Receipts',
   PHOTO_ADD_DOCUMENT_FOR_REFERRAL_LETTER: '~Add document for Referral letter',
   SETTLEMENT_DATE: '~Settlement date'
@@ -70,7 +71,9 @@ class ClaimsScreen extends AppScreen {
   get inputReceiptAmount() {
     return $(SELECTOR.INPUT_RECEIPT_AMOUNT);
   }
-
+  get claimsAmount() {
+    return $(SELECTOR.CLAIMS_AMOUNT);
+  }
   get photoAddDocumentReceipts() {
     return $(SELECTOR.PHOTO_ADD_DOCUMENT_RECEIPTS);
   }

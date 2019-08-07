@@ -15,7 +15,8 @@ export function loginAs(empDetail) {
 
   LoginScreen.passwordField().click();
   LoginScreen.passwordField().setValue(empDetail.password);
-  $(txt('Welcome to')).click();
+  $(txt('As provided in registration email')).click();
+
   LoginScreen.loginButton().click();
 
   /*

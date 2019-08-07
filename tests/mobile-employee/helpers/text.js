@@ -23,7 +23,6 @@ function txt(text, type) {
   } else if (platform === 'android') {
     selector = `new UiSelector().text("${text}").className("${type}")`;
   }
-
   return `${prefix}${selector}`;
 }
 
