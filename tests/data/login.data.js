@@ -5,6 +5,13 @@ export const validCredentials = {
   password: 'P@ssw0rd'
 };
 
+// general test data (supports "Wellness" claims)
+export const wellnessValidCredentials = {
+  companyName: 'cxadevclient1',
+  emailAddress: 'cxademo0@test.com',
+  password: 'P@ssw0rd'
+};
+
 // secondary test data (supports "e-Health Card", and "My Benefits")
 export const validCredentials2 = {
   companyName: 'cxadevclient1',

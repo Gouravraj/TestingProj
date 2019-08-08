@@ -13,6 +13,11 @@ export const detailsDentalCare = {
   diagnosis: 'Dysarthria'
 };
 
+export const detailWellnessClaims = {
+  type: 'Vaccination',
+  diagnosis: 'Vaccination / Immunization'
+};
+
 export const detailsRefer = {
   type: 'Diagnostic X-Ray & Laboratory tests and imaging',
   diagnosis: 'Abdominal Pain'
@@ -28,6 +33,16 @@ export const image = {
 
 export const dependent = 'Karen Brown';
 
+export const patientName = {
+  ios: '(//XCUIElementTypeOther[@name="Peter Parker "])[2]',
+  android: '//*[contains(@text,"Peter Parker")]'
+};
+export const selectPName = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Patient name, current selection is")])[last()]',
+  android:
+    '//android.view.ViewGroup[contains(@content-desc,"Patient name, current selection is")]'
+};
 export const isReimbursedAmountVisible = {
   ios: '~Reimbursed amount',
   android: '//*[@text="Reimbursed amount"]'
@@ -166,4 +181,37 @@ export const rejectedClaimGMP = {
     '(//XCUIElementTypeOther[contains(@name,"Rejected") and contains(@name,"General Medical Practitioner HK$")])[16]',
   android:
     '(//android.view.ViewGroup[@content-desc="Rejected"])/following-sibling::android.widget.TextView[@text="General Medical Practitioner"]/following-sibling::*[position()=2][contains(@text, "HK$")]'
+};
+
+export const uniqueClaimNumber = {
+  ios: '//XCUIElementTypeOther[contains(@name,"Claim ID is C-WBI")]',
+  android:
+    '//android.widget.TextView[contains(@content-desc,"Claim ID is C-WBI")]'
+};
+
+export const submittedClaim = {
+  ios: '//XCUIElementTypeOther[contains(@name,"Claim submitted")]',
+  android: '//android.widget.TextView[contains(@text,"Claim submitted")]'
+};
+
+export const consultationType = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Consultation type, current selection is")])[last()]',
+  android: '~Consultation type, current selection is empty'
+};
+export const selectCType = {
+  ios: '(//XCUIElementTypeOther[contains(@name,"Vaccination")])[last()]',
+  android: '//android.widget.TextView[contains(@text,"Vaccination")]'
+};
+export const diagnosisText = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Diagnosis, current selection is")])[last()]',
+  android: '~Diagnosis, current selection is empty'
+};
+
+export const selectDText = {
+  ios:
+    '(//XCUIElementTypeOther[contains(@name,"Vaccination / Immunization")])[last()]',
+  android:
+    '//android.widget.TextView[contains(@text,"Vaccination / Immunization")]'
 };
