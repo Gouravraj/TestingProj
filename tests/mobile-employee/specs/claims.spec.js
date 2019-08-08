@@ -41,6 +41,26 @@ describe('Employee should be', () => {
   });
 });
 
+describe('Employee should be', () => {
+  beforeAll(() => {
+    loginAs(wellnessValidCredentials);
+    isNavigationBarVisible();
+    navigateToClaimsScreen();
+
+    $(SELECTOR.buttonMakeAClaim).click();
+  });
+
+  it('able to submitted wellness claim and get unique claims number', () => {
+    expect(claims.makeWellnessClaim()).toBeTruthy();
+    expect(claims.claimSubmittedIsDisplay()).toBeTruthy();
+    expect(claims.uniqueClaimNumberIsDisplay()).toBeTruthy();
+  });
+
+  afterAll(() => {
+    driver.reset();
+  });
+});
+
 describe('General Medical Practitioner-Employee pending claims should be', () => {
   beforeAll(() => {
     loginAs(validCredentials);
