@@ -9,14 +9,14 @@ export function loginAs(empDetail) {
 
   LoginScreen.companyNameField().click();
   LoginScreen.companyNameField().setValue(empDetail.companyName);
+  $(txt('Welcome to')).click();
   LoginScreen.emailAddressField().click();
   LoginScreen.emailAddressField().setValue(empDetail.emailAddress);
   $(txt('Welcome to')).click();
 
   LoginScreen.passwordField().click();
   LoginScreen.passwordField().setValue(empDetail.password);
-  $(txt('As provided in registration email')).click();
-
+  $(txt('Welcome to')).click();
   LoginScreen.loginButton().click();
 
   /*
@@ -34,7 +34,7 @@ export function loginAs(empDetail) {
   LoginScreen.companyNameField().addValue('t');
   LoginScreen.companyNameField().addValue('3');
 
-  
+      $(txt('Welcome to')).click();
   LoginScreen.emailAddressField().click();
   // LoginScreen.emailAddressField().setValue(empDetail.emailAddress);
   LoginScreen.emailAddressField().addValue('t');
@@ -65,7 +65,8 @@ export function loginAs(empDetail) {
   LoginScreen.passwordField().addValue('r');
   LoginScreen.passwordField().addValue('d');
 
-  $(txt('Welcome to')).click();
+
+  //$(txt('Welcome to')).click();
 
   LoginScreen.loginButton().click();
   */

@@ -5,7 +5,7 @@ const SELECTORS = {
   EMPLOYEE_CENSUS_UPLOAD_BUTTON: 'data-testid=file-upload-input',
   DOWNLOAD_EMPLOYEE_CENSUS_TEMPLATE:
     ".//button[@id='download-employee-template']",
-  CENSUS_CAPTION: "//p[text()='Census']"
+  CENSUS_CAPTION: "//span[text()='Census']"
 };
 
 class CensusPage extends AppPage {

@@ -30,7 +30,8 @@ exports.config = {
   suites: {
     login: ['./tests/mobile-employee/specs/login.spec.js'],
     claims: ['./tests/mobile-employee/specs/claims.spec.js'],
-    health: ['./tests/mobile-employee/specs/health.spec.js']
+    health: ['./tests/mobile-employee/specs/health.spec.js'],
+    profile: ['./tests/mobile-employee/specs/profile.spec.js']
   },
 
   beforeSession: (/* config, capabilities, specs */) => {

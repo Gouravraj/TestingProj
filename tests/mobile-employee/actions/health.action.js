@@ -19,27 +19,7 @@ export function isLifeStyleTabSelected() {
 export function slideFaceAging(from, to) {
   HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
   swipeSlider(HealthScreen.agingSlider, from, to);
-  driver.pause(3000);
-}
-
-export function getGraphicRiskNumber() {
-  return parseInt(HealthScreen.graphicRiskNumber.getText());
-}
-
-export function getHeighOfLastBarOfGraphicRiskScore() {
-  HealthScreen.scrollDownToElement(HealthScreen.historyGraph, 10);
-  return HealthScreen.lastBarHistoryGraph.getSize('height');
-}
-
-export function getScoreOfLastBarOfGraphicRiskScore() {
-  const heightOfLastBar = getHeighOfLastBarOfGraphicRiskScore();
-  const heightOfGraphicRiskScore = getHeightOfGraphicAssessmentScore();
-
-  return Math.round((heightOfLastBar / heightOfGraphicRiskScore) * 100);
-}
-
-export function getHeightOfGraphicAssessmentScore() {
-  return HealthScreen.historyGraphToGetHeight.getSize('height');
+  driver.pause(1000);
 }
 
 export function isFutureYouAtTheAgeOf(age) {
@@ -67,11 +47,6 @@ export function copyImageToLibrary() {
 export function clickNextButton() {
   HealthUpdateScreen.scrollDownToElement(HealthUpdateScreen.next, 50);
   HealthUpdateScreen.next.click();
-}
-
-export function isGraphicHistoryScoreDisplay() {
-  HealthScreen.waitForIsShown(true);
-  return HealthScreen.graphicRiskNumber.isExisting();
 }
 
 export function isPhotoExistingOnUpdatePage() {

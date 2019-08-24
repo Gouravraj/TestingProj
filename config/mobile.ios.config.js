@@ -6,10 +6,9 @@ exports.config = {
   specs: ['./tests/mobile-employee/specs/**/*.spec.js'],
   capabilities: [
     {
-      deviceName: 'iphone_x_12_2',
+      deviceName: 'iPhone XR',
       platformName: 'iOS',
       platformVersion: '12.2',
-      orientation: 'PORTRAIT',
       maxInstances: 1,
       app: join(process.cwd(), 'app', 'app-debug.app'),
       useNewWDA: true,

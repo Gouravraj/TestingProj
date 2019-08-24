@@ -16,21 +16,14 @@ import {
   _checkLoadedImageOnApprovedClaims,
   _backButton,
   _startFromIntial,
-  _rejectedClaims,
-  _wellnessClaimDetails,
-  _uniqueClaimNumberIsDisplay,
-  _claimSubmittedIsDisplay,
-  _patientDetailsWellness
+  _rejectedClaims
 } from './internal/_claims';
 import {
   details,
-  detailWellnessClaims,
   detailsRefer,
   receiptAmount,
   image,
   dependent,
-  patientName,
-  selectPName,
   isReimbursedAmountVisible,
   viewSubmittedClaim,
   gmpPendingClaim,
@@ -55,13 +48,7 @@ import {
   rejectedClaimSC,
   rejectedClaimLabel,
   verifyRejectedImageLoadedCheck,
-  rejectedClaimGMP,
-  uniqueClaimNumber,
-  submittedClaim,
-  consultationType,
-  selectCType,
-  diagnosisText,
-  selectDText
+  rejectedClaimGMP
 } from '../../data/claims.data';
 import { screen } from '../helpers/api';
 import navi from '../helpers/navi';
@@ -71,30 +58,6 @@ export function makeClaim() {
 
   navi('Patient Details', () => _patientDetails(dependent));
   navi('Claim Details', () => _claimDetails(type, diagnosis, receiptAmount));
-  navi('Add Documents', () => _addDocuments(image));
-  navi('Review Claim', _reviewClaim(submitClaimButton));
-  navi('Terms & Conditions', _termsConditions);
-
-  return screen('Claim submitted');
-}
-
-export function makeWellnessClaim() {
-  const { type, diagnosis } = detailWellnessClaims;
-
-  navi('Patient Details', () =>
-    _patientDetailsWellness(selectPName, patientName, true)
-  );
-  navi('Claim Details', () =>
-    _wellnessClaimDetails(
-      type,
-      diagnosis,
-      receiptAmount,
-      consultationType,
-      selectCType,
-      diagnosisText,
-      selectDText
-    )
-  );
   navi('Add Documents', () => _addDocuments(image));
   navi('Review Claim', _reviewClaim(submitClaimButton));
   navi('Terms & Conditions', _termsConditions);
@@ -243,12 +206,7 @@ export function rejectedClaimLables() {
 export function verifyRejectedLoadedImageCheck() {
   return _checkLoadedImageOnApprovedClaims(verifyRejectedImageLoadedCheck);
 }
+
 export function checkAndClickRejectedClaimsForGeneralMedicalPractitioner() {
   return _rejectedClaims(rejectedClaimGMP);
-}
-export function claimSubmittedIsDisplay() {
-  return _claimSubmittedIsDisplay(submittedClaim);
-}
-export function uniqueClaimNumberIsDisplay() {
-  return _uniqueClaimNumberIsDisplay(uniqueClaimNumber);
 }

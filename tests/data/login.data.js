@@ -5,13 +5,6 @@ export const validCredentials = {
   password: 'P@ssw0rd'
 };
 
-// general test data (supports "Wellness" claims)
-export const wellnessValidCredentials = {
-  companyName: 'cxadevclient1',
-  emailAddress: 'cxademo0@test.com',
-  password: 'P@ssw0rd'
-};
-
 // secondary test data (supports "e-Health Card", and "My Benefits")
 export const validCredentials2 = {
   companyName: 'cxadevclient1',
@@ -59,13 +52,13 @@ export const forgotPwdEmail = {
 };
 
 export const hrCredentials = {
-  emailAddress: 'hradmin@test.com',
-  password: 'P@ssw0rd'
+  emailAddress: 'testuser1@gmail.com',
+  password: 'P@$$w0rd'
 };
 
 export const csCredentials = {
-  emailAddress: 'csadmin@test.com',
-  password: 'P@ssw0rd'
+  emailAddress: 'testuser2@gmail.com',
+  password: 'P@$$w0rd'
 };
 
 /*

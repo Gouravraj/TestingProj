@@ -6,7 +6,6 @@ You can run Android on Windows but to run iOS, you should use macOS. So, this gu
 
 ## Get Started
 
-
 ```bash
 npm install
 ```
